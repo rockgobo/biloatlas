@@ -1,0 +1,20 @@
+﻿body {
+}
+
+path.subunit{
+    stroke: lightgray;
+}
+
+#tooltip{
+    position: absolute;
+    font-size: 10px;
+    height: auto;
+    padding: 10px;
+    background-color: white;
+    border: 1px solid #CCC;
+    z-index: 10000;
+}
+
+/*#tooltip.hidden{
+    display: none;
+}*/

@@ -1,0 +1,15 @@
+﻿<h1>{{topicTable.topic.name}}</h1>
+<p>{{topicTable.topic.description}}</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th ng-click="topicTable.sortOrder = '-name'">Region</th>
+            <th ng-click="topicTable.sortOrder = '-value'">Value</th>
+        </tr>
+    </thead>
+    <tr ng-repeat="stat in topicTable.topic.data | orderBy: topicTable.sortOrder">
+        <td ng-click="selection = 1">{{stat.name}}</td>
+        <td>{{stat.value}}</td>
+    </tr>
+</table>

@@ -1,0 +1,14 @@
+﻿<table class="table">
+    <thead>
+        <tr>
+            <th ng-click="sortOrder = '-name'">Region</th>
+            <th ng-click="sortOrder = '-value'">Value</th>
+        </tr>
+    </thead>
+    <tr ng-repeat="stat in regionInfo | orderBy: sortOrder">
+        <td ng-click="selection = 1">{{stat.name}}</td>
+        <td>{{stat.value}}</td>
+    </tr>
+</table>
+
+<p>{{selection}}</p>

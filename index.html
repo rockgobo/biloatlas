@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta charset="utf-8" />
+
+    <!--
+        Passen Sie die Inhaltssicherheitsrichtlinie im META-Tag unten nach Bedarf an. Fügen Sie "default-src" die Option "unsafe-inline" hinzu, um Inline-JavaScript zu aktivieren.
+        Details finden Sie unter "http://go.microsoft.com/fwlink/?LinkID=617521".
+    -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">
+    <title>BiloAtlas</title>
+
+    <!-- BiloAtlas-Verweise -->
+    <link href="css/index.css" rel="stylesheet" />
+    <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body  ng-app="biloAtlas" ng-controller="topicsController as c">
+
+    <!-- NAVIGATION -->
+    <div bilo-navigation topics="c.topics"></div>
+
+    <!-- VIEWS -->
+    <div class="container">
+        <div ng-view></div>
+    </div>
+
+    <div id="tooltip"></div>
+
+    <script src="app/vendor/jquery/dist/jquery.min.js"></script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="node_modules/colorbrewer/colorbrewer.js"></script>
+    <script src="app/common/lifbi.tooltip.js"></script>
+    <script src="app/vendor/angular/angular.js"></script>
+    <script src="app/vendor/angular-route/angular-route.min.js"></script>
+    <script src="app/common/topojson.js"></script>
+    <script src="app/common/lifbi.logging.js"></script>
+
+    <!-- Cordova-Verweis, wird Ihrer App beim Erstellen hinzugefügt. -->
+    <!-- script src="cordova.js"></script> -->
+    <!-- <script src="app/platformOverrides.js"></script> -->
+    <!-- <script src="app/index.js"></script> -->
+
+    <script src="app/app.js"></script>
+    <script src="app/app.routes.js"></script>
+
+    <script src="app/services/TopicData.service.js"></script>
+    <script src="app/services/d3.service.js"></script>
+    <script src="app/components/topic-table/topic-table.component.js"></script>
+    <script src="app/components/regions-map/regions-map.component.js"></script>
+
+    <script src="app/controllers.js"></script>
+    <script src="app/directives.js"></script>
+</body>
+</html>
