@@ -1,5 +1,5 @@
 <!-- <div bilo-navigation></div>-->
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
@@ -15,13 +15,25 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#/">Start</a></li>
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Themen <span class="caret"></span></a>
+                <li ng-class="{active: topicsNavigation.startSelected() }"><a href="#/">Start</a></li>
+                
+                <li class="dropdown" ng-class="{active: topicsNavigation.topicSelected()}">
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Bereiche <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li ng-repeat="topic in topicsNavigation.topics">
+                        <li ng-repeat="topic in topicsNavigation.topics" ng-class="{active: topicsNavigation.activeTopic(topic)}">
                             <a ng-href="#/topic/{{topic.id}}">
                                 {{topic.name}}
+                            </a>
+                        </li>
+                    </ul>
+                  </li> 
+                  
+                  <li  ng-class="{active: topicsNavigation.regionSelected()}"> 
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Regionen <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li ng-repeat="region in topicsNavigation.regions" ng-class="{active: topicsNavigation.activeRegion(region)}" >
+                            <a ng-href="#/region/{{region.id}}">
+                                {{region.name}}
                             </a>
                         </li>
                     </ul>

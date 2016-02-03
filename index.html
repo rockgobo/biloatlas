@@ -15,24 +15,39 @@
     <link href="css/index.css" rel="stylesheet" />
     <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
 </head>
-<body  ng-app="biloAtlas" ng-controller="topicsController as c">
+<body  ng-app="biloAtlas">
+    <div id="wrap">
+        <!-- NAVIGATION -->
+        <topics-navigation></topics-navigation>
 
-    <!-- NAVIGATION -->
-    <div bilo-navigation topics="c.topics"></div>
+        <!-- VIEWS -->
+        <div class="container">
+            <div ng-view></div>
+        </div>
 
-    <!-- VIEWS -->
-    <div class="container">
-        <div ng-view></div>
-    </div>
+        <!-- TOOLTIP -->
+        <div id="tooltip"></div>
+        
+        <!-- Needed for sticky footer -->
+        <div id="push"></div>
+    </div>   
+    
+    <!-- FOOTER -->
+    <footer class="atlas-footer" role="contentinfo" id="footer"> 
+        <div class="container"> 
+            <ul class="bs-docs-footer-links"> 
+                <li><a href="#/impressum">Impressum</a></li>  
+            </ul>
+        </div>
+    </footer>
 
-    <div id="tooltip"></div>
 
     <script src="app/vendor/jquery/dist/jquery.min.js"></script>
     <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="node_modules/colorbrewer/colorbrewer.js"></script>
     <script src="app/common/lifbi.tooltip.js"></script>
     <script src="app/vendor/angular/angular.js"></script>
     <script src="app/vendor/angular-route/angular-route.min.js"></script>
+    <script src="app/vendor/d3/d3pie.js"></script>
     <script src="app/common/topojson.js"></script>
     <script src="app/common/lifbi.logging.js"></script>
 
@@ -45,11 +60,24 @@
     <script src="app/app.routes.js"></script>
 
     <script src="app/services/TopicData.service.js"></script>
-    <script src="app/services/d3.service.js"></script>
+    <script src="app/services/RegionData.service.js"></script>
+    <script src="app/services/ColorBrewer.service.js"></script>
+    <script src="app/components/topics-navigation/topics-navigation.component.js"></script>
+    <script src="app/components/topics-buttons/topics-buttons.component.js"></script>
+    <script src="app/components/topic-view/topic-view.component.js"></script>
     <script src="app/components/topic-table/topic-table.component.js"></script>
+    <script src="app/components/region-view/region-view.component.js"></script>
     <script src="app/components/regions-map/regions-map.component.js"></script>
+    <script src="app/components/regions-pie/regions-pie.component.js"></script>
+    <script src="app/components/colorbrewer-picker/colorbrewer-picker.component.js"></script>
 
-    <script src="app/controllers.js"></script>
-    <script src="app/directives.js"></script>
+
+    <script src="app/vendor/d3/d3.min.js"></script>
+    <script src="app/vendor/d3/nv.d3.js"></script> <!-- or use another assembly -->
+    <script src="app/vendor/d3/angular-nvd3.js"></script>
+    <link rel="stylesheet" href="app/vendor/d3/nv.d3.css">
+
+    <!--<script src="app/controllers.js"></script>
+    <script src="app/directives.js"></script>-->
 </body>
 </html>

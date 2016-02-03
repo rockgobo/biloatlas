@@ -1,0 +1,25 @@
+<div style="text-align: right; width:100%">
+    <button class="btn btn-xs"><span class="glyphicon glyphicon-zoom-in"></span></button>
+    <button class="btn btn-xs"><span class="glyphicon glyphicon-zoom-out"></span></button>
+    <button class="btn btn-xs"><span class="glyphicon glyphicon-resize-full"></span></button>
+</div>
+
+<div id="regions-map">
+    <svg></svg>
+</div>
+
+<div id="legend">
+    <colorbrewer-picker schema="schemecolors"></colorbrewer-picker>
+    <!--<div class="colors">
+        <div ng-repeat="color in regionColors" ng-style="{'background-color': color, 'width': (100/regionColors.length)+'%'}" class="legenditem"></div>
+    </div>-->
+    <div class="row"> 
+        <div class="col-md-6"><small>0</small></div>
+        <div class="col-md-6" style="text-align: right"><small>{{maxValue}}</small></div>
+    </div>
+</div>
+
+
+<div id="config">
+    
+</div>

@@ -1,0 +1,30 @@
+<div ng-repeat="topic in regionView.topics" class="topic-container">
+    <h1>{{topic.name}} in {{regionView.region}}</h1>
+    <div ng-repeat="layer in topic.layers">
+        <h2>{{layer.name}}</h2>
+        <div class="row">
+            <div class="col-md-6">
+                <p>
+                    {{layer.description}}
+                </p>
+
+                <div class="row" style="margin-left: 0">
+                    <div class="col-md-2" style="padding-left: 0">
+                        <small><b>Quelle:</b></small>
+                    </div> 
+                    <div class="col-md-10"><small>{{layer.source}}</small></div>
+
+                    <div class="col-md-2" style="padding-left: 0">
+                        <small><b>Berechnung:</b></small>
+                    </div> 
+                    <div class="col-md-10"><small>{{layer.calculation}}</small></div>
+                </div>
+            </div>
+            <div class="col-md-6 well">
+                <nvd3 options="regionView.getLayerOptions(layer.id)" data="regionView.getLayerData(layer.id)"></nvd3>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>

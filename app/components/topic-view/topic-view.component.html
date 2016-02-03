@@ -1,0 +1,33 @@
+<div>
+    <h1>{{topicView.topic.name}}</h1>
+    
+    
+    <div class="row" >
+    
+        <div class="col-md-6">
+            <p>
+                {{topicView.topic.description}}
+            </p>
+            <button role="button" class="btn btn-default btn-block" ng-repeat="layer in topicView.topic.layers | orderBy:name"  ng-class="{active: topicView.layerVisible(layer.id)}"  ng-click="topicView.selectLayer(layer)">
+                {{layer.name}}
+            </button>
+            <nav>
+                <ul class="pagination pagination-sm">
+                    <li ng-repeat="year in topicView.years "  ng-class="{active: topicView.year == year}">
+                        <a ng-click="topicView.year = year">{{year}}</a>
+                    </li>
+                </ul>
+            </nav>
+            <topic-table layer="topicView.layer" year="topicView.year"></topic-table>
+        </div>
+        <div class="col-md-6" >
+            <ul class="nav nav-tabs">
+                <li role="presentation" ng-click="topicView.showMap = true" ng-class="{active: topicView.showMap}"><a>Karte</a></li>
+                <li role="presentation" ng-click="topicView.showMap = false" ng-class="{active: !topicView.showMap}"><a>Diagramm</a></li>
+            </ul>
+            
+            <div regions-map stats="topicView.layer.data" year="topicView.year" ng-if="topicView.showMap"></div>
+            <div regions-pie stats="topicView.layer.data" year="topicView.year" ng-if="!topicView.showMap"></div>
+        </div>
+    </div>
+</div>

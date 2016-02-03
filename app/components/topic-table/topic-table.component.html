@@ -1,15 +1,36 @@
-﻿<h1>{{topicTable.topic.name}}</h1>
-<p>{{topicTable.topic.description}}</p>
+﻿
+<h3>{{topicTable.layer.name}}</h3>
+<p>
+    {{topicTable.layer.description}}
+</p>
 
-<table class="table">
+<div class="row" style="margin-left: 0">
+    <div class="col-md-4" style="padding-left: 0">
+        <small><b>Quelle:</b></small>
+    </div> 
+    <div class="col-md-8"><small>{{topicTable.layer.source}}</small></div>
+
+    <div class="col-md-4" style="padding-left: 0">
+        <small><b>Berechnung:</b></small>
+    </div> 
+    <div class="col-md-8"><small>{{topicTable.layer.calculation}}</small></div>
+    <div class="col-md-4" style="padding-left: 0">
+        <small><b>Durchschnitt Oberfranken:</b></small>
+    </div> 
+    <div class="col-md-8"><small>{{topicTable.average()}}{{topicTable.unit()}}</small></div>
+</div>
+
+<table class="table" style="margin-top: 40px;">
     <thead>
-        <tr>
-            <th ng-click="topicTable.sortOrder = '-name'">Region</th>
-            <th ng-click="topicTable.sortOrder = '-value'">Value</th>
+        <tr style="cursor: pointer">
+            <th ng-click="topicTable.sortOrder = 'name'">Region <small><span ng-show="topicTable.sortOrder == 'name'" class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span></small></th>
+            <th ng-click="topicTable.sortOrder = '-value'">Wert <small><span ng-show="topicTable.sortOrder == '-value'" class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span></small></th>
+            <th ng-click="topicTable.sortOrder = '-year'">Jahr <small><span ng-show="topicTable.sortOrder == '-year'" class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span></small></th>
         </tr>
     </thead>
-    <tr ng-repeat="stat in topicTable.topic.data | orderBy: topicTable.sortOrder">
-        <td ng-click="selection = 1">{{stat.name}}</td>
-        <td>{{stat.value}}</td>
+    <tr ng-repeat="stat in topicTable.layer.data | filter:topicTable.year | orderBy: topicTable.sortOrder">
+        <td>{{stat.name}}</td>
+        <td>{{stat.value}}{{topicTable.unit()}}</td>
+        <td>{{stat.year}}</td>
     </tr>
 </table>

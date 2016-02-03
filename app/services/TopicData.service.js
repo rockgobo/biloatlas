@@ -2,12 +2,12 @@
     'use strict'
 
     angular.module('biloAtlas')
-    .factory('TopicData', function () {
+    .factory('TopicData', function ($http) {
 
         // Mock data
         var topics = [];
         topics.push( {
-            id: 1, 
+            id: 1,
             name: 'Bildungsstand',
             description: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.',
             data: [
@@ -72,18 +72,29 @@
 
         //private implementation
         function getTopicById(id) {
+            return $http.get(webRoot+id).then(
+                function(response){
+                    return response.data;
+                },
+                function(error) {console.log(error)}
+            )
+            /*
             var searchTopic = topics.filter(function (topic) { return topic.id == id});
             if (searchTopic.length == 1) {
                 return searchTopic[0];
             }
             else {
                 return null;
-            }
+            }*/
         }
+
+        //returns a promise
         function getTopics() {
-
-
-            return topics;
+            return $http.get(webRoot).then(
+                function(response){
+                    return response.data;
+                },
+                function(error) {console.log(error)});
         }
         
         //public API
@@ -93,4 +104,4 @@
         }
     });
 
-})()
+})();

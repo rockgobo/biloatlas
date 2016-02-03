@@ -5,16 +5,125 @@ path.subunit{
     stroke: lightgray;
 }
 
+#content{
+}
+
 #tooltip{
     position: absolute;
     font-size: 10px;
     height: auto;
-    padding: 10px;
-    background-color: white;
-    border: 1px solid #CCC;
+    padding: 4px;
+    background-color: #000000;
+    color: #efefef;
     z-index: 10000;
+    display: none;
+    -webkit-border-radius: 2px; 
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    opacity: 0.5;    
+    font: "arial";
 }
 
-/*#tooltip.hidden{
-    display: none;
-}*/
+#legend .colors{
+    border: 1px solid #CCC;
+    height: 20px;
+}
+
+#legend .legenditem{
+    display: inline-block;
+    height: 12px;
+}
+
+nav .pagination li a{
+    color: black;
+    cursor: pointer;
+}
+
+.atlas-footer{
+    padding-top: 20px;
+    padding-bottom: 50px;
+    color: #99979c;
+    text-align: left;
+    background-color: #2a2730;
+}
+
+.atlas-footer ul li{
+    list-style-type: none;
+}
+.atlas-footer ul li a, .atlas-footer ul li a:visited, .atlas-footer ul li a:hover{
+    color: white;
+}
+
+.colorpicker{
+    width: 100%;   
+}
+
+.colorpanel{
+    padding: 5px;
+    margin-top: 2px;
+    margin-right: 2px;
+    display: inline-block;
+    border: 1px solid #CCC;
+    cursor: pointer;
+}
+.colorpickerColors{
+    position: absolute;
+    z-index: 1000;
+    overflow: auto;
+    padding: 5px;
+    border: 1px solid #CCC;
+    box-shadow: 5px 5px 5px #99979c;
+    background-color: #FFF;
+}
+
+.topic-container{
+    margin-bottom:60px;
+}
+
+.chart_caption {
+    text-align: 'center';
+    font-size: 12px;
+    margin-top:10px;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+
+html,
+body {
+    height: 100%;
+    /* The html and body elements cannot have any padding or margin. */
+}
+
+/* Wrapper for page content to push down footer */
+#wrap {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    /* Negative indent footer by it's height */
+    margin: 0 auto -60px;
+}
+
+/* Set the fixed height of the footer here */
+#push,
+#footer {
+    height: 60px;
+}
+
+/* Lastly, apply responsive CSS fixes as necessary */
+@media (max-width: 767px) {
+    #footer {
+        margin-left: -20px;
+        margin-right: -20px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}
+
+/* Custom page CSS
+-------------------------------------------------- */
+/* Not required for template or sticky footer method. */
+
+#wrap > .container {
+    padding-top: 60px;
+}

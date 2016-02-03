@@ -6,16 +6,16 @@
             function($routeProvider) {
                 $routeProvider.
                 when('/', {
-                    templateUrl: 'app/views/main.html',
-                    controller: 'atlasController'
+                    templateUrl: 'app/views/main.html'
                 }).
                 when('/topic/:topicid', {
-                    templateUrl: 'app/views/topic.html',
-                    controller: 'topicController'
+                    template: '<topic-view></topic-view>',
                 }).
-                when('/region/:region', {
-                    templateUrl: 'app/views/region.html',
-                    controller: 'regionController'
+                when('/region/:regionid', {
+                    template: '<region-view></region-view>',
+                }).
+                when('/impressum', {
+                    templateUrl: 'app/views/impressum.html'
                 }).
                 otherwise({
                     redirectTo: '/'

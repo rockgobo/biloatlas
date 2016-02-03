@@ -1,0 +1,27 @@
+<div class="colorpicker colorpanel" ng-click="colorbrewerPicker.opencolors?colorbrewerPicker.opencolors=false:colorbrewerPicker.opencolors=true">
+    <div class="row">
+        <div class="col-md-11"> 
+            <span ng-repeat="c in colorbrewerPicker.schema" style="display: inline-block; height: 15px;" ng-style="{'background-color': c, 'width': (100/colorbrewerPicker.schema.length)+'%'}" >
+                &nbsp;
+            </span>
+        </div>
+        <div class="col-md-1">
+            <span class="glyphicon glyphicon-menu-down"  ng-show="!colorbrewerPicker.opencolors"></span>
+            <span class="glyphicon glyphicon-menu-up"  ng-show="colorbrewerPicker.opencolors"></span>
+        </div>
+    </div>
+</div>
+ 
+ 
+<div class="colorpickerColors" ng-show="colorbrewerPicker.opencolors"  >    
+    <div ng-repeat="(name,schemas) in colorbrewerPicker.colors">
+        <div ng-repeat="(count, cs) in schemas" ng-click="colorbrewerPicker.opencolors=false; colorbrewerPicker.schema=cs; " class="colorpanel">
+            <span ng-repeat="c in cs" style="display: inline-block; width: 15px; height: 15px;" ng-style="{'background-color': c}">
+                &nbsp;
+            </span>
+        </div>
+    </div>
+</div>   
+
+
+

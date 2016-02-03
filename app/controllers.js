@@ -26,19 +26,22 @@
                 ];
             }
         }])
-        .controller('topicsController', ['TopicData', function (topicsService) {
+        .controller('topicsController', function (TopicData) {
             var c = this;
-
-            c.topics = topicsService.getTopics();
-        }])
-        .controller('topicController', ['$routeParams', 'TopicData',function ($routeParams, topicsService) {
+            TopicData.getTopics().then(function(topics){
+                c.topics = topics;
+            }.bind(c));
+        })
+        .controller('topicController', function ($routeParams, TopicData) {
             var data = this;
-
-            data.topic = topicsService.getTopicById($routeParams.topicid);
-            
             data.selection = 0;
             data.sortOrder = '-value';
-        }])
+
+            TopicData.getTopicById($routeParams.topicid).then(function(topic){
+                data.topic = topic;
+            }.bind(data));
+
+        })
         .controller('regionController', ['$routeParams', function ($routeParams) {
             var data = this;
             data.name = $routeParams.region;

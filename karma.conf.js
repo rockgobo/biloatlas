@@ -69,6 +69,10 @@ module.exports = function (config) {
         ngHtml2JsPreprocessor: {
             stripPrefix: 'app/',
             moduleName: 'ng'
+        },
+
+        client: {
+            captureConsole: true
         }
     });
 };

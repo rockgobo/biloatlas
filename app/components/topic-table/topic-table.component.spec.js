@@ -10,10 +10,10 @@
     }));
 
     it('should show a topic', function () {
-        var template = '<topic-table id="1"></topic-table>';
-        var scope = $rootScope.$new(); // create a new scope
-        var element = $compile(template)(scope); // compile the template against the scope
-        scope.$apply(); // trigger dirty checking
+       // var template = '<topic-table id="E75B92A3-3299-4407-A913-C5CA196B3CAB"></topic-table>';
+       // var scope = $rootScope.$new(); // create a new scope
+       // var element = $compile(template)(scope); // compile the template against the scope
+       // scope.$apply(); // trigger dirty checking
 
         // now the directive is ready to check if expectations are satisfied
     });
