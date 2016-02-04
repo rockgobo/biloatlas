@@ -63,6 +63,12 @@
 	                           sortOrder: "value-desc",
                                content: data
                             },
+                            size: {
+                                canvasHeight: 500,
+                                canvasWidth: 550,
+                                pieInnerRadius: 0,
+                                pieOuterRadius: 150
+                            },
                             labels: {
                                 outer: {
                                     format: "label-value2"
@@ -73,7 +79,7 @@
                                 mainLabel: {
                                     color: "#333",
                                     font: "arial",
-                                    fontSize: 10
+                                    fontSize: 11
                                 }
                             },
                             tooltips: {

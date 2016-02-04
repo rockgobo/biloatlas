@@ -1,4 +1,4 @@
-<div>
+<div ng-if="topicView.topic.layers.length">
     <h1>{{topicView.topic.name}}</h1>
     
     
@@ -8,16 +8,38 @@
             <p>
                 {{topicView.topic.description}}
             </p>
-            <button role="button" class="btn btn-default btn-block" ng-repeat="layer in topicView.topic.layers | orderBy:name"  ng-class="{active: topicView.layerVisible(layer.id)}"  ng-click="topicView.selectLayer(layer)">
-                {{layer.name}}
-            </button>
-            <nav>
-                <ul class="pagination pagination-sm">
-                    <li ng-repeat="year in topicView.years "  ng-class="{active: topicView.year == year}">
-                        <a ng-click="topicView.year = year">{{year}}</a>
-                    </li>
-                </ul>
-            </nav>
+            
+                                    
+            <h3>
+                <select class="form-control" ng-options="layer as layer.name for layer in topicView.topic.layers track by layer.id" ng-model="topicView.layer"></select>
+            </h3>
+            <p>
+                {{topicView.layer.description}}
+            </p>
+
+            <div class="row" style="margin-left: 0">
+                <div class="col-md-4" style="padding-left: 0">
+                    <small><b>Jahr:</b></small>
+                </div> 
+                <div class="col-md-8">
+                    <select ng-options="year as year for year in topicView.years" ng-model="topicView.year" class="form-control bilo-inline-control"></select>
+                </div>
+
+                <div class="col-md-4" style="padding-left: 0">
+                    <small><b>Quelle:</b></small>
+                </div> 
+                <div class="col-md-8"><small>{{topicView.layer.source}}</small></div>
+                
+                <div class="col-md-4" style="padding-left: 0">
+                    <small><b>Berechnung:</b></small>
+                </div> 
+                <div class="col-md-8"><small>{{topicView.layer.calculation}}</small></div>
+                <div class="col-md-4" style="padding-left: 0">
+                    <small><b>Durchschnitt Oberfranken:</b></small>
+                </div> 
+                <div class="col-md-8"><small>{{topicView.average()}}{{topicView.unit()}}</small></div>
+            </div>
+            
             <topic-table layer="topicView.layer" year="topicView.year"></topic-table>
         </div>
         <div class="col-md-6" >
@@ -30,4 +52,8 @@
             <div regions-pie stats="topicView.layer.data" year="topicView.year" ng-if="!topicView.showMap"></div>
         </div>
     </div>
+</div>
+
+<div ng-if="topicView.topic.layers.length == 0">
+    <div class="alert alert-info" role="alert">Bislang keine Daten verfügbar</div>
 </div>

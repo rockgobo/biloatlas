@@ -8,7 +8,9 @@
         component('colorbrewerPicker',{
         templateUrl: 'app/components/colorbrewer-picker/colorbrewer-picker.component.html',
         bindings: {
-            schema: '='
+            schema: '=',
+            min: '=',
+            max: '='
         },
         controller: function(ColorBrewer){
             this.opencolors = false

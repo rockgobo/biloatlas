@@ -1,36 +1,13 @@
 ﻿
-<h3>{{topicTable.layer.name}}</h3>
-<p>
-    {{topicTable.layer.description}}
-</p>
-
-<div class="row" style="margin-left: 0">
-    <div class="col-md-4" style="padding-left: 0">
-        <small><b>Quelle:</b></small>
-    </div> 
-    <div class="col-md-8"><small>{{topicTable.layer.source}}</small></div>
-
-    <div class="col-md-4" style="padding-left: 0">
-        <small><b>Berechnung:</b></small>
-    </div> 
-    <div class="col-md-8"><small>{{topicTable.layer.calculation}}</small></div>
-    <div class="col-md-4" style="padding-left: 0">
-        <small><b>Durchschnitt Oberfranken:</b></small>
-    </div> 
-    <div class="col-md-8"><small>{{topicTable.average()}}{{topicTable.unit()}}</small></div>
-</div>
-
-<table class="table" style="margin-top: 40px;">
+<table class="table table-condensed table-hover" style="margin-top: 40px;"> 
     <thead>
         <tr style="cursor: pointer">
             <th ng-click="topicTable.sortOrder = 'name'">Region <small><span ng-show="topicTable.sortOrder == 'name'" class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span></small></th>
-            <th ng-click="topicTable.sortOrder = '-value'">Wert <small><span ng-show="topicTable.sortOrder == '-value'" class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span></small></th>
-            <th ng-click="topicTable.sortOrder = '-year'">Jahr <small><span ng-show="topicTable.sortOrder == '-year'" class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span></small></th>
+            <th ng-click="topicTable.sortOrder = '-value'"  style="text-align: right; padding-right: 20px;">Wert <small><span ng-show="topicTable.sortOrder == '-value'" class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span></small></th>
         </tr>
     </thead>
     <tr ng-repeat="stat in topicTable.layer.data | filter:topicTable.year | orderBy: topicTable.sortOrder">
-        <td>{{stat.name}}</td>
-        <td>{{stat.value}}{{topicTable.unit()}}</td>
-        <td>{{stat.year}}</td>
+        <td><a href="#/region/{{stat.id}}">{{stat.name}}</a></td>
+        <td style="text-align: right; padding-right: 20px;">{{stat.value.toFixed(1)}}{{topicTable.unit()}}</td>
     </tr>
 </table>

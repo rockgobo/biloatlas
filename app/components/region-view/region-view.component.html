@@ -1,5 +1,5 @@
 <div ng-repeat="topic in regionView.topics" class="topic-container">
-    <h1>{{topic.name}} in {{regionView.region}}</h1>
+    <h1><a href="#/topic/{{topic.id}}">{{topic.name}}</a> </h1>
     <div ng-repeat="layer in topic.layers">
         <h2>{{layer.name}}</h2>
         <div class="row">
@@ -9,6 +9,11 @@
                 </p>
 
                 <div class="row" style="margin-left: 0">
+                    <div class="col-md-2" style="padding-left: 0">
+                        <small><b>Region:</b></small>
+                    </div> 
+                    <div class="col-md-10"><small>{{regionView.region}}</small></div>
+                    
                     <div class="col-md-2" style="padding-left: 0">
                         <small><b>Quelle:</b></small>
                     </div> 

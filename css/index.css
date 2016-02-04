@@ -59,21 +59,26 @@ nav .pagination li a{
 }
 
 .colorpanel{
-    padding: 5px;
+    padding: 4px;
     margin-top: 2px;
     margin-right: 2px;
     display: inline-block;
-    border: 1px solid #CCC;
     cursor: pointer;
+    border-radius: 4px;
+    border: 1px solid white;
 }
 .colorpickerColors{
     position: absolute;
     z-index: 1000;
+    height:250px;
     overflow: auto;
     padding: 5px;
-    border: 1px solid #CCC;
     box-shadow: 5px 5px 5px #99979c;
     background-color: #FFF;
+    border: 1px solid #CCC;
+}
+.colorpanel:hover{
+    border: 1px solid #CCC;
 }
 
 .topic-container{
@@ -84,6 +89,34 @@ nav .pagination li a{
     text-align: 'center';
     font-size: 12px;
     margin-top:10px;
+}
+
+h3 select.form-control{
+    font-size: 24px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-weight: 500;
+    line-height: 1.1;
+    padding: 0px;
+    box-shadow: none;
+    color: rgb(51, 51, 51);
+    border: 1px solid white;
+}
+select.form-control:hover{
+        border: 1px solid #ccc !important;
+}
+
+select.bilo-inline-control{
+    padding: 0px;
+    box-shadow: none;
+    color: black;
+    font-size: 85%;
+    height:20px;
+    border: 1px solid white;
+}
+
+a{
+    cursor: pointer;
 }
 
 /* Sticky footer styles
