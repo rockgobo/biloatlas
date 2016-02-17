@@ -20,9 +20,9 @@
                     <small><b>Jahr:</b></small>
                 </div> 
                 <div class="col-md-8">
-                    <span ng-show="topicView.switchYearLastEnbled()" ng-click="topicView.switchYearLast()" class="glyphicon glyphicon-triangle-left clickable"  style="font-size: 0.7em"></span>
+                    <span ng-style="topicView.switchYearLastEnbled()?{opacity:1.0}:{opacity:0.5, cursor: 'default'}" ng-click="topicView.switchYearLast()" class="glyphicon glyphicon-triangle-left clickable"  style="font-size: 0.7em"></span>
                     <select ng-options="year as year for year in topicView.years" ng-model="topicView.year" class="form-control bilo-inline-control clean" style="display:inline; width: auto; "></select>
-                    <span ng-show="topicView.switchYearNextEnbled()" ng-click="topicView.switchYearNext()" class="glyphicon glyphicon-triangle-right clickable" style="font-size: 0.7em"></span>
+                    <span ng-style="topicView.switchYearNextEnbled()?{opacity:1.0}:{opacity:0.5, cursor: 'default'}" ng-click="topicView.switchYearNext()" class="glyphicon glyphicon-triangle-right clickable" style="font-size: 0.7em"></span>
                 </div>
 
                 <div class="col-md-4" style="padding-left: 0">
