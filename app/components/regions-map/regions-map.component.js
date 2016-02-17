@@ -17,10 +17,12 @@
                link: function (scope, element, attrs) { 
                    var regions;
                    var regionsRendered = false;
+                   var regionColors;
+                   var colors;
                    
                    scope.update = function(data){
                        console.log("updating map");
-                       var colors = scope.schemecolors;
+                       colors = scope.schemecolors;
                        var regionScale = d3.scale.linear()
                                             .domain([0, scope.maxValue])
                                             .range([0,colors.length-1]);
@@ -60,12 +62,12 @@
                         var projection_oberfranken;
                         var pathTopo;
                         
-                        var colors = scope.schemecolors;
+                        colors = scope.schemecolors;
                         var regionScale = d3.scale.linear()
                                             .domain([0, scope.maxValue])
                                             .range([0,colors.length-1]);
                                             //.range(ColorBrewer.colors.PuBu[9]);
-                        var regionColors = function(value){
+                        regionColors = function(value){
                             if(value == 0) return "#FFF";
                             return colors[Math.floor(regionScale(value))];
                         }         
@@ -124,17 +126,21 @@
                                 .attr("title", function (d) { return GeoData.getRegionData(d.id).properties.NAME_3; })
                                 .attr("class", function (d) { return "subunit " + GeoData.getRegionData(d.id).properties.NAME_3.replace(" ", "_"); })
                                 .attr("d", function (d) { return pathTopo(GeoData.getRegionData(d.id));})
+                                .attr("stroke-width", 1)
+                                .attr("stroke", "#ddd")
                                 .on("click", clicked)
                                 .on("mouseover", function (d) {
                                     lifbi.tooltip.showTooltip(GeoData.getRegionData(d.id).properties.NAME_3 + " " + d.value);
-                                    d3.select(this).attr("fill", "#FFFFCC");
+                                    d3.select(this)
+                                        .attr("stroke", "gray");
                                     scope.active = GeoData.getRegionData(d.id).properties.ID_3;
                                     scope.selection = GeoData.getRegionData(d.id).properties.ID_3;
                                     scope.$apply();
                                 })
                                 .on("mouseout", function (d) {
                                     lifbi.tooltip.hideTooltip();
-                                    d3.select(this).attr("fill", function (d) { return regionColors(d.value) });
+                                    d3.select(this)
+                                        .attr("stroke", "#ddd");
                                 });
 /*
                             d3.json("data/maps/oberfranken_cities.js", function (graph) {
