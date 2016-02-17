@@ -49,7 +49,10 @@
             if(regions.length == 1){
                 return regions[0];
             }
+            
+            //Log error and return null
             console.log("Error in GeoData service. Region not found or not singular. Looked for region id "+id);
+            return null;
         }
         
         /**
