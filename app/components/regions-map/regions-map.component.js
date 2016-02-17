@@ -15,7 +15,36 @@
                    self.schemecolors = ColorBrewer.colors.PuBu[9];
                },
                link: function (scope, element, attrs) { 
-                   scope.render = function(data){                
+                   var regions;
+                   var regionsRendered = false;
+                   
+                   scope.update = function(data){
+                       console.log("updating map");
+                       var colors = scope.schemecolors;
+                       var regionScale = d3.scale.linear()
+                                            .domain([0, scope.maxValue])
+                                            .range([0,colors.length-1]);
+                                            //.range(ColorBrewer.colors.PuBu[9]);
+                       var regionColors = function(value){
+                            if(value == 0) return "#FFF";
+                            return colors[Math.floor(regionScale(value))];
+                       } 
+                        
+                       regions.selectAll("path")
+                                .data(data)
+                                .transition()
+                                .duration(1000)
+                                .attr("fill", function (d) { return regionColors(d.value); })
+                                
+                   }
+                    
+                   scope.render = function(data){   
+                       if(regionsRendered){
+                           scope.update(data);
+                           return;
+                       } 
+                       
+                                    
                     //d3Service.d3().then(function (d3) {
                         console.log("starting render function");
                         
@@ -49,7 +78,7 @@
                             .attr("height", height);
 
 
-                        var regions = svg_topo.append("g")
+                        regions = svg_topo.append("g")
                                 .attr("class", "black");
 
                         var locations,
@@ -57,11 +86,11 @@
                             oberfranken;
 
 
-                        d3.json("data/maps/oberfranken.js", function (error, d) {
-                            if (error) return log(error);
-                            oberfranken = d;
-
-                            var center = d3.geo.centroid(oberfranken);
+                        //d3.json("data/maps/oberfranken.js", function (error, d) {
+                          //  if (error) return log(error);
+                            //oberfranken = d;
+                            oberfranken = GeoData.geoCollection;
+                            var center = d3.geo.centroid(GeoData.geoCollection);
                             var scale = 150;
                             var offset = [width / 2, height / 2];
 
@@ -88,26 +117,26 @@
                                     .projection(projection_oberfranken);
 
                             regions.selectAll("path")
-                                .data(oberfranken.features)
+                                .data(data)
                                 .enter()
                                 .append("path")
-                                .attr("fill", function (d) { return regionColors(getStat(d.properties.ID_3)); })
-                                .attr("title", function (d) { return d.properties.NAME_3; })
-                                .attr("class", function (d) { return "subunit " + d.properties.NAME_3.replace(" ", "_"); })
-                                .attr("d", pathTopo)
+                                .attr("fill", function (d) { return regionColors(d.value); })
+                                .attr("title", function (d) { return GeoData.getRegionData(d.id).properties.NAME_3; })
+                                .attr("class", function (d) { return "subunit " + GeoData.getRegionData(d.id).properties.NAME_3.replace(" ", "_"); })
+                                .attr("d", function (d) { return pathTopo(GeoData.getRegionData(d.id));})
                                 .on("click", clicked)
                                 .on("mouseover", function (d) {
-                                    lifbi.tooltip.showTooltip(d.properties.NAME_3 + " " + getStat(d.properties.ID_3));
+                                    lifbi.tooltip.showTooltip(GeoData.getRegionData(d.id).properties.NAME_3 + " " + d.value);
                                     d3.select(this).attr("fill", "#FFFFCC");
-                                    scope.active = d.properties.ID_3;
-                                    scope.selection = d.properties.ID_3;
+                                    scope.active = GeoData.getRegionData(d.id).properties.ID_3;
+                                    scope.selection = GeoData.getRegionData(d.id).properties.ID_3;
                                     scope.$apply();
                                 })
                                 .on("mouseout", function (d) {
                                     lifbi.tooltip.hideTooltip();
-                                    d3.select(this).attr("fill", function (d) { return regionColors(getStat(d.properties.ID_3)) });
+                                    d3.select(this).attr("fill", function (d) { return regionColors(d.value) });
                                 });
-
+/*
                             d3.json("data/maps/oberfranken_cities.js", function (graph) {
                                 locations = svg_topo.selectAll(".locations")
                                     .data(graph.locations)
@@ -129,10 +158,10 @@
                                     .text(function (d) { return d.name; })
                                     .attr("x", function (d) { return d.lat > 10 ? labelDistance : -1 * labelDistance; })
                                     .style("text-anchor", function (d) { return d.lat > 10 ? "start" : "end"; });
-                            });
-                        });
+                            });*/
+                        //});
                     
-                        function getStat(id) {
+/*                        function getStat(id) {
                             if(!data) return 0;
                             
                             for (var i = 0; i < data.length; ++i) {
@@ -141,7 +170,9 @@
                                 }
                             }
                             return 0;
-                        }
+                        }*/
+                        regionsRendered = true;
+
 
                         //Zoom on click
                         function fitToScreen() {

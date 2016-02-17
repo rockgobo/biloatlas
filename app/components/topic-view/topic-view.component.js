@@ -55,6 +55,17 @@
                 }
                 return 0.0;
             }
+            
+            this.switchYearLast = function(){
+                var index = this.years.indexOf(this.year);
+                if(index == 0) return;
+                this.year = this.years[index-1];
+            }
+            this.switchYearNext = function(){
+                var index = this.years.indexOf(this.year);
+                if(index == this.years.length) return;
+                this.year = this.years[index+1];
+            }
         }
     })
 })()
