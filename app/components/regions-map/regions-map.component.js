@@ -2,7 +2,7 @@
     'use strict'
 
     angular.module('biloAtlas')
-       .directive('regionsMap',  function(ColorBrewer) {
+       .directive('regionsMap',  function(ColorBrewer, GeoData) {
            return {
                restrict: 'EA',
                scope: {

@@ -1,10 +1,17 @@
 (function(){
     'use strict'
 
+    /**
+     * @class biloAtlas.ColorBrewer
+     * @memberof biloAtlas
+     * @description This service provides the color schemes from https://github.com/mbostock/d3/tree/master/lib/colorbrewer
+     */
     angular.module('biloAtlas')
     .factory('ColorBrewer', function ($http) {
 
-        // private impl
+        /**
+         * @description private declaration of the brewer color schema
+         */
         var colorbrewer = {YlGn: {
         3: ["#f7fcb9","#addd8e","#31a354"],
         4: ["#ffffcc","#c2e699","#78c679","#238443"],
@@ -307,8 +314,13 @@
         12: ["#8dd3c7","#ffffb3","#bebada","#fb8072","#80b1d3","#fdb462","#b3de69","#fccde5","#d9d9d9","#bc80bd","#ccebc5","#ffed6f"]
         }};
         
-        //public API
+        /**
+         * Public API
+         */
         return {
+            /**
+             * @description Returns the brewer color schemes
+             */
             colors : colorbrewer
         }
     });

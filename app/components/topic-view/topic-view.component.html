@@ -1,15 +1,13 @@
 <div ng-if="topicView.topic.layers.length">
+    
     <h1>{{topicView.topic.name}}</h1>
-    
-    
     <div class="row" >
     
         <div class="col-md-6">
             <p>
                 {{topicView.topic.description}}
             </p>
-            
-                                    
+                                 
             <h3>
                 <select class="form-control" ng-options="layer as layer.name for layer in topicView.topic.layers track by layer.id" ng-model="topicView.layer"></select>
             </h3>
@@ -39,8 +37,9 @@
                 </div> 
                 <div class="col-md-8"><small>{{topicView.average()}}{{topicView.unit()}}</small></div>
             </div>
-            
+        
             <topic-table layer="topicView.layer" year="topicView.year"></topic-table>
+            
         </div>
         <div class="col-md-6" >
             <ul class="nav nav-tabs">

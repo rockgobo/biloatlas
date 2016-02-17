@@ -24,6 +24,11 @@ path.subunit{
     font: "arial";
 }
 
+#tooltip span{
+    color: white;
+    opacity: 1.0 !important;
+}
+
 #legend .colors{
     border: 1px solid #CCC;
     height: 20px;

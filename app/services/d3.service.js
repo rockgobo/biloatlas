@@ -1,6 +1,11 @@
 ﻿(function () {
     'use strict'
 
+    /**
+     * @class biloAtlas.d3Service
+     * @memberof biloAtlas
+     * @description Service that injects the code of d3 in the document
+     */
     angular.module('biloAtlas')
         .factory('d3Service', 
             function($document, $q, $rootScope) {

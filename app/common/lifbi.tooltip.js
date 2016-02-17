@@ -28,7 +28,7 @@ $("body").mousemove(function(event) {
 var lifbi = {
     tooltip: {
         showTooltip: function(text){
-            $('#tooltip').text(text).show();
+            $('#tooltip').html('<span>'+text+'</span>').show();
         },
         hideTooltip: function(){
             $('#tooltip').hide();
