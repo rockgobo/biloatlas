@@ -1,16 +1,15 @@
 <div class="colorpicker colorpanel" ng-click="colorbrewerPicker.opencolors?colorbrewerPicker.opencolors=false:colorbrewerPicker.opencolors=true">
     <div class="row">
         <div class="col-md-2" style="text-align: right; padding-right:2px">
-                <small>{{colorbrewerPicker.min}}</small><span class="glyphicon glyphicon-triangle-right"></span>  
+                <small>{{colorbrewerPicker.min}}</small><span class="glyphicon glyphicon-triangle-right" style="font-size: 0.7em"></span>  
             </div>
-        <div class="col-md-8"style="text-align: center; padding:2px"> 
-            
-            <span ng-repeat="c in colorbrewerPicker.schema" style="display: inline-block; height: 15px;" ng-style="{'background-color': c, 'width': (100/colorbrewerPicker.schema.length)+'%'}" >
+        <div class="col-md-8"style="text-align: center; height:12px; padding: 4px;"> 
+            <span ng-repeat="c in colorbrewerPicker.schema" class="colorpicker_colorbag" ng-style="{'background-color': c, 'width': (100/colorbrewerPicker.schema.length)+'%'}" >
                 &nbsp;
             </span>
         </div>
         <div class="col-md-2"  style="text-align: left; padding-left:2px">
-            <span class="glyphicon glyphicon-triangle-left"></span><small>{{colorbrewerPicker.max}}</small>
+            <span class="glyphicon glyphicon-triangle-left"  style="font-size: 0.7em"></span><small>{{colorbrewerPicker.max}}</small>
         </div>
     </div>
 </div>

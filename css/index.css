@@ -92,6 +92,11 @@ select.clean{
 .colorpanel:hover{
     border: 1px solid #CCC;
 }
+.colorpicker_colorbag{
+    display: inline-block; 
+    height: 12px;
+}
+
 
 .topic-container{
     margin-bottom:60px;
