@@ -63,8 +63,14 @@
             }
             this.switchYearNext = function(){
                 var index = this.years.indexOf(this.year);
-                if(index == this.years.length) return;
+                if(index == this.years.length-1) return;
                 this.year = this.years[index+1];
+            }
+            this.switchYearLastEnbled = function(){
+                return this.years.indexOf(this.year) > 0;;
+            }
+            this.switchYearNextEnbled = function(){
+                return this.years.indexOf(this.year) < this.years.length-1;
             }
         }
     })

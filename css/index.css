@@ -1,10 +1,6 @@
 ﻿body {
 }
 
-path.subunit{
-    stroke: lightgray;
-}
-
 #content{
 }
 
@@ -42,6 +38,17 @@ path.subunit{
 nav .pagination li a{
     color: black;
     cursor: pointer;
+}
+
+.clickable{
+    cursor: pointer;
+}
+
+select.clean{
+    -webkit-appearance: none; 
+    -moz-appearance: none;
+    text-indent: 1px;
+    text-overflow: '';
 }
 
 .atlas-footer{
