@@ -5,9 +5,9 @@
     .component('regionView', {
         templateUrl: 'app/components/region-view/region-view.component.html',
         binding: {},
-        controller: function(RegionData, $routeParams){
+        controller: function(RegionData, GeoData, $routeParams){
             this.topics = [];
-            
+            this.selection = 0;
             this.options =  {
                     chart: {
                         type: 'lineChart',
@@ -56,6 +56,13 @@
         this.getLayerOptions = function(id){           
             return this.layersData[id].options;
         }
+        
+        this.regions = [];
+        RegionData.getRegions().then(
+            function(regions){
+                this.regions = regions;
+            }.bind(this)
+        );
             
         RegionData.getRegionById($routeParams.regionid).then(function(regionTopics){
                
@@ -73,7 +80,11 @@
                 
                 this.layersData = layersData;
                 this.topics = regionTopics.topics;
-                this.region = regionTopics.region.name;
+                this.region = regionTopics.region;
+                                
+                this.mapData = GeoData.getDataByValue(regionTopics.region.id,100);
+                
+                //[{id: regionTopics.region.id, name: this.region, value: 100, year: 0}];
             }.bind(this));
         
         
