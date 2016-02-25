@@ -6,8 +6,8 @@
             <th ng-click="topicTable.sortOrder = '-value'"  style="text-align: right; padding-right: 20px;">Wert <small><span ng-show="topicTable.sortOrder == '-value'" class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span></small></th>
         </tr>
     </thead>
-    <tr ng-repeat="stat in topicTable.layer.data | filter:topicTable.year | orderBy: topicTable.sortOrder">
+    <tr ng-repeat="stat in topicTable.stats | orderBy: topicTable.sortOrder">
         <td><a href="#/region/{{stat.id}}">{{stat.name}}</a></td>
-        <td style="text-align: right; padding-right: 20px;">{{stat.value.toFixed(1)}}{{topicTable.unit()}}</td>
+        <td style="text-align: right; padding-right: 20px;">{{stat.value.toFixed(1)}}{{topicTable.unit}}</td>
     </tr>
 </table>

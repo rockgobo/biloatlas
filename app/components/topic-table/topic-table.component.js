@@ -6,15 +6,11 @@
         templateUrl: 'app/components/topic-table/topic-table.component.html',
         bindings: {
             id: '@',
-            layer: '=',
-            year: '='
+            stats: '=',
+            unit: '='
         },
-        controller: function($routeParams,TopicData){
+        controller: function(){
             this.sortOrder = '-value';
-            
-            this.unit = function(){
-                return this.layer.unit;
-            }
         }
     })
 })()
