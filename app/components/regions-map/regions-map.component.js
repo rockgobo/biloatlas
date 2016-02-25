@@ -7,13 +7,11 @@
                restrict: 'EA',
                scope: {
                    stats: '=',
-                   year: '='
+                   schemecolors: '=',
+                   regionColors: '=',
+                   selection: '='
                },
                templateUrl: 'app/components/regions-map/regions-map.component.html',
-               controller: function($scope){
-                   var self = $scope;
-                   self.schemecolors = ColorBrewer.colors.PuBu[9];
-               },
                link: function (scope, element, attrs) { 
                    var regions;
                    var regionsRendered = false;
@@ -24,9 +22,8 @@
                        console.log("updating map");
                        colors = scope.schemecolors;
                        var regionScale = d3.scale.linear()
-                                            .domain([0, scope.maxValue])
+                                            .domain([scope.minValue, scope.maxValue])
                                             .range([0,colors.length-1]);
-                                            //.range(ColorBrewer.colors.PuBu[9]);
                        var regionColors = function(value){
                             if(value == 0) return "#FFF";
                             return colors[Math.floor(regionScale(value))];
@@ -73,7 +70,7 @@
                         }         
                         scope.regionColors = ["#FFF"].concat(colors);
                         
-                        //HACK.... Remove entire map, data could also be 
+                        //Remove entire map, data will be updated later on
                         d3.select(element[0]).select("svg").remove();
                         var svg_topo = d3.select("#regions-map").append("svg")
                             .attr("width", width)
@@ -121,62 +118,29 @@
                             regions.selectAll("path")
                                 .data(data)
                                 .enter()
+                                .append("a")
+                                .attr("xlink:href", function(d){return "#/region/"+d.id})
                                 .append("path")
                                 .attr("fill", function (d) { return regionColors(d.value); })
                                 .attr("title", function (d) { return GeoData.getRegionData(d.id).properties.NAME_3; })
                                 .attr("class", function (d) { return "subunit " + GeoData.getRegionData(d.id).properties.NAME_3.replace(" ", "_"); })
                                 .attr("d", function (d) { return pathTopo(GeoData.getRegionData(d.id));})
                                 .attr("stroke-width", 1)
-                                .attr("stroke", "#ddd")
+                                .attr("stroke", "#BBB")
                                 .on("click", clicked)
                                 .on("mouseover", function (d) {
                                     lifbi.tooltip.showTooltip(GeoData.getRegionData(d.id).properties.NAME_3 + " " + d.value);
-                                    d3.select(this)
-                                        .attr("stroke", "gray");
-                                    scope.active = GeoData.getRegionData(d.id).properties.ID_3;
+                                    d3.select(this).attr("stroke", "#666");
                                     scope.selection = GeoData.getRegionData(d.id).properties.ID_3;
-                                    scope.$apply();
+                                    scope.$apply(); //need to refresh scope manually as data is set in backend code
                                 })
                                 .on("mouseout", function (d) {
                                     lifbi.tooltip.hideTooltip();
-                                    d3.select(this)
-                                        .attr("stroke", "#ddd");
+                                    d3.select(this).attr("stroke", "#BBB");
+                                    scope.selection = 0;
+                                    scope.$apply(); //need to refresh scope manually as data is set in backend code
                                 });
-/*
-                            d3.json("data/maps/oberfranken_cities.js", function (graph) {
-                                locations = svg_topo.selectAll(".locations")
-                                    .data(graph.locations)
-                                    .enter().append("circle")
-                                    .attr("class", "node")
-                                    .attr("id", function (d) { return "node_" + d.id; })
-                                    .attr("title", function (d) { return d.name; })
-                                    .attr("r", function (d) { return d.type == 0 ? 6 : 4 })
-                                    .attr("cx", function (d) { return projection_oberfranken([d.lat, d.lon])[0]; })
-                                    .attr("cy", function (d) { return projection_oberfranken([d.lat, d.lon])[1]; })
-                                    .style("fill", function (d) { return d.type == 0 ? "#fff" : "#f00" })
-                                    .style("stroke", "#666");
 
-                                var labelDistance = 10;
-                                labels = svg_topo.selectAll(".place-label")
-                                    .data(graph.locations).enter().append("text").attr("class", "place-label")
-                                    .attr("transform", function (d) { return "translate(" + projection_oberfranken([d.lat, d.lon]) + ")"; })
-                                    .attr("dy", ".35em")
-                                    .text(function (d) { return d.name; })
-                                    .attr("x", function (d) { return d.lat > 10 ? labelDistance : -1 * labelDistance; })
-                                    .style("text-anchor", function (d) { return d.lat > 10 ? "start" : "end"; });
-                            });*/
-                        //});
-                    
-/*                        function getStat(id) {
-                            if(!data) return 0;
-                            
-                            for (var i = 0; i < data.length; ++i) {
-                                if (data[i].id == id ) {
-                                    return data[i].value;
-                                }
-                            }
-                            return 0;
-                        }*/
                         regionsRendered = true;
 
 
@@ -233,27 +197,25 @@
                    scope.$watch('stats', function(data){
                        //Calculate max using all years
                        scope.maxValue = 0;
+                       scope.minValue = Number.MAX_VALUE;
                        if(data == undefined) {
                            return;
                        }
                        data.forEach( 
                             function (d) { if(d.value > scope.maxValue) scope.maxValue = d.value; }
                        );
-                       
-                       scope.render(data.filter(function(d){return d.year == scope.year}));
-                   })
-                   scope.$watch('year', function(year){
-                       if(scope.stats == undefined) {
-                           return;
-                       }
-                       scope.render(scope.stats.filter(function(d){return d.year == year}));
+                       data.forEach( 
+                            function (d) { if(d.value < scope.minValue) scope.minValue = d.value; }
+                       );
+                                              
+                       scope.render(data);
                    })
                    
-                    scope.$watch('schemecolors', function(year){
+                    scope.$watch('schemecolors', function(){
                        if(scope.stats == undefined) {
                            return;
                        }
-                       scope.render(scope.stats.filter(function(d){return d.year == scope.year}));
+                       scope.render(scope.stats);
                    })
                }
            }
