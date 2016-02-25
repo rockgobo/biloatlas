@@ -6,9 +6,13 @@
      * @memberof biloAtlas
      * @description This service provides the color schemes from https://github.com/mbostock/d3/tree/master/lib/colorbrewer
      */
-    angular.module('biloAtlas')
-    .factory('ColorBrewer', function ($http) {
+    angular
+        .module('biloAtlas')
+        .factory('ColorBrewer', colorBrewer);
 
+    //////////////////////
+
+    function colorBrewer() {
         /**
          * @description private declaration of the brewer color schema
          */
@@ -323,8 +327,7 @@
              */
             colors : colorbrewer
         }
-    });
-
+    }
 })();
 
 
