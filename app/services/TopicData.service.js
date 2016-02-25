@@ -24,7 +24,7 @@
          * @return Topic object as promise
          */
         function getTopicById(id) {
-            return $http.get(webRoot+id).then(
+            return $http.get(webRoot+id, {cache: true}).then(
                 function(response){
                     return response.data;
                 },
@@ -38,7 +38,7 @@
          * @return List of topics as promise
          */
         function getTopics() {
-            return $http.get(webRoot).then(
+            return $http.get(webRoot, {cache: true}).then(
                 function(response){
                     return response.data;
                 },

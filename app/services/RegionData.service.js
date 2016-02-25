@@ -22,7 +22,7 @@
          * @return Region object as promise
          */
         function getRegionById(id) {
-            return $http.get(webRoot+id).then(
+            return $http.get(webRoot+id, {cache: true}).then(
                 function(response){
                     return response.data;
                 },
@@ -36,7 +36,7 @@
          * @return List of regions as promise
          */
         function getRegions() {
-            return $http.get(webRoot).then(
+            return $http.get(webRoot, {cache: true}).then(
                 function(response){
                     return response.data;
                 },
