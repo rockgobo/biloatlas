@@ -7,16 +7,10 @@
                restrict: 'EA',
                scope: {
                    stats: '=',
-                   year: '='
+                   schemecolors :'='
                },
                templateUrl: 'app/components/regions-pie/regions-pie.component.html',
-               controller: function($scope){
-                   var self = $scope;
-                   self.schemecolors = ColorBrewer.colors.PuBu[9];
-               },
                link: function (scope, element, attrs) { 
-                   
-                   
                    scope.render = function(data){ 
                      //d3Service.d3().then(function (d3) {  
                         var colors = scope.schemecolors;
@@ -31,13 +25,6 @@
                         scope.regionColors = ["#FFF"].concat(colors);
                         
                         data = data.map(function(i){ return {label: i.name, value: i.value, color: regionColors(i.value)}});   
-                        
-                        //update data
-                        //if(scope.pie != undefined){
-                        //    scope.pie.updateProp("data.content", data);
-                        //    return;
-                        //}
-                       
                                    
                         console.log("starting rendering pie function");
                         
@@ -57,17 +44,18 @@
                             header: {
                                 title: {
                                     text: ""
-                                }
+                                },
+		                        location: "pie-center"
                             },
                             data: {
 	                           sortOrder: "value-desc",
                                content: data
                             },
                             size: {
-                                canvasHeight: 500,
+                                canvasHeight: 400,
                                 canvasWidth: 550,
                                 pieInnerRadius: 0,
-                                pieOuterRadius: 150
+                                pieOuterRadius: '90%'
                             },
                             labels: {
                                 outer: {
@@ -88,9 +76,6 @@
                                 string: "{label} {value}"
                             }
                         });
-
-
-                    //})
                    };
                    
                    scope.$watch('stats', function(data){
@@ -103,20 +88,14 @@
                             function (d) { if(d.value > scope.maxValue) scope.maxValue = d.value; }
                        );
                        
-                       scope.render(data.filter(function(d){return d.year == scope.year}));
-                   })
-                   scope.$watch('year', function(year){
+                       scope.render(data);
+                   }) 
+                                    
+                   scope.$watch('schemecolors', function(year){
                        if(scope.stats == undefined) {
                            return;
                        }
-                       scope.render(scope.stats.filter(function(d){return d.year == year}));
-                   })
-                   
-                    scope.$watch('schemecolors', function(year){
-                       if(scope.stats == undefined) {
-                           return;
-                       }
-                       scope.render(scope.stats.filter(function(d){return d.year == scope.year}));
+                       scope.render(scope.stats);
                    })
                }
            }
