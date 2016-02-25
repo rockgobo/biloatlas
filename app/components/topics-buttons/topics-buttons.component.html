@@ -1,6 +1,16 @@
-<div ng-repeat="topic in topicsButtons.topics" style="margin-top:40px">
-    <h3>{{topic.name}}</h3>
-    <p>{{topic.description}}</p>
-    <a role="button" ng-href="#/topic/{{topic.id}}" class="btn btn-default">mehr</a>
+<div class="row" ng-repeat="topics in topicsButtons.chunkedTopics" style="margin-bottom: 20px;">
+    <div ng-repeat="topic in topics" class="col-md-4"  ng-class="{disabled: topic.layers.length == 0}">
+        
+        <h3><a ng-href="#/topic/{{topic.id}}" ng-class="{disabled: topic.layers.length == 0}">{{topic.name}}</a></h3>
+        <p>{{topic.description}}</p>
+        
+        <ul  class="media-body" style="margin-bottom: 20px;">
+            <li ng-repeat="layer in topic.layers"><small>{{layer.name}}</small></li>
+        </ul>
+        <div class="media-right">
+            <a role="button" ng-href="#/topic/{{topic.id}}" class="btn btn-default" ng-class="{disabled: topic.layers.length == 0}">mehr</a>
+        </div>
+        
+    </div>
 </div>
                    
