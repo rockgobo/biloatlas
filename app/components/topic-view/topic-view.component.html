@@ -21,7 +21,7 @@
                 </div> 
                 <div class="col-md-8">
                     <span ng-style="topicView.switchYearLastEnbled()?{opacity:1.0}:{opacity:0.5, cursor: 'default'}" ng-click="topicView.switchYearLast()" class="glyphicon glyphicon-triangle-left clickable"  style="font-size: 0.7em"></span>
-                    <select ng-options="year as year for year in topicView.years" ng-model="topicView.year" class="form-control bilo-inline-control clean" style="display:inline; width: auto; "></select>
+                    <select ng-options="year as year for year in topicView.years" ng-model="topicView.year" ng-change="topicView.filterData()" class="form-control bilo-inline-control clean" style="display:inline; width: auto; "></select>
                     <span ng-style="topicView.switchYearNextEnbled()?{opacity:1.0}:{opacity:0.5, cursor: 'default'}" ng-click="topicView.switchYearNext()" class="glyphicon glyphicon-triangle-right clickable" style="font-size: 0.7em"></span>
                 </div>
 
@@ -40,17 +40,29 @@
                 <div class="col-md-8"><small>{{topicView.average()}}{{topicView.unit()}}</small></div>
             </div>
         
-            <topic-table layer="topicView.layer" year="topicView.year"></topic-table>
+            
             
         </div>
         <div class="col-md-6" >
-            <ul class="nav nav-tabs">
-                <li role="presentation" ng-click="topicView.showMap = true" ng-class="{active: topicView.showMap}"><a>Karte</a></li>
-                <li role="presentation" ng-click="topicView.showMap = false" ng-class="{active: !topicView.showMap}"><a>Diagramm</a></li>
-            </ul>
             
-            <div regions-map stats="topicView.layer.data" year="topicView.year" ng-if="topicView.showMap"></div>
-            <div regions-pie stats="topicView.layer.data" year="topicView.year" ng-if="!topicView.showMap"></div>
+            <ul class="nav nav-tabs">
+                <li role="presentation" ng-click="topicView.showMap()" ng-class="{active: topicView.visibleMap}"><a>Karte</a></li>
+                <li role="presentation" ng-click="topicView.showPie()" ng-class="{active: topicView.visiblePie}"><a>Diagramm</a></li>
+                <li role="presentation" ng-click="topicView.showTable()" ng-class="{active: topicView.visibleTable}"><a>Table</a></li>
+            </ul>
+            <div class="mapinfo" ng-style="{backgroundColor: topicView.averageColor, borderColor: topicView.averageColor}" title="Durchschnitt Oberfranken">
+                {{topicView.average()}}{{topicView.unit()}}
+            </div>
+            <div ng-if="topicView.visibleMap">
+                <div regions-map stats="topicView.filteredData" schemecolors="topicView.colors" ></div>
+            </div>
+            <div regions-pie stats="topicView.filteredData" schemecolors="topicView.colors" ng-if="topicView.visiblePie"></div>
+            <topic-table stats="topicView.filteredData" unit="topicView.layer.unit" ng-if="topicView.visibleTable"></topic-table>
+            
+            
+            <div id="legend">
+                <colorbrewer-picker schema="topicView.colors" min="topicView.minValue" max="topicView.maxValue"></colorbrewer-picker>
+            </div>
         </div>
     </div>
 </div>
