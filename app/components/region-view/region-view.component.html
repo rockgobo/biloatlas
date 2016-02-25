@@ -4,9 +4,9 @@
     
     <div class="col-md-6">
         <img ng-src="images/{{regionView.region.id}}.png" width="40%" />
-        <div id="coats" ng-animate="'animate'">
+        <div id="coats">
             <a ng-repeat="region in regionView.regions" ng-href="#/region/{{region.id}}" >
-                <img  ng-src="images/{{region.id}}.png" title="{{region.name}}" width="40px" ng-class="region.id!=regionView.selection?'coatsofarms':''"></img>
+                <img  ng-src="images/{{region.id}}.png" title="{{region.name}}" width="40px" height="47px" ng-class="region.id!=regionView.selection?'coatsofarms':''" style="margin-bottom: 2px;"></img>
             </a>
         </div>
     </div>
