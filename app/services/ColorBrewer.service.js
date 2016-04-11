@@ -16,7 +16,8 @@
         /**
          * @description private declaration of the brewer color schema
          */
-        var colorbrewer = {YlGn: {
+        var colorbrewer = {
+            /*YlGn: {
         3: ["#f7fcb9","#addd8e","#31a354"],
         4: ["#ffffcc","#c2e699","#78c679","#238443"],
         5: ["#ffffcc","#c2e699","#78c679","#31a354","#006837"],
@@ -56,7 +57,7 @@
         7: ["#f6eff7","#d0d1e6","#a6bddb","#67a9cf","#3690c0","#02818a","#016450"],
         8: ["#fff7fb","#ece2f0","#d0d1e6","#a6bddb","#67a9cf","#3690c0","#02818a","#016450"],
         9: ["#fff7fb","#ece2f0","#d0d1e6","#a6bddb","#67a9cf","#3690c0","#02818a","#016c59","#014636"]
-        },PuBu: {
+        },*/PuBu: {
         3: ["#ece7f2","#a6bddb","#2b8cbe"],
         4: ["#f1eef6","#bdc9e1","#74a9cf","#0570b0"],
         5: ["#f1eef6","#bdc9e1","#74a9cf","#2b8cbe","#045a8d"],
@@ -64,7 +65,8 @@
         7: ["#f1eef6","#d0d1e6","#a6bddb","#74a9cf","#3690c0","#0570b0","#034e7b"],
         8: ["#fff7fb","#ece7f2","#d0d1e6","#a6bddb","#74a9cf","#3690c0","#0570b0","#034e7b"],
         9: ["#fff7fb","#ece7f2","#d0d1e6","#a6bddb","#74a9cf","#3690c0","#0570b0","#045a8d","#023858"]
-        },BuPu: {
+        }}/*
+        ,BuPu: {
         3: ["#e0ecf4","#9ebcda","#8856a7"],
         4: ["#edf8fb","#b3cde3","#8c96c6","#88419d"],
         5: ["#edf8fb","#b3cde3","#8c96c6","#8856a7","#810f7c"],
@@ -316,7 +318,7 @@
         10: ["#8dd3c7","#ffffb3","#bebada","#fb8072","#80b1d3","#fdb462","#b3de69","#fccde5","#d9d9d9","#bc80bd"],
         11: ["#8dd3c7","#ffffb3","#bebada","#fb8072","#80b1d3","#fdb462","#b3de69","#fccde5","#d9d9d9","#bc80bd","#ccebc5"],
         12: ["#8dd3c7","#ffffb3","#bebada","#fb8072","#80b1d3","#fdb462","#b3de69","#fccde5","#d9d9d9","#bc80bd","#ccebc5","#ffed6f"]
-        }};
+        }};*/
         
         /**
          * Public API

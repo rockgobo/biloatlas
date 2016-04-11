@@ -5,6 +5,7 @@
     .component('regionView', {
         templateUrl: 'app/components/region-view/region-view.component.html',
         binding: {},
+        controllerAs: 'regionView',
         controller: function(RegionData, GeoData, $routeParams){
             this.topics = [];
             this.selection = 0;
@@ -65,8 +66,6 @@
         );
             
         RegionData.getRegionById($routeParams.regionid).then(function(regionTopics){
-               
-                
                 //Prepare data for linecharts
                 var layersData = [];
                 regionTopics.topics.forEach(function(topic){

@@ -1,0 +1,38 @@
+<div class="row">
+    <div class="col-md-6">
+        <topic-view topic="{id: 'b6bcd6bc-4823-4508-af44-59450490426e'}" data="topicsCollection.data1" average="topicsCollection.average" averageColor="topicsCollection.averageColor" unit="topicsCollection.unit"></topic-view>
+        
+        <div role="button" class="btn btn-default">Add Layer</div>
+        
+        <!-- Addional Layer -->
+        <div>
+        <topics-selection topic="topicsCollection.topicId2"></topics-selection>        
+        <topic-view topic="topicsCollection.topicId2" data="topicsCollection.data2"></topic-view>
+        </div>
+    </div>
+    
+    <div class="col-md-6">
+        <!-- Tabs with visuals -->
+        <ul class="nav nav-tabs">
+            <li role="presentation" ng-click="topicsCollection.showMap()" ng-class="{active: topicsCollection.visibleMap}"><a>Karte</a></li>
+            <li role="presentation" ng-click="topicsCollection.showPie()" ng-class="{active: topicsCollection.visiblePie}"><a>Diagramm</a></li>
+            <li role="presentation" ng-click="topicsCollection.showTable()" ng-class="{active: topicsCollection.visibleTable}"><a>Table</a></li>
+        </ul>
+
+
+        <div class="mapinfo" ng-style="{backgroundColor: topicsCollection.averageColor, borderColor: topicsCollection.averageColor}" title="Durchschnitt Oberfranken">
+            {{topicsCollection.average()}}{{topicsCollection.unit()}}
+        </div>
+        <div ng-if="topicsCollection.visibleMap">
+            <div regions-map stats="topicsCollection.data1" schemecolors="topicsCollection.colors" ></div>
+        </div>
+        <div regions-pie stats="topicsCollection.data1" schemecolors="topicsCollection.colors" ng-if="topicsCollection.visiblePie"></div>
+        <topic-table stats="topicsCollection.data1" unit="topicsCollection.layer.unit" ng-if="topicsCollection.visibleTable"></topic-table>
+
+
+        <div id="legend">
+            <colorbrewer-picker schema="topicsCollection.colors" min="topicsCollection.minValue" max="topicsCollection.maxValue"></colorbrewer-picker>
+        </div>
+
+    </div>
+</div>

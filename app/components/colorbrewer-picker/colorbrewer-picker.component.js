@@ -13,9 +13,7 @@
             max: '='
         },
         controller: function(ColorBrewer){
-            this.opencolors = false
             this.colors = ColorBrewer.colors;
-            //this.schema = this.colors.PuBu[6];
         }
     });
 })();

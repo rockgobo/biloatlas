@@ -1,23 +1,23 @@
-<div class="colorpicker colorpanel" ng-click="colorbrewerPicker.opencolors?colorbrewerPicker.opencolors=false:colorbrewerPicker.opencolors=true">
+<div class="colorpicker colorpanel" ng-init="opencolors=false" ng-click="opencolors?opencolors=false:opencolors=true">
     <div class="row">
         <div class="col-md-2" style="text-align: right; padding-right:2px">
-                <small>{{colorbrewerPicker.min}}</small><span class="glyphicon glyphicon-triangle-right" style="font-size: 0.7em"></span>  
+                <small>{{$ctrl.min}}</small><span class="glyphicon glyphicon-triangle-right" style="font-size: 0.7em"></span>  
             </div>
         <div class="col-md-8"style="text-align: center; height:12px; padding: 4px;"> 
-            <span ng-repeat="c in colorbrewerPicker.schema" class="colorpicker_colorbag" ng-style="{'background-color': c, 'width': (100/colorbrewerPicker.schema.length)+'%'}" >
+            <span ng-repeat="c in $ctrl.schema" class="colorpicker_colorbag" ng-style="{'background-color': c, 'width': (100/$ctrl.schema.length)+'%'}" >
                 &nbsp;
             </span>
         </div>
         <div class="col-md-2"  style="text-align: left; padding-left:2px">
-            <span class="glyphicon glyphicon-triangle-left"  style="font-size: 0.7em"></span><small>{{colorbrewerPicker.max}}</small>
+            <span class="glyphicon glyphicon-triangle-left"  style="font-size: 0.7em"></span><small>{{$ctrl.max}}</small>
         </div>
     </div>
 </div>
  
  
-<div class="colorpickerColors" ng-show="colorbrewerPicker.opencolors"  >    
-    <div ng-repeat="(name,schemas) in colorbrewerPicker.colors">
-        <div ng-repeat="(count, cs) in schemas" ng-click="colorbrewerPicker.opencolors=false; colorbrewerPicker.schema=cs; " class="colorpanel">
+<div class="colorpickerColors" ng-show="opencolors"  >    
+    <div ng-repeat="(name,schemas) in $ctrl.colors">
+        <div ng-repeat="(count, cs) in schemas" ng-click="$ctrl.opencolors=false; $ctrl.schema=cs; " class="colorpanel">
             <span ng-repeat="c in cs" style="display: inline-block; width: 15px; height: 15px;" ng-style="{'background-color': c}">
                 &nbsp;
             </span>

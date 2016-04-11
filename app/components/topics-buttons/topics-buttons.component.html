@@ -1,4 +1,4 @@
-<div class="row" ng-repeat="topics in topicsButtons.chunkedTopics" style="margin-bottom: 20px;">
+<div class="row" ng-repeat="topics in $ctrl.chunkedTopics" style="margin-bottom: 20px;">
     <div ng-repeat="topic in topics" class="col-md-4"  ng-class="{disabled: topic.layers.length == 0}">
         
         <h3><a ng-href="#/topic/{{topic.id}}" ng-class="{disabled: topic.layers.length == 0}">{{topic.name}}</a></h3>

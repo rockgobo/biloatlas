@@ -5,87 +5,70 @@
     .component('topicView', {
         templateUrl: 'app/components/topic-view/topic-view.component.html',
         bindings: {
-            id: '@'
+            topic: '=',
+            data: '=?',
+            unit: '&',
+            average: '&'
         },
-        controller: function(TopicData,ColorBrewer, $routeParams){
-            this.topic;
-            this.topicId = $routeParams.topicid
+        controllerAs: 'topicView',
+        controller: function(TopicData){
+            this.topic_;
             this.layer = [];
             this.selection = 0;
             this.years = [];
             this.year = false;
-            this.visibleMap = true;
-            this.visiblePie = false;
-            this.visibleTable = false;
-            this.colors = ColorBrewer.colors.PuBu[9];
-            this.maxValue = 0;
-            this.minValue = Number.MAX_VALUE;
-            this.regionColors = function(){};
             
-            this.data = []
-            this.filteredData = []
+            this.data_ = []
             this.filterData = function(){
-                this.filteredData = this.data.filter(function(d){
+                this.data = this.data_.filter(function(d){
                     return d.year == this.year
                 }.bind(this));
             };
+                        
+            this.$onInit = function(){
+                TopicData.getTopicById(this.topic.id).then(function(topic){
+
+                    this.topic_ = topic;
+                    if(this.topic_.layers.length > 0){
+                        this.selectLayer(this.topic_.layers[0]);
+                    }
+                    
+                }.bind(this))
+            }
             
-            TopicData.getTopicById(this.topicId).then(function(topic){
-                this.topic = topic;
-                if(this.topic.layers.length > 0){
-                    this.selectLayer(this.topic.layers[0]);
-                }
-                
-            }.bind(this));
-            
-            this.averageColor = '#00F';
             this.selectLayer = function(layer){
                 this.layer = layer;
                 this.years = [];
-                this.maxValue = 0;
-                this.minValue = Number.MAX_VALUE;
                 
                 layer.data.forEach(function(d){
                     if(this.years.indexOf(d.year) == -1){
                         this.years.push(d.year);
                     }
-                    if(d.value > this.maxValue) this.maxValue = d.value; 
-                    if(d.value < this.minValue) this.minValue = d.value; 
                 }.bind(this));
                                
                 this.years.sort();
                 this.year = this.years[this.years.length-1];
                 
-                this.data = layer.data;
+                this.data_ = layer.data;
                 this.filterData();
                 
-                var regionScale = d3.scale.linear()
-                                            .domain([this.minValue, this.maxValue])
-                                            .range([0,this.colors.length-1]);
-                this.regionColors = function(value){
-                    if(value == 0) return "#FFF";
-                    return this.colors[Math.floor(regionScale(value))];
-                }
             }
             this.layerVisible = function(id){
                 return id == this.layer.id;
             }
             
             this.unit = function(){
+                if(this.layer == undefined) return
                 return this.layer.unit;
             }
             
             this.average = function(){
-                if(this.layer != [] && this.layer.data != undefined){
-                    var dataOfYear = this.layer.data.filter(d => d.year == this.year ).map( x => x.value);
-                    
-                    if(dataOfYear.length > 0){
-                        var sum = dataOfYear.reduce((p, c) => p + c) 
-                        var average = parseFloat((sum / dataOfYear.length)+'').toFixed(2);
-                        this.averageColor = this.regionColors(average);
+                    if(this.data && this.data.length > 0){
+                        var data = this.data.map(function (d){return d.value})
+                        var sum = data.reduce(function(p, c){return p+c}) 
+                        var average = parseFloat((sum / this.data.length)+'').toFixed(2);
                         return average;
                     }
-                }
                 return 0.0;
             }
             
@@ -108,21 +91,6 @@
                 return this.years.indexOf(this.year) < this.years.length-1;
             }
             
-            this.showMap = function(){
-                this.visibleMap = true;
-                this.visiblePie = false;
-                this.visibleTable = false;
-            }
-            this.showPie = function(){
-                this.visibleMap = false;
-                this.visiblePie = true;
-                this.visibleTable = false;
-            }
-            this.showTable = function(){
-                this.visibleMap = false;
-                this.visiblePie = false;
-                this.visibleTable = true;
-            }
         }
     })
 })()

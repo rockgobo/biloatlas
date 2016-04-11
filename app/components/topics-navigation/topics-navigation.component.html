@@ -15,12 +15,12 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li ng-class="{active: topicsNavigation.startSelected() }"><a href="#/">Start</a></li>
+                <li ng-class="{active: $ctrl.startSelected() }"><a href="#/">Start</a></li>
                 
-                <li class="dropdown" ng-class="{active: topicsNavigation.topicSelected()}">
+                <li class="dropdown" ng-class="{active: $ctrl.topicSelected()}">
                     <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Bereiche <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li ng-repeat="topic in topicsNavigation.topics" ng-class="{active: topicsNavigation.activeTopic(topic), disabled: topic.layers.length  == 0}">
+                        <li ng-repeat="topic in $ctrl.topics" ng-class="{active: $ctrl.activeTopic(topic), disabled: topic.layers.length  == 0}">
                             <a ng-href="#/topic/{{topic.id}}">
                                 {{topic.name}}
                             </a>
@@ -28,10 +28,10 @@
                     </ul>
                   </li> 
                   
-                  <li  ng-class="{active: topicsNavigation.regionSelected()}"> 
+                  <li  ng-class="{active: $ctrl.regionSelected()}"> 
                     <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Regionen <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li ng-repeat="region in topicsNavigation.regions" ng-class="{active: topicsNavigation.activeRegion(region)}" >
+                        <li ng-repeat="region in $ctrl.regions" ng-class="{active: $ctrl.activeRegion(region)}" >
                             <a ng-href="#/region/{{region.id}}">
                                 {{region.name}}
                             </a>

@@ -9,7 +9,7 @@
                     templateUrl: 'app/views/main.html'
                 }).
                 when('/topic/:topicid', {
-                    template: '<topic-view></topic-view>',
+                    template: '<topics-collection></topics-collection>',
                 }).
                 when('/region/:regionid', {
                     template: '<region-view></region-view>',

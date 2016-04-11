@@ -1,63 +1,40 @@
 {
-  "_args": [
-    [
-      "angular@1.5.0-beta.2",
-      "C:\\Users\\CMatyas\\Documents\\Visual Studio 2015\\Projects\\BiloAtlas\\BiloAtlas\\www"
-    ]
-  ],
-  "_from": "angular@1.5.0-beta.2",
-  "_id": "angular@1.5.0-beta.2",
-  "_inCache": true,
-  "_installable": true,
-  "_location": "/angular",
-  "_nodeVersion": "0.10.26",
-  "_npmUser": {
-    "email": "angular-core+npm@google.com",
-    "name": "angularcore"
+  "name": "angular",
+  "version": "1.5.0",
+  "description": "HTML enhanced for web apps",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "_npmVersion": "2.0.2",
-  "_phantomChildren": {},
-  "_requested": {
-    "name": "angular",
-    "raw": "angular@1.5.0-beta.2",
-    "rawSpec": "1.5.0-beta.2",
-    "scope": null,
-    "spec": "1.5.0-beta.2",
-    "type": "version"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/angular/angular.js.git"
   },
-  "_requiredBy": [
-    "/"
+  "keywords": [
+    "angular",
+    "framework",
+    "browser",
+    "client-side"
   ],
-  "_resolved": "http://registry.npmjs.org/angular/-/angular-1.5.0-beta.2.tgz",
-  "_shasum": "ae521ee54c5124c449d61ae12a479c91b28623a4",
-  "_shrinkwrap": null,
-  "_spec": "angular@1.5.0-beta.2",
-  "_where": "C:\\Users\\CMatyas\\Documents\\Visual Studio 2015\\Projects\\BiloAtlas\\BiloAtlas\\www",
   "author": {
-    "email": "angular-core+npm@google.com",
-    "name": "Angular Core Team"
+    "name": "Angular Core Team",
+    "email": "angular-core+npm@google.com"
   },
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/angular/angular.js/issues"
   },
-  "dependencies": {},
-  "description": "HTML enhanced for web apps",
-  "devDependencies": {},
-  "directories": {},
-  "dist": {
-    "shasum": "ae521ee54c5124c449d61ae12a479c91b28623a4",
-    "tarball": "http://registry.npmjs.org/angular/-/angular-1.5.0-beta.2.tgz"
-  },
-  "gitHead": "b9d7f2d6824e522681db24eeb9c313c92c4461c7",
   "homepage": "http://angularjs.org",
-  "keywords": [
-    "angular",
-    "browser",
-    "client-side",
-    "framework"
-  ],
-  "license": "MIT",
-  "main": "index.js",
+  "gitHead": "017a583b226a335740c5b50b3e9381a52d0bb260",
+  "_id": "angular@1.5.0",
+  "_shasum": "d96ee97ab6df6cfd0915accbee484d098adb74ec",
+  "_from": "angular@1.5.0",
+  "_npmVersion": "2.14.12",
+  "_nodeVersion": "4.2.6",
+  "_npmUser": {
+    "name": "angularcore",
+    "email": "angular-core+npm@google.com"
+  },
   "maintainers": [
     {
       "name": "bclinkinbeard",
@@ -72,15 +49,14 @@
       "email": "pete@bacondarwin.com"
     }
   ],
-  "name": "angular",
-  "optionalDependencies": {},
-  "readme": "ERROR: No README data found!",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/angular/angular.js.git"
+  "dist": {
+    "shasum": "d96ee97ab6df6cfd0915accbee484d098adb74ec",
+    "tarball": "http://registry.npmjs.org/angular/-/angular-1.5.0.tgz"
   },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "_npmOperationalInternal": {
+    "host": "packages-5-east.internal.npmjs.com",
+    "tmp": "tmp/angular-1.5.0.tgz_1454673705688_0.6785951922647655"
   },
-  "version": "1.5.0-beta.2"
+  "directories": {},
+  "_resolved": "http://registry.npmjs.org/angular/-/angular-1.5.0.tgz"
 }

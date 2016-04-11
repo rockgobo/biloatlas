@@ -8,19 +8,27 @@
                scope: {
                    stats: '=',
                    schemecolors: '=',
-                   regionColors: '=',
-                   selection: '='
+                   selection: '=?'
                },
                templateUrl: 'app/components/regions-map/regions-map.component.html',
                link: function (scope, element, attrs) { 
                    var regions;
                    var regionsRendered = false;
                    var regionColors;
-                   var colors;
+                   var colors = scope.schemecolors;
+                   
+                   //set some defaults 
+                   if(colors == undefined){
+                        colors = ColorBrewer.colors.PuBu[9];
+                   }
                    
                    scope.update = function(data){
                        console.log("updating map");
                        colors = scope.schemecolors;
+                       //set some defaults 
+                       if(colors == undefined){
+                            colors = ColorBrewer.colors.PuBu[9];
+                       }
                        var regionScale = d3.scale.linear()
                                             .domain([scope.minValue, scope.maxValue])
                                             .range([0,colors.length-1]);
@@ -59,7 +67,6 @@
                         var projection_oberfranken;
                         var pathTopo;
                         
-                        colors = scope.schemecolors;
                         var regionScale = d3.scale.linear()
                                             .domain([0, scope.maxValue])
                                             .range([0,colors.length-1]);
@@ -131,7 +138,7 @@
                                 .on("mouseover", function (d) {
                                     lifbi.tooltip.showTooltip(GeoData.getRegionData(d.id).properties.NAME_3 + " " + d.value);
                                     d3.select(this).attr("stroke", "#666");
-                                    scope.selection = GeoData.getRegionData(d.id).properties.ID_3;
+                                    scope.selection = d.id;
                                     scope.$apply(); //need to refresh scope manually as data is set in backend code
                                 })
                                 .on("mouseout", function (d) {
