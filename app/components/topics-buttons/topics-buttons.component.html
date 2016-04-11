@@ -7,9 +7,6 @@
         <ul  class="media-body" style="margin-bottom: 20px;">
             <li ng-repeat="layer in topic.layers"><small>{{layer.name}}</small></li>
         </ul>
-        <div class="media-right">
-            <a role="button" ng-href="#/topic/{{topic.id}}" class="btn btn-default" ng-class="{disabled: topic.layers.length == 0}">mehr</a>
-        </div>
         
     </div>
 </div>
