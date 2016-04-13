@@ -26,7 +26,7 @@
 
 
         <div class="mapinfo" ng-style="{backgroundColor: topicsCollection.averageColor, borderColor: topicsCollection.averageColor}" title="Durchschnitt Oberfranken">
-            {{topicsCollection.average()}}{{topicsCollection.unit()}}
+            &#216; Oberfranken: {{topicsCollection.average()}}{{topicsCollection.unit()}}
         </div>
         <div ng-if="topicsCollection.visibleMap">
             <div regions-map stats="topicsCollection.data1" stats2="topicsCollection.data2" schemecolors="topicsCollection.colors" options="topicsCollection.mapOptions"></div>

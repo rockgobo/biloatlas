@@ -87,12 +87,12 @@
             console.log("Error in GeoData service. Region not found or not singular. Looked for region id "+id);
             return null;
         }
-        function getDataByValue(id,value){
+        function getDataByValue(id=0,value=0,year=0){
             var regions = geoCollection.features.map(function(f){
                 if( f.properties.ID_3 == id){
-                    return {id : id, name: f.properties.VARNAME_3, value: value, year: 0}
+                    return {id : id, name: f.properties.VARNAME_3, value: value, year: year}
                 }
-                return {id : f.properties.ID_3, name: f.properties.VARNAME_3, value: 0, year: 0}
+                return {id : f.properties.ID_3, name: f.properties.VARNAME_3, value: 0, year: year}
             });
             
             if(regions.length > 0){
@@ -112,8 +112,8 @@
                     return [previousValue[0] + currentValue[0], previousValue[1] + currentValue[1]]
                 })
                 coordinates = [
-                    sum[0]/coordinates.length + (centroids_corrections_x[id] == undefined ? 0 : centroids_corrections_x[id]), 
-                    sum[1]/coordinates.length + (centroids_corrections_y[id] == undefined ? 0 : centroids_corrections_y[id])
+                    (sum[0]/coordinates.length) + (centroids_corrections_x[id] == undefined ? 0 : centroids_corrections_x[id]), 
+                    (sum[1]/coordinates.length) + (centroids_corrections_y[id] == undefined ? 0 : centroids_corrections_y[id])
                 ]
                 
                 cache_centroids[id] = coordinates

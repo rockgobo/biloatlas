@@ -10,7 +10,7 @@
             unit: '='
         },
         controller: function(){
-            this.sortOrder = '-value';
+            this.sortOrder = 'name';
         }
     })
 })()

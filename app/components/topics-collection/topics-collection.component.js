@@ -48,7 +48,7 @@
                 this.mapOptions.stats2.visible = false;
                 this.additionLayer = false;
             }
-             
+                         
             this.average = function(){
                     if(this.data1 && this.data1.length > 0){
                         var data = this.data1.map(function (d){return d.value})
