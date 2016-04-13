@@ -15,7 +15,11 @@
                         
             //Loading all topics
             TopicData.getTopics().then(function(topics){
-                this.topics = topics.filter(function(t){return t.layers.length > 0});
+                this.topics = topics.filter(function(t){return t.layers.length > 0 && t.id != $routeParams.topicid});
+                if(this.topics.length > 0){
+                    this.topic = this.topics[0];
+                }
+                
             }.bind(this));
             
         }

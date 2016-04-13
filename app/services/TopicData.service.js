@@ -23,7 +23,7 @@
          * @param {guid} id - The ID of the topic.
          * @return Topic object as promise
          */
-        function getTopicById(id) {            
+        function getTopicById(id) {      
             return $http.get(webRoot+id, {cache: true}).then(
                 function(response){
                     return response.data;

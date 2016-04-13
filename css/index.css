@@ -172,6 +172,30 @@ a{
     cursor: pointer;
 }
 
+/*
+    Additional layer
+    -----------------------------------------------------
+*/
+#addition_layer{
+    margin-top: 5px;
+    font-size: 10px;
+    padding: 10px;
+}
+
+#addition_layer .btn-remove{
+    margin-top: 10px;
+}
+#addition_layer h1{
+    display: none;
+}
+#addition_layer h3 select.form-control{
+    font-size: 12px;
+}
+.container_additional_layer{
+    margin-top: 20px;
+}
+
+
 /* Sticky footer styles
 -------------------------------------------------- */
 

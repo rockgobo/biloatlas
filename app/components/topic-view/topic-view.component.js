@@ -11,46 +11,66 @@
             average: '&'
         },
         controllerAs: 'topicView',
-        controller: function(TopicData){
-            this.topic_;
+        controller: function(TopicData, $scope){
             this.layer = [];
             this.selection = 0;
             this.years = [];
             this.year = false;
+            this.topic_ = {}
             
             this.data_ = []
+            
             this.filterData = function(){
                 this.data = this.data_.filter(function(d){
                     return d.year == this.year
                 }.bind(this));
             };
-                        
-            this.$onInit = function(){
-                TopicData.getTopicById(this.topic.id).then(function(topic){
-
-                    this.topic_ = topic;
-                    if(this.topic_.layers.length > 0){
-                        this.selectLayer(this.topic_.layers[0]);
-                    }
-                    
-                }.bind(this))
-            }
             
+            //initial load
+            TopicData.getTopicById(this.topic.id).then(function(t){
+                this.topic_ = t;
+                if(this.topic_.layers.length > 0){
+                    this.selectLayer(this.topic_.layers[0]);
+                }
+            }.bind(this))
+            
+            //Dirty loads
+            $scope.$watch('topicView.topic',function(topic){
+                TopicData.getTopicById(topic.id).then(function(t){
+
+                this.topic_ = t;
+                if(this.topic_.layers.length > 0){
+                    this.selectLayer(this.topic_.layers[0]);
+                }
+            }.bind(this))
+            }.bind(this))            
+            
+           
+            $scope.$watch('topicView.layer',function(layer){
+                this.selectLayer(layer)
+            }.bind(this))
+            
+            //Functions
             this.selectLayer = function(layer){
                 this.layer = layer;
                 this.years = [];
                 
-                layer.data.forEach(function(d){
-                    if(this.years.indexOf(d.year) == -1){
-                        this.years.push(d.year);
-                    }
-                }.bind(this));
-                               
-                this.years.sort();
-                this.year = this.years[this.years.length-1];
-                
-                this.data_ = layer.data;
-                this.filterData();
+                if(layer.data){
+                    layer.data.forEach(function(d){
+                        if(this.years.indexOf(d.year) == -1){
+                            this.years.push(d.year);
+                        }
+                    }.bind(this));
+                                
+                    this.years.sort();
+                    this.year = this.years[this.years.length-1];
+                    
+                    this.data_ = layer.data;
+                    this.filterData();
+                }
+                else{
+                    this.data_ = []
+                }
                 
             }
             this.layerVisible = function(id){

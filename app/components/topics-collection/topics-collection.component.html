@@ -1,13 +1,18 @@
 <div class="row">
     <div class="col-md-6">
-        <topic-view topic="{id: 'b6bcd6bc-4823-4508-af44-59450490426e'}" data="topicsCollection.data1" average="topicsCollection.average" averageColor="topicsCollection.averageColor" unit="topicsCollection.unit"></topic-view>
+        <topic-view topic="topicsCollection.topicId1" data="topicsCollection.data1" average="topicsCollection.average" averageColor="topicsCollection.averageColor" unit="topicsCollection.unit"></topic-view>
         
-        <div role="button" class="btn btn-default">Add Layer</div>
+        <div class="container_additional_layer">
+            <div role="button" class="btn btn-primary" ng-click="topicsCollection.showAdditionalLayer()" ng-hide="topicsCollection.additionLayer">Add Layer</div>
         
-        <!-- Addional Layer -->
-        <div>
-        <topics-selection topic="topicsCollection.topicId2"></topics-selection>        
-        <topic-view topic="topicsCollection.topicId2" data="topicsCollection.data2"></topic-view>
+            <!-- Addional Layer -->
+            <div id="addition_layer" class="panel panel-default" ng-show="topicsCollection.additionLayer">
+                <topics-selection topic="topicsCollection.topicId2" exclude="topicsCollection.topicId1"></topics-selection>        
+                <topic-view topic="topicsCollection.topicId2" data="topicsCollection.data2"></topic-view>
+                <div class="text-right">
+                    <div role="button" class="btn btn-primary btn-sm btn-remove" ng-click="topicsCollection.removeAdditionalLayer()">Remove</div>
+                </div>
+            </div>
         </div>
     </div>
     
@@ -24,7 +29,7 @@
             {{topicsCollection.average()}}{{topicsCollection.unit()}}
         </div>
         <div ng-if="topicsCollection.visibleMap">
-            <div regions-map stats="topicsCollection.data1" schemecolors="topicsCollection.colors" ></div>
+            <div regions-map stats="topicsCollection.data1" stats2="topicsCollection.data2" schemecolors="topicsCollection.colors" options="topicsCollection.mapOptions"></div>
         </div>
         <div regions-pie stats="topicsCollection.data1" schemecolors="topicsCollection.colors" ng-if="topicsCollection.visiblePie"></div>
         <topic-table stats="topicsCollection.data1" unit="topicsCollection.layer.unit" ng-if="topicsCollection.visibleTable"></topic-table>

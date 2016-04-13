@@ -8,6 +8,23 @@
      */
     angular.module('biloAtlas')
     .factory('GeoData', function ($http) {
+        
+        var cache_centroids = [];
+        var centroids_corrections_x = [];
+        var centroids_corrections_y = [];
+        //Bamberg
+        centroids_corrections_y[22927] = 0.02;
+        centroids_corrections_x[22927] = 0.2;
+        //Bayreuth
+        centroids_corrections_y[22929] = -0.1;
+        centroids_corrections_x[22929] = -0.05;
+        //Coburg
+        centroids_corrections_y[22931] = 0.08;
+        centroids_corrections_x[22931] = -0.10;
+        //Hof
+        centroids_corrections_y[22934] = 0.0;
+        centroids_corrections_x[22934] = -0.12;
+        
         /**
          * @description private declaration geometries for upper franconia
          */
@@ -50,7 +67,9 @@
             
             getRegionData: getRegionData,
             
-            getDataByValue: getDataByValue
+            getDataByValue: getDataByValue,
+            
+            getCentroid: getCentroid
         }
 
         /////////////
@@ -85,6 +104,21 @@
             return [];
         }
         
+        function getCentroid(id){
+                if(cache_centroids[id]) return cache_centroids[id]
+                var coordinates = getRegionData(id).geometry.coordinates[0]
+                                         
+                var sum = coordinates.reduce(function(previousValue, currentValue, currentIndex, array){
+                    return [previousValue[0] + currentValue[0], previousValue[1] + currentValue[1]]
+                })
+                coordinates = [
+                    sum[0]/coordinates.length + (centroids_corrections_x[id] == undefined ? 0 : centroids_corrections_x[id]), 
+                    sum[1]/coordinates.length + (centroids_corrections_y[id] == undefined ? 0 : centroids_corrections_y[id])
+                ]
+                
+                cache_centroids[id] = coordinates
+                return cache_centroids[id]
+        }
     });
 
 })();

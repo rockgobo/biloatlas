@@ -12,7 +12,9 @@
         controller: function(TopicData, ColorBrewer, RegionData, $routeParams){          
             this.topicId1 = {id: $routeParams.topicid};
             this.topicId2 = {id: $routeParams.topicid};
-            
+            this.additionLayer = false;
+            this.mapOptions = {stats2: { visible: false}}
+                        
             this.minValue
             this.maxValue            
             this.colors = ColorBrewer.colors.PuBu[9];
@@ -37,6 +39,15 @@
                 this.visiblePie = false;
                 this.visibleTable = true;
             }  
+            
+            this.showAdditionalLayer =function(){
+                this.mapOptions.stats2.visible = true;
+                this.additionLayer = true;
+            }
+            this.removeAdditionalLayer =function(){
+                this.mapOptions.stats2.visible = false;
+                this.additionLayer = false;
+            }
              
             this.average = function(){
                     if(this.data1 && this.data1.length > 0){

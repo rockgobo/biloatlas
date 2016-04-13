@@ -1,6 +1,6 @@
 <h1>{{regionView.region.name}}</h1>
 <div class="row">
-    <div regions-map stats="regionView.mapData" year="0" selection="regionView.selection"  schemecolors="['#FFF','#337ab7']" class="col-md-6"></div>
+    <div regions-map stats="regionView.mapData" year="0" selection="regionView.selection"  schemecolors="['#FFF','#337ab7']" options="{tooltips: {value: false}}"" class="col-md-6"></div>
     
     <div class="col-md-6">
         <img ng-src="images/{{regionView.region.id}}.png" width="40%" />
