@@ -50,9 +50,22 @@
                    /*   RENDER METHODS
                    ---------------------------------------------------------------
                    */
-                   scope.update = function(data, data2){
+                   scope.update = function(data, data2_){
                        log("update map")
                        
+                       //prepare data2
+                       data2_ = data2_?data2_:[]
+                       var data2_template = GeoData.getDataByValue(0,0,data2_.length>0?data2_[0].year:0);
+                       console.log(data2_template)
+                       var data2 = data2_template.map(function(d1){
+                           var d2 = data2_.find(function(element){ return element.id == d1.id })
+                           if(d2){
+                               d1.value = d2.value
+                               d1.name = d2.name
+                           }
+                           return d1
+                       })
+                        
                        angular.merge(options, scope.options)
                        
                        colors = scope.schemecolors;
@@ -80,11 +93,14 @@
                             }else{ 
                                 return p
                             }},0);
+                      log(max_height)
+                      log(data2)
+                      
                       regions.selectAll("rect")
                             .data(data2)
                             .transition()
                             .duration(1000)
-                            .attr('y', function(d){ return projection_oberfranken(GeoData.getCentroid(d.id))[1] - (d.value/max_height) * options.stats2.height})
+                            .attr('y', function(d){ log(d.id+" "+d.value);return projection_oberfranken(GeoData.getCentroid(d.id))[1] - ((d.value/max_height) * options.stats2.height)})
                             .attr('width', options.stats2.width)
                             .attr('height', function(d){ return (d.value/max_height) * options.stats2.height})
                             .style("visibility", options.stats2.visible?"visible":"hidden")
@@ -110,13 +126,29 @@
                    }
                    
                         
-                   scope.render = function(data, data2){   
-                        data2=data2?data2:[]
+                   scope.render = function(data, data2_){  
                         
-                        if(regionsRendered){
-                            scope.update(data, data2);
+                       if(regionsRendered){
+                            scope.update(data, data2_);
                             return;
                         } 
+                       log("render map")
+                       
+                       
+                       //prepare data2
+                       data2_ = data2_?data2_:[]
+                       var data2_template = GeoData.getDataByValue(0,0,data2_.length>0?data2_[0].year:0);
+                       console.log(data2_template)
+                       var data2 = data2_template.map(function(d1){
+                           var d2 = data2_.find(function(element){ return element.id == d1.id })
+                           if(d2){
+                               d1.value = d2.value
+                               d1.name = d2.name
+                           }
+                           return d1
+                       })
+                        
+                       angular.merge(options, scope.options)
                         
                         /******************************
                          *             D3 TEST
@@ -211,6 +243,10 @@
                             }else{ 
                                 return p
                             }},0);
+                        
+                        log(max_height)    
+                        log(data2)
+                        
                         regions.selectAll("rect")
                             .data(data2)
                             .enter()
@@ -221,6 +257,7 @@
                             .attr('height', function(d){ return (d.value/max_height) * options.stats2.height})
                             .attr('fill','#FFF')
                             .attr("stroke", "#666")
+                            .attr("class",function(d){return "id_"+d.id})
                             .style("visibility", options.stats2.visible?"visible":"hidden")
                             .on("mouseover", function (d) {
                                 lifbi.tooltip.showTooltip(
@@ -234,6 +271,7 @@
                             .data(data2)
                             .enter()
                             .append("line")
+                            .attr("class",function(d){return "id_"+d.id})
                             .attr('x1', function(d){ return projection_oberfranken(GeoData.getCentroid(d.id))[0]  - 10})
                             .attr('x2', function(d){ return projection_oberfranken(GeoData.getCentroid(d.id))[0]  + 10})
                             .attr('y1', function(d){ return projection_oberfranken(GeoData.getCentroid(d.id))[1]})
@@ -244,6 +282,7 @@
                             .data(data2)
                             .enter()
                             .append("g")
+                            .attr("class",function(d){return "id_"+d.id})
                             .attr("transform", function(d){ 
                                 var centroid = projection_oberfranken(GeoData.getCentroid(d.id));
                                 return "translate("+(centroid[0])+","+(centroid[1]+12)+")"
@@ -311,9 +350,8 @@
                    scope.$watch('stats2', function(data){
                        if(scope.stats == undefined) {
                            return;
-                       }
-                                     
-                       scope.render(scope.stats, scope.stats2);
+                       }    
+                       scope.render(scope.stats, data);
                    })
                    scope.$watch('options', function(data){
                        if(scope.stats == undefined) {
