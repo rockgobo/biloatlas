@@ -9,6 +9,8 @@
         controller: function(RegionData, GeoData, $routeParams){
             this.topics = [];
             this.selection = 0;
+            this.regionid = $routeParams.regionid
+            
             this.options =  {
                     chart: {
                         type: 'lineChart',
@@ -65,7 +67,7 @@
             }.bind(this)
         );
             
-        RegionData.getRegionById($routeParams.regionid).then(function(regionTopics){
+        RegionData.getRegionById(this.regionid).then(function(regionTopics){
                 //Prepare data for linecharts
                 var layersData = [];
                 regionTopics.topics.forEach(function(topic){

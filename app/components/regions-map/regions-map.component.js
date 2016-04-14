@@ -20,6 +20,8 @@
                    var colors = scope.schemecolors;
                    var pathTopo, projection_oberfranken;  
                    
+                   /*   SETTINGS
+                   ---------------------------------------------------------------*/
                    //Options defaults
                    var options = {
                        debug: false,
@@ -47,17 +49,15 @@
                        if (options.debug) console.log(m)
                    }
                    
-                   /*   RENDER METHODS
-                   ---------------------------------------------------------------
-                   */
-                   scope.update = function(data, data2_){
-                       log("update map")
-                       
-                       //prepare data2
+                   /**
+                    * D3 expects updated data in the same sort order as the 
+                    * original data, it also has to be the same length.
+                    */
+                   function prepareData2(data2_){
                        data2_ = data2_?data2_:[]
                        var data2_template = GeoData.getDataByValue(0,0,data2_.length>0?data2_[0].year:0);
                        console.log(data2_template)
-                       var data2 = data2_template.map(function(d1){
+                       return data2_template.map(function(d1){
                            var d2 = data2_.find(function(element){ return element.id == d1.id })
                            if(d2){
                                d1.value = d2.value
@@ -65,6 +65,16 @@
                            }
                            return d1
                        })
+                   }
+                   
+                   /*   RENDER METHODS
+                   ---------------------------------------------------------------
+                   */
+                   scope.update = function(data, data2_){
+                       log("update map")
+                       
+                       //prepare data2
+                       var data2 = prepareData2(data2_);
                         
                        angular.merge(options, scope.options)
                        
@@ -93,8 +103,6 @@
                             }else{ 
                                 return p
                             }},0);
-                      log(max_height)
-                      log(data2)
                       
                       regions.selectAll("rect")
                             .data(data2)
@@ -133,20 +141,9 @@
                             return;
                         } 
                        log("render map")
-                       
-                       
+                                              
                        //prepare data2
-                       data2_ = data2_?data2_:[]
-                       var data2_template = GeoData.getDataByValue(0,0,data2_.length>0?data2_[0].year:0);
-                       console.log(data2_template)
-                       var data2 = data2_template.map(function(d1){
-                           var d2 = data2_.find(function(element){ return element.id == d1.id })
-                           if(d2){
-                               d1.value = d2.value
-                               d1.name = d2.name
-                           }
-                           return d1
-                       })
+                       var data2 = prepareData2(data2_);
                         
                        angular.merge(options, scope.options)
                         
@@ -243,10 +240,7 @@
                             }else{ 
                                 return p
                             }},0);
-                        
-                        log(max_height)    
-                        log(data2)
-                        
+                                                
                         regions.selectAll("rect")
                             .data(data2)
                             .enter()
@@ -330,6 +324,10 @@
                         }
                    }
                    
+                   
+                   /*   WATCHERS
+                   ---------------------------------------------------------------
+                   */
                    scope.$watch('stats', function(data){
                        //Calculate max using all years
                        scope.maxValue = 0;

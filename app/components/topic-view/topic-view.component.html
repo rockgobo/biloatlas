@@ -1,9 +1,4 @@
-<h1>{{topicView.topic_.name}}</h1>
-<p>
-    {{topicView.topic_.description}}
-</p>
-                        
-<h3>
+ <h3>
     <select class="form-control" ng-options="layer as layer.name for layer in topicView.topic_.layers track by layer.id" ng-model="topicView.layer"></select>
 </h3>
 <p>

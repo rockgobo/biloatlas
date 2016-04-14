@@ -1,46 +1,49 @@
-<h1>{{regionView.region.name}}</h1>
-<div class="row">
-    <div regions-map stats="regionView.mapData" year="0" selection="regionView.selection"  schemecolors="['#FFF','#337ab7']" options="{tooltips: {value: false}}"" class="col-md-6"></div>
-    
-    <div class="col-md-6">
-        <img ng-src="images/{{regionView.region.id}}.png" width="40%" />
-        <div id="coats">
-            <a ng-repeat="region in regionView.regions" ng-href="#/region/{{region.id}}" >
-                <img  ng-src="images/{{region.id}}.png" title="{{region.name}}" width="40px" height="47px" ng-class="region.id!=regionView.selection?'coatsofarms':''" style="margin-bottom: 2px;"></img>
-            </a>
+
+<region-badge regionid="regionView.regionid"></region-badge>
+
+<div class="container">
+    <div class="row">
+        <div regions-map stats="regionView.mapData" year="0" selection="regionView.selection"  schemecolors="['#FFF','#009ee2']" options="{tooltips: {value: false}}"" class="col-md-8"></div>
+        
+        <div class="col-md-4">
+            <div id="coats">
+                <a ng-repeat="region in regionView.regions" ng-href="#/region/{{region.id}}" >
+                    <img  ng-src="images/{{region.id}}.png" title="{{region.name}}" width="60px" height="64px" ng-class="region.id!=regionView.selection?'coatsofarms':''" style="margin-bottom: 2px;"></img>
+                </a>
+            </div>
         </div>
     </div>
-</div>
-<div ng-repeat="topic in regionView.topics" class="topic-container">
-    <div ng-if="topic.layers.length > 0">
-        <h2><a href="#/topic/{{topic.id}}">{{topic.name}}</a> </h2>
-        <div ng-repeat="layer in topic.layers">
-            <h3>{{layer.name}}</h3>
-            <div class="row">
-                <div class="col-md-6">
-                    <p>
-                        {{layer.description}}
-                    </p>
+    <div ng-repeat="topic in regionView.topics" class="topic-container">
+        <div ng-if="topic.layers.length > 0">
+            <h2><a href="#/topic/{{topic.id}}">{{topic.name}}</a> </h2>
+            <div ng-repeat="layer in topic.layers">
+                <h3>{{layer.name}}</h3>
+                <div class="row">
+                    <div class="col-md-6">
+                        <p>
+                            {{layer.description}}
+                        </p>
 
-                    <div class="row" style="margin-left: 0">
-                        <div class="col-md-2" style="padding-left: 0">
-                            <small><b>Region:</b></small>
-                        </div> 
-                        <div class="col-md-10"><small>{{regionView.region.name}}</small></div>
-                        
-                        <div class="col-md-2" style="padding-left: 0">
-                            <small><b>Quelle:</b></small>
-                        </div> 
-                        <div class="col-md-10"><small>{{layer.source}}</small></div>
+                        <div class="row" style="margin-left: 0">
+                            <div class="col-md-2" style="padding-left: 0">
+                                <small><b>Region:</b></small>
+                            </div> 
+                            <div class="col-md-10"><small>{{regionView.region.name}}</small></div>
+                            
+                            <div class="col-md-2" style="padding-left: 0">
+                                <small><b>Quelle:</b></small>
+                            </div> 
+                            <div class="col-md-10"><small>{{layer.source}}</small></div>
 
-                        <div class="col-md-2" style="padding-left: 0">
-                            <small><b>Berechnung:</b></small>
-                        </div> 
-                        <div class="col-md-10"><small>{{layer.calculation}}</small></div>
+                            <div class="col-md-2" style="padding-left: 0">
+                                <small><b>Berechnung:</b></small>
+                            </div> 
+                            <div class="col-md-10"><small>{{layer.calculation}}</small></div>
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-6 well">
-                    <nvd3 options="regionView.getLayerOptions(layer.id)" data="regionView.getLayerData(layer.id)"></nvd3>
+                    <div class="col-md-6 well">
+                        <nvd3 options="regionView.getLayerOptions(layer.id)" data="regionView.getLayerData(layer.id)"></nvd3>
+                    </div>
                 </div>
             </div>
         </div>

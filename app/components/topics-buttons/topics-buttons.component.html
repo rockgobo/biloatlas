@@ -1,13 +1,15 @@
-<div class="row" ng-repeat="topics in $ctrl.chunkedTopics" style="margin-bottom: 20px;">
-    <div ng-repeat="topic in topics" class="col-md-4"  ng-class="{disabled: topic.layers.length == 0}">
-        
-        <h3><a ng-href="#/topic/{{topic.id}}" ng-class="{disabled: topic.layers.length == 0}">{{topic.name}}</a></h3>
-        <p>{{topic.description}}</p>
-        
-        <ul  class="media-body" style="margin-bottom: 20px;">
-            <li ng-repeat="layer in topic.layers"><small>{{layer.name}}</small></li>
-        </ul>
-        
+<div class="container">
+    <div class="row" ng-repeat="topics in $ctrl.chunkedTopics" style="margin-bottom: 20px;">
+        <div ng-repeat="topic in topics" class="col-md-4"  ng-class="{disabled: topic.layers.length == 0}">
+            
+            <h3><a ng-href="#/topic/{{topic.id}}" ng-class="{disabled: topic.layers.length == 0}">{{topic.name}}</a></h3>
+            <p>{{topic.description}}</p>
+            
+            <ul  class="media-body" style="margin-bottom: 20px;">
+                <li ng-repeat="layer in topic.layers"><small>{{layer.name}}</small></li>
+            </ul>
+            
+        </div>
     </div>
 </div>
                    
