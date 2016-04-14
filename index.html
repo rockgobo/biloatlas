@@ -14,14 +14,16 @@
     <!-- BiloAtlas-Verweise -->
     <link href="css/index.css" rel="stylesheet" />
     <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="node_modules/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet" />
 </head>
 <body  ng-app="biloAtlas">
     <div id="wrap">
+
         <!-- NAVIGATION -->
         <topics-navigation></topics-navigation>
-
+        
         <!-- VIEWS -->
-        <div class="container">
+        <div class="container-fluid" style="margin-top: 50px;">
             <div ng-view>Loading...</div>
         </div>
 
@@ -66,8 +68,10 @@
     <script src="app/components/topics-navigation/topics-navigation.component.js"></script>
     <script src="app/components/topics-buttons/topics-buttons.component.js"></script>
     <script src="app/components/topics-selection/topics-selection.component.js"></script>
+    <script src="app/components/topic-badge/topic-badge.component.js"></script>
     <script src="app/components/topic-view/topic-view.component.js"></script>
     <script src="app/components/topic-table/topic-table.component.js"></script>
+    <script src="app/components/region-badge/region-badge.component.js"></script>
     <script src="app/components/region-view/region-view.component.js"></script>
     <script src="app/components/regions-map/regions-map.component.js"></script>
     <script src="app/components/regions-pie/regions-pie.component.js"></script>
