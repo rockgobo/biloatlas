@@ -7,13 +7,16 @@
     angular.module('biloAtlas').
         component('topicsButtons',{
         templateUrl: 'app/components/topics-buttons/topics-buttons.component.html',
-        controller: function(TopicData,$routeParams){
+        controller: function(TopicData, GeoData, $routeParams){
             this.chunkedTopics = [];
             
             TopicData.getTopics().then(function(topics){
                 topics = topics.sort(function(a,b){return a.layers.length < b.layers.length});
                 this.chunkedTopics = chunk(topics, 3);
             }.bind(this));
+            
+            
+            this.mapData = GeoData.getDataByValue();
             
             function chunk(arr, size) {
                 var newArr = [];
