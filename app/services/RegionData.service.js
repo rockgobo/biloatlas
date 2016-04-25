@@ -13,7 +13,7 @@
      */
     angular.module('biloAtlas')
     .factory('RegionData', function ($http) {
-        var webRoot = "http://localhost/dnn/DesktopModules/Bilo.Services.Atlas/API/Regions/";
+        var webRoot = "http://localhost/dnn7_4/DesktopModules/Bilo.Services.Atlas/API/Regions/";
 
         /**
          * @name getRegionById

@@ -10,7 +10,7 @@
     "test": "karma start"
   },
   "dependencies": {
-    "angular": "^1.5.0",
+    "angular": "^1.5.5",
     "angular-d3-promise": "^1.1.0",
     "angular-mocks": "~1.5.0-beta.2",
     "angular-route": "^1.4.7",
@@ -24,6 +24,13 @@
     "canonical-path": "0.0.2",
     "dgeni": "^0.4.2",
     "dgeni-packages": "^0.11.1",
+    "eslint": "^2.8.0",
+    "grunt": "^1.0.1",
+    "grunt-contrib-jshint": "^1.0.0",
+    "grunt-contrib-nodeunit": "~0.4.1",
+    "grunt-contrib-uglify": "~0.5.0",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-standard": "^2.0.0",
     "jasmine-core": "^2.3.4",
     "karma": "0.12.37",
     "karma-chrome-launcher": "0.2.0",
@@ -33,7 +40,8 @@
     "karma-ng-html2js-preprocessor": "0.1.0",
     "karma-phantomjs-launcher": "0.2.0",
     "nunjucks": "^2.3.0",
-    "phantomjs": "^1.9.18"
+    "phantomjs": "^1.9.18",
+    "standard": "^6.0.8"
   },
   "private": true
 }

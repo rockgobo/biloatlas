@@ -6,14 +6,14 @@
             <topic-view topic="topicsCollection.topicId1" data="topicsCollection.data1" average="topicsCollection.average" averageColor="topicsCollection.averageColor" unit="topicsCollection.unit"></topic-view>
             
             <div class="container_additional_layer">
-                <div role="button" class="btn btn-primary" ng-click="topicsCollection.showAdditionalLayer()" ng-hide="topicsCollection.additionLayer">Add Layer</div>
+                <div role="button" class="btn btn-default" ng-click="topicsCollection.showAdditionalLayer()" ng-hide="topicsCollection.additionLayer">Add Layer</div>
             
                 <!-- Addional Layer -->
                 <div id="addition_layer" class="panel panel-default" ng-show="topicsCollection.additionLayer">
                     <topics-selection topic="topicsCollection.topicId2" exclude="topicsCollection.topicId1"></topics-selection>        
                     <topic-view topic="topicsCollection.topicId2" data="topicsCollection.data2"></topic-view>
                     <div class="text-right">
-                        <div role="button" class="btn btn-primary btn-sm btn-remove" ng-click="topicsCollection.removeAdditionalLayer()">Remove</div>
+                        <div role="button" class="btn btn-default btn-sm btn-remove" ng-click="topicsCollection.removeAdditionalLayer()">Remove</div>
                     </div>
                 </div>
             </div>

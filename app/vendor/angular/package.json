@@ -1,6 +1,6 @@
 {
   "name": "angular",
-  "version": "1.5.0",
+  "version": "1.5.5",
   "description": "HTML enhanced for web apps",
   "main": "index.js",
   "scripts": {
@@ -25,21 +25,21 @@
     "url": "https://github.com/angular/angular.js/issues"
   },
   "homepage": "http://angularjs.org",
-  "gitHead": "017a583b226a335740c5b50b3e9381a52d0bb260",
-  "_id": "angular@1.5.0",
-  "_shasum": "d96ee97ab6df6cfd0915accbee484d098adb74ec",
-  "_from": "angular@1.5.0",
-  "_npmVersion": "2.14.12",
-  "_nodeVersion": "4.2.6",
+  "gitHead": "cd353693d20736baa44fb44f65f8f573ef6e8e18",
+  "_id": "angular@1.5.5",
+  "_shasum": "678fdfd1c9c47368dd202c7fc8bb3bd4dba17c18",
+  "_from": "angular@1.5.5",
+  "_npmVersion": "2.15.1",
+  "_nodeVersion": "4.4.3",
   "_npmUser": {
     "name": "angularcore",
     "email": "angular-core+npm@google.com"
   },
+  "dist": {
+    "shasum": "678fdfd1c9c47368dd202c7fc8bb3bd4dba17c18",
+    "tarball": "https://registry.npmjs.org/angular/-/angular-1.5.5.tgz"
+  },
   "maintainers": [
-    {
-      "name": "bclinkinbeard",
-      "email": "ben.clinkinbeard@gmail.com"
-    },
     {
       "name": "angularcore",
       "email": "angular-core+npm@google.com"
@@ -49,14 +49,10 @@
       "email": "pete@bacondarwin.com"
     }
   ],
-  "dist": {
-    "shasum": "d96ee97ab6df6cfd0915accbee484d098adb74ec",
-    "tarball": "http://registry.npmjs.org/angular/-/angular-1.5.0.tgz"
-  },
   "_npmOperationalInternal": {
-    "host": "packages-5-east.internal.npmjs.com",
-    "tmp": "tmp/angular-1.5.0.tgz_1454673705688_0.6785951922647655"
+    "host": "packages-16-east.internal.npmjs.com",
+    "tmp": "tmp/angular-1.5.5.tgz_1460972850073_0.7311463879887015"
   },
   "directories": {},
-  "_resolved": "http://registry.npmjs.org/angular/-/angular-1.5.0.tgz"
+  "_resolved": "http://registry.npmjs.org/angular/-/angular-1.5.5.tgz"
 }
