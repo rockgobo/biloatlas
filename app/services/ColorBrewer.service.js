@@ -1,71 +1,74 @@
-(function(){
-    'use strict'
+/*globals angular:true*/
 
+;(function () {
+  'use strict'
+
+  /**
+   * @class biloAtlas.ColorBrewer
+   * @memberof biloAtlas
+   * @description This service provides the color schemes from https://github.com/mbostock/d3/tree/master/lib/colorbrewer
+   */
+  angular
+    .module('biloAtlas')
+    .factory('ColorBrewer', colorBrewer)
+
+  // ////////////////////
+
+  function colorBrewer () {
     /**
-     * @class biloAtlas.ColorBrewer
-     * @memberof biloAtlas
-     * @description This service provides the color schemes from https://github.com/mbostock/d3/tree/master/lib/colorbrewer
+     * @description private declaration of the brewer color schema
      */
-    angular
-        .module('biloAtlas')
-        .factory('ColorBrewer', colorBrewer);
-
-    //////////////////////
-
-    function colorBrewer() {
-        /**
-         * @description private declaration of the brewer color schema
-         */
-        var colorbrewer = {
-            /*YlGn: {
-        3: ["#f7fcb9","#addd8e","#31a354"],
-        4: ["#ffffcc","#c2e699","#78c679","#238443"],
-        5: ["#ffffcc","#c2e699","#78c679","#31a354","#006837"],
-        6: ["#ffffcc","#d9f0a3","#addd8e","#78c679","#31a354","#006837"],
-        7: ["#ffffcc","#d9f0a3","#addd8e","#78c679","#41ab5d","#238443","#005a32"],
-        8: ["#ffffe5","#f7fcb9","#d9f0a3","#addd8e","#78c679","#41ab5d","#238443","#005a32"],
-        9: ["#ffffe5","#f7fcb9","#d9f0a3","#addd8e","#78c679","#41ab5d","#238443","#006837","#004529"]
-        },YlGnBu: {
-        3: ["#edf8b1","#7fcdbb","#2c7fb8"],
-        4: ["#ffffcc","#a1dab4","#41b6c4","#225ea8"],
-        5: ["#ffffcc","#a1dab4","#41b6c4","#2c7fb8","#253494"],
-        6: ["#ffffcc","#c7e9b4","#7fcdbb","#41b6c4","#2c7fb8","#253494"],
-        7: ["#ffffcc","#c7e9b4","#7fcdbb","#41b6c4","#1d91c0","#225ea8","#0c2c84"],
-        8: ["#ffffd9","#edf8b1","#c7e9b4","#7fcdbb","#41b6c4","#1d91c0","#225ea8","#0c2c84"],
-        9: ["#ffffd9","#edf8b1","#c7e9b4","#7fcdbb","#41b6c4","#1d91c0","#225ea8","#253494","#081d58"]
-        },GnBu: {
-        3: ["#e0f3db","#a8ddb5","#43a2ca"],
-        4: ["#f0f9e8","#bae4bc","#7bccc4","#2b8cbe"],
-        5: ["#f0f9e8","#bae4bc","#7bccc4","#43a2ca","#0868ac"],
-        6: ["#f0f9e8","#ccebc5","#a8ddb5","#7bccc4","#43a2ca","#0868ac"],
-        7: ["#f0f9e8","#ccebc5","#a8ddb5","#7bccc4","#4eb3d3","#2b8cbe","#08589e"],
-        8: ["#f7fcf0","#e0f3db","#ccebc5","#a8ddb5","#7bccc4","#4eb3d3","#2b8cbe","#08589e"],
-        9: ["#f7fcf0","#e0f3db","#ccebc5","#a8ddb5","#7bccc4","#4eb3d3","#2b8cbe","#0868ac","#084081"]
-        },BuGn: {
-        3: ["#e5f5f9","#99d8c9","#2ca25f"],
-        4: ["#edf8fb","#b2e2e2","#66c2a4","#238b45"],
-        5: ["#edf8fb","#b2e2e2","#66c2a4","#2ca25f","#006d2c"],
-        6: ["#edf8fb","#ccece6","#99d8c9","#66c2a4","#2ca25f","#006d2c"],
-        7: ["#edf8fb","#ccece6","#99d8c9","#66c2a4","#41ae76","#238b45","#005824"],
-        8: ["#f7fcfd","#e5f5f9","#ccece6","#99d8c9","#66c2a4","#41ae76","#238b45","#005824"],
-        9: ["#f7fcfd","#e5f5f9","#ccece6","#99d8c9","#66c2a4","#41ae76","#238b45","#006d2c","#00441b"]
-        },PuBuGn: {
-        3: ["#ece2f0","#a6bddb","#1c9099"],
-        4: ["#f6eff7","#bdc9e1","#67a9cf","#02818a"],
-        5: ["#f6eff7","#bdc9e1","#67a9cf","#1c9099","#016c59"],
-        6: ["#f6eff7","#d0d1e6","#a6bddb","#67a9cf","#1c9099","#016c59"],
-        7: ["#f6eff7","#d0d1e6","#a6bddb","#67a9cf","#3690c0","#02818a","#016450"],
-        8: ["#fff7fb","#ece2f0","#d0d1e6","#a6bddb","#67a9cf","#3690c0","#02818a","#016450"],
-        9: ["#fff7fb","#ece2f0","#d0d1e6","#a6bddb","#67a9cf","#3690c0","#02818a","#016c59","#014636"]
-        },*/PuBu: {
-        3: ["#ece7f2","#a6bddb","#2b8cbe"],
-        4: ["#f1eef6","#bdc9e1","#74a9cf","#0570b0"],
-        5: ["#f1eef6","#bdc9e1","#74a9cf","#2b8cbe","#045a8d"],
-        6: ["#f1eef6","#d0d1e6","#a6bddb","#74a9cf","#2b8cbe","#045a8d"],
-        7: ["#f1eef6","#d0d1e6","#a6bddb","#74a9cf","#3690c0","#0570b0","#034e7b"],
-        8: ["#fff7fb","#ece7f2","#d0d1e6","#a6bddb","#74a9cf","#3690c0","#0570b0","#034e7b"],
-        9: ["#fff7fb","#ece7f2","#d0d1e6","#a6bddb","#74a9cf","#3690c0","#0570b0","#045a8d","#023858"]
-        }}/*
+    var colorbrewer = {
+        /* YlGn: {
+            3: ["#f7fcb9","#addd8e","#31a354"],
+            4: ["#ffffcc","#c2e699","#78c679","#238443"],
+            5: ["#ffffcc","#c2e699","#78c679","#31a354","#006837"],
+            6: ["#ffffcc","#d9f0a3","#addd8e","#78c679","#31a354","#006837"],
+            7: ["#ffffcc","#d9f0a3","#addd8e","#78c679","#41ab5d","#238443","#005a32"],
+            8: ["#ffffe5","#f7fcb9","#d9f0a3","#addd8e","#78c679","#41ab5d","#238443","#005a32"],
+            9: ["#ffffe5","#f7fcb9","#d9f0a3","#addd8e","#78c679","#41ab5d","#238443","#006837","#004529"]
+            },YlGnBu: {
+            3: ["#edf8b1","#7fcdbb","#2c7fb8"],
+            4: ["#ffffcc","#a1dab4","#41b6c4","#225ea8"],
+            5: ["#ffffcc","#a1dab4","#41b6c4","#2c7fb8","#253494"],
+            6: ["#ffffcc","#c7e9b4","#7fcdbb","#41b6c4","#2c7fb8","#253494"],
+            7: ["#ffffcc","#c7e9b4","#7fcdbb","#41b6c4","#1d91c0","#225ea8","#0c2c84"],
+            8: ["#ffffd9","#edf8b1","#c7e9b4","#7fcdbb","#41b6c4","#1d91c0","#225ea8","#0c2c84"],
+            9: ["#ffffd9","#edf8b1","#c7e9b4","#7fcdbb","#41b6c4","#1d91c0","#225ea8","#253494","#081d58"]
+            },GnBu: {
+            3: ["#e0f3db","#a8ddb5","#43a2ca"],
+            4: ["#f0f9e8","#bae4bc","#7bccc4","#2b8cbe"],
+            5: ["#f0f9e8","#bae4bc","#7bccc4","#43a2ca","#0868ac"],
+            6: ["#f0f9e8","#ccebc5","#a8ddb5","#7bccc4","#43a2ca","#0868ac"],
+            7: ["#f0f9e8","#ccebc5","#a8ddb5","#7bccc4","#4eb3d3","#2b8cbe","#08589e"],
+            8: ["#f7fcf0","#e0f3db","#ccebc5","#a8ddb5","#7bccc4","#4eb3d3","#2b8cbe","#08589e"],
+            9: ["#f7fcf0","#e0f3db","#ccebc5","#a8ddb5","#7bccc4","#4eb3d3","#2b8cbe","#0868ac","#084081"]
+            },BuGn: {
+            3: ["#e5f5f9","#99d8c9","#2ca25f"],
+            4: ["#edf8fb","#b2e2e2","#66c2a4","#238b45"],
+            5: ["#edf8fb","#b2e2e2","#66c2a4","#2ca25f","#006d2c"],
+            6: ["#edf8fb","#ccece6","#99d8c9","#66c2a4","#2ca25f","#006d2c"],
+            7: ["#edf8fb","#ccece6","#99d8c9","#66c2a4","#41ae76","#238b45","#005824"],
+            8: ["#f7fcfd","#e5f5f9","#ccece6","#99d8c9","#66c2a4","#41ae76","#238b45","#005824"],
+            9: ["#f7fcfd","#e5f5f9","#ccece6","#99d8c9","#66c2a4","#41ae76","#238b45","#006d2c","#00441b"]
+            },PuBuGn: {
+            3: ["#ece2f0","#a6bddb","#1c9099"],
+            4: ["#f6eff7","#bdc9e1","#67a9cf","#02818a"],
+            5: ["#f6eff7","#bdc9e1","#67a9cf","#1c9099","#016c59"],
+            6: ["#f6eff7","#d0d1e6","#a6bddb","#67a9cf","#1c9099","#016c59"],
+            7: ["#f6eff7","#d0d1e6","#a6bddb","#67a9cf","#3690c0","#02818a","#016450"],
+            8: ["#fff7fb","#ece2f0","#d0d1e6","#a6bddb","#67a9cf","#3690c0","#02818a","#016450"],
+            9: ["#fff7fb","#ece2f0","#d0d1e6","#a6bddb","#67a9cf","#3690c0","#02818a","#016c59","#014636"]
+            },*/
+      PuBu: {
+        3: ['#ece7f2', '#a6bddb', '#2b8cbe'],
+        4: ['#f1eef6', '#bdc9e1', '#74a9cf', '#0570b0'],
+        5: ['#f1eef6', '#bdc9e1', '#74a9cf', '#2b8cbe', '#045a8d'],
+        6: ['#f1eef6', '#d0d1e6', '#a6bddb', '#74a9cf', '#2b8cbe', '#045a8d'],
+        7: ['#f1eef6', '#d0d1e6', '#a6bddb', '#74a9cf', '#3690c0', '#0570b0', '#034e7b'],
+        8: ['#fff7fb', '#ece7f2', '#d0d1e6', '#a6bddb', '#74a9cf', '#3690c0', '#0570b0', '#034e7b'],
+        9: ['#fff7fb', '#ece7f2', '#d0d1e6', '#a6bddb', '#74a9cf', '#3690c0', '#0570b0', '#045a8d', '#023858']
+      } } /*
         ,BuPu: {
         3: ["#e0ecf4","#9ebcda","#8856a7"],
         4: ["#edf8fb","#b3cde3","#8c96c6","#88419d"],
@@ -319,17 +322,15 @@
         11: ["#8dd3c7","#ffffb3","#bebada","#fb8072","#80b1d3","#fdb462","#b3de69","#fccde5","#d9d9d9","#bc80bd","#ccebc5"],
         12: ["#8dd3c7","#ffffb3","#bebada","#fb8072","#80b1d3","#fdb462","#b3de69","#fccde5","#d9d9d9","#bc80bd","#ccebc5","#ffed6f"]
         }};*/
-        
-        /**
-         * Public API
-         */
-        return {
-            /**
-             * @description Returns the brewer color schemes
-             */
-            colors : colorbrewer
-        }
+
+    /**
+     * Public API
+     */
+    return {
+      /**
+       * @description Returns the brewer color schemes
+       */
+      colors: colorbrewer
     }
-})();
-
-
+  }
+})()

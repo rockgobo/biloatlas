@@ -12,7 +12,7 @@
     controllerAs: 'topicsCollection',
     controller: function (TopicData, ColorBrewer, RegionData, $routeParams) {
       this.topicId1 = {id: $routeParams.topicid}
-      this.topicId2 = {id: $routeParams.topicid}
+      this.topicId2 = {}
       this.additionLayer = false
       this.mapOptions = { stats2: { visible: false } }
 

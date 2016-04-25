@@ -188,7 +188,7 @@ a{
     margin-top: 10px;
 }
 #addition_layer h1{
-    display: none;
+    /*display: none;*/
 }
 #addition_layer h3 select.form-control{
     font-size: 12px;

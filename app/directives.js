@@ -1,26 +1,27 @@
-﻿(function () {
-    'user strict';
+﻿/*globals angular:true*/
+;(function () {
+  'user strict'
 
-    angular.module('biloAtlas')
-        
+  angular.module('biloAtlas')
+
     .directive('biloNavigation', [ function () {
-        return {
-            restrict: 'EA',
-            scope: {
-                topics: '='
-            },
-            templateUrl: 'app/views/directives/biloNavigation.html'
-        };
+      return {
+        restrict: 'EA',
+        scope: {
+          topics: '='
+        },
+        templateUrl: 'app/views/directives/biloNavigation.html'
+      }
     }])
     .directive('biloTable', [ function () {
-        return {
-            restrict: 'EA',
-            scope: {
-                regionInfo: '=stats',
-                selection: '=',
-                sortOrder: '=' 
-            },
-            templateUrl: 'app/views/directives/biloTable.html'
-        };
-    }]);
-})();
+      return {
+        restrict: 'EA',
+        scope: {
+          regionInfo: '=stats',
+          selection: '=',
+          sortOrder: '='
+        },
+        templateUrl: 'app/views/directives/biloTable.html'
+      }
+    }])
+})()
