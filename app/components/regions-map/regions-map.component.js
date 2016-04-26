@@ -109,11 +109,15 @@
               .transition()
               .duration(1000)
               .attr('y', function (d) {
-                log(d.id + ' ' + d.value)
+                log(d.id + ' ' + d.value + ' ' + max_height)
+                if (max_height === 0) return '' // otherwise division by 0
                 return projection_oberfranken(GeoData.getCentroid(d.id))[1] - ((d.value / max_height) * options.stats2.height)
               })
               .attr('width', options.stats2.width)
-              .attr('height', function (d) { return (d.value / max_height) * options.stats2.height })
+              .attr('height', function (d) {
+                if (max_height === 0) return 0 // otherwise division by 0
+                return (d.value / max_height) * options.stats2.height
+              })
               .style('visibility', options.stats2.visible ? 'visible' : 'hidden')
             regions.selectAll('rect')
               .data(data2).on('mouseover', function (d) {
@@ -210,7 +214,7 @@
               .data(data)
               .enter()
               .append('a')
-              .attr('xlink:href', function (d) {return '#/region/' + d.id })
+              .attr('xlink:href', function (d) { return '#/region/' + d.id })
               .append('path')
               .attr('fill', function (d) { return regionColors(d.value) })
               .attr('title', function (d) { return GeoData.getRegionData(d.id).properties.NAME_3 })
@@ -247,9 +251,15 @@
               .enter()
               .append('rect')
               .attr('x', function (d) { return projection_oberfranken(GeoData.getCentroid(d.id))[0] - (options.stats2.width / 2) })
-              .attr('y', function (d) { return projection_oberfranken(GeoData.getCentroid(d.id))[1] - ((d.value / max_height) * options.stats2.height) })
+              .attr('y', function (d) {
+                if (max_height === 0) return '' // otherwise division by 0
+                return projection_oberfranken(GeoData.getCentroid(d.id))[1] - ((d.value / max_height) * options.stats2.height) 
+              })
               .attr('width', options.stats2.width)
-              .attr('height', function (d) { return (d.value / max_height) * options.stats2.height })
+              .attr('height', function (d) {
+                if (max_height === 0) return 0 // otherwise division by 0
+                return (d.value / max_height) * options.stats2.height
+              })
               .attr('fill', '#FFF')
               .attr('stroke', '#666')
               .attr('class', function (d) { return 'id_' + d.id })
