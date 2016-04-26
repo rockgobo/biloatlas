@@ -30,7 +30,7 @@
 
         // Watch topic
         $scope.$watch('topicView.topic', function (topic) {
-          if (topic === undefined) return
+          if (topic === undefined || topic.id === undefined) return
           TopicData.getTopicById(topic.id).then(function (t) {
             this.topic_ = t
             if (this.topic_.layers.length > 0) {

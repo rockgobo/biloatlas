@@ -32,10 +32,10 @@
                 &#216; Oberfranken: {{topicsCollection.average()}}{{topicsCollection.unit()}}
             </div>
             <div ng-if="topicsCollection.visibleMap">
-                <div regions-map stats="topicsCollection.data1" stats2="topicsCollection.data2" schemecolors="topicsCollection.colors" options="topicsCollection.mapOptions"></div>
+                <div regions-map stats="topicsCollection.data1" stats2="topicsCollection.data2" schemecolors="topicsCollection.colors" options="topicsCollection.mapOptions">Loading...</div>
             </div>
-            <div regions-pie stats="topicsCollection.data1" schemecolors="topicsCollection.colors" ng-if="topicsCollection.visiblePie"></div>
-            <topic-table stats="topicsCollection.data1" unit="topicsCollection.layer.unit" ng-if="topicsCollection.visibleTable"></topic-table>
+            <div regions-pie stats="topicsCollection.data1" schemecolors="topicsCollection.colors" ng-if="topicsCollection.visiblePie">Loading...</div>
+            <topic-table stats="topicsCollection.data1" stats2="topicsCollection.additionLayer?topicsCollection.data2:false" unit="topicsCollection.layer.unit" ng-if="topicsCollection.visibleTable">Loading...</topic-table>
 
 
             <div id="legend">

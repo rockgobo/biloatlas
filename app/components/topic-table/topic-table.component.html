@@ -4,10 +4,12 @@
         <tr style="cursor: pointer">
             <th ng-click="$ctrl.sortOrder = 'name'">Region <small><span ng-show="$ctrl.sortOrder == 'name'" class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span></small></th>
             <th ng-click="$ctrl.sortOrder = '-value'"  style="text-align: right; padding-right: 20px;">Wert <small><span ng-show="$ctrl.sortOrder == '-value'" class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span></small></th>
+            <th ng-show="$ctrl.stats2" ng-click="$ctrl.sortOrder = '-value2'"  style="text-align: right; padding-right: 20px;">Wert 2<small><span ng-show="$ctrl.sortOrder == '-value2'" class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span></small></th>
         </tr>
     </thead>
     <tr ng-repeat="stat in $ctrl.stats | orderBy: $ctrl.sortOrder">
         <td><a href="#/region/{{stat.id}}">{{stat.name}}</a></td>
         <td style="text-align: right; padding-right: 20px;">{{stat.value.toFixed(1)}}{{$ctrl.unit}}</td>
+        <td ng-show="$ctrl.stats2" style="text-align: right; padding-right: 20px;">{{stat.value2.toFixed(1)}}{{$ctrl.unit}}</td>
     </tr>
 </table>

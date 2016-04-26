@@ -8,9 +8,9 @@
         $routeProvider.when('/', {
           templateUrl: 'app/views/main.html'
         }).when('/topic/:topicid', {
-          template: '<topics-collection></topics-collection>',
+          template: '<topics-collection>Loading...</topics-collection>'
         }).when('/region/:regionid', {
-          template: '<region-view></region-view>',
+          template: '<region-view>Loading...</region-view>'
         }).when('/impressum', {
           templateUrl: 'app/views/impressum.html'
         }).otherwise({

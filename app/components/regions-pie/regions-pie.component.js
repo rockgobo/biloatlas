@@ -1,104 +1,99 @@
-﻿(function () {
-    'use strict'
+﻿/*globals angular:true d3:true d3pie:true*/
 
-    angular.module('biloAtlas')
-       .directive('regionsPie',  function(ColorBrewer) {
-           return {
-               restrict: 'EA',
-               scope: {
-                   stats: '=',
-                   schemecolors :'='
-               },
-               templateUrl: 'app/components/regions-pie/regions-pie.component.html',
-               link: function (scope, element, attrs) { 
-                   scope.render = function(data){ 
-                     //d3Service.d3().then(function (d3) {  
-                        var colors = scope.schemecolors;
-                        var regionScale = d3.scale.linear()
-                                            .domain([0, scope.maxValue])
-                                            .range([0,colors.length-1]);
-                                            //.range(ColorBrewer.colors.PuBu[9]);
-                        var regionColors = function(value){
-                            if(value == 0) return "#FFF";
-                            return colors[Math.floor(regionScale(value))];
-                        }         
-                        scope.regionColors = ["#FFF"].concat(colors);
-                        
-                        data = data.map(function(i){ return {label: i.name, value: i.value, color: regionColors(i.value)}});   
-                                   
-                        console.log("starting rendering pie function");
-                        
-                        /******************************
-                         *             D3 TEST
-                         *******************************/
-                        var width = element[0].clientWidth;
-                        var height = 400;
+;(function () {
+  'use strict'
 
-                        //currently selected region
-                        var active = d3.select(null);
+  angular.module('biloAtlas')
+    .directive('regionsPie', function (ColorBrewer) {
+      return {
+        restrict: 'EA',
+        scope: {
+          stats: '=',
+          schemecolors: '='
+        },
+        templateUrl: 'app/components/regions-pie/regions-pie.component.html',
+        link: function (scope, element, attrs) {
+          scope.render = function (data) {
+            var colors = scope.schemecolors
+            var regionScale = d3.scale.linear()
+              .domain([0, scope.maxValue])
+              .range([0, colors.length - 1])
+            var regionColors = function (value) {
+              if (value === 0) return '#FFF'
+              return colors[Math.floor(regionScale(value))]
+            }
+            scope.regionColors = ['#FFF'].concat(colors)
 
-                        //HACK.... Remove entire map, data could also be 
-                        d3.select(element[0]).select("svg").remove();
-                        
-                        scope.pie = new d3pie("regions-pie", {
-                            header: {
-                                title: {
-                                    text: ""
-                                },
-		                        location: "pie-center"
-                            },
-                            data: {
-	                           sortOrder: "value-desc",
-                               content: data
-                            },
-                            size: {
-                                canvasHeight: 400,
-                                canvasWidth: 550,
-                                pieInnerRadius: 0,
-                                pieOuterRadius: '90%'
-                            },
-                            labels: {
-                                outer: {
-                                    format: "label-value2"
-                                },
-                                inner: {
-                                    format: "none"
-                                },
-                                mainLabel: {
-                                    color: "#333",
-                                    font: "arial",
-                                    fontSize: 11
-                                }
-                            },
-                            tooltips: {
-                                enabled: true,
-                                type: "placeholder",
-                                string: "{label} {value}"
-                            }
-                        });
-                   };
-                   
-                   scope.$watch('stats', function(data){
-                       //Calculate max using all years
-                       scope.maxValue = 0;
-                       if(data == undefined) {
-                           return;
-                       }
-                       data.forEach( 
-                            function (d) { if(d.value > scope.maxValue) scope.maxValue = d.value; }
-                       );
-                       
-                       scope.render(data);
-                   }) 
-                                    
-                   scope.$watch('schemecolors', function(year){
-                       if(scope.stats == undefined) {
-                           return;
-                       }
-                       scope.render(scope.stats);
-                   })
-               }
-           }
-       }
-     )
-})();
+            data = data.map(function (i) { return {label: i.name, value: i.value, color: regionColors(i.value)}})
+
+            console.log('starting rendering pie function')
+
+            /** ****************************
+             *             D3
+             *******************************/
+
+            // Remove Pie if it already exists ... redraw is currently not possible (https://github.com/benkeen/d3pie/issues/48)
+            if (scope.pie) scope.pie.destroy()
+
+            scope.pie = new d3pie('regions-pie', {
+              header: {
+                title: {
+                  text: ''
+                },
+                location: 'pie-center'
+              },
+              data: {
+                sortOrder: 'value-desc',
+                content: data
+              },
+              size: {
+                canvasHeight: 400,
+                canvasWidth: 550,
+                pieInnerRadius: 0,
+                pieOuterRadius: '90%'
+              },
+              labels: {
+                outer: {
+                  format: 'label-value2'
+                },
+                inner: {
+                  format: 'none'
+                },
+                mainLabel: {
+                  color: '#333',
+                  font: 'arial',
+                  fontSize: 11
+                }
+              },
+              tooltips: {
+                enabled: true,
+                type: 'placeholder',
+                string: '{label} {value}'
+              }
+            })
+          }
+
+          scope.$watch('stats', function (data) {
+            // Calculate max using all years
+            scope.maxValue = 0
+            if (data === undefined || data.length === 0) {
+              return
+            }
+            data.forEach(
+              function (d) { if (d.value > scope.maxValue) scope.maxValue = d.value }
+            )
+
+            scope.render(data)
+          })
+
+          scope.$watch('schemecolors', function (year) {
+            if (scope.stats === undefined || scope.stats.length === 0) {
+              return
+            }
+            scope.render(scope.stats)
+          })
+        }
+      }
+    }
+  )
+})()
