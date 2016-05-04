@@ -51,7 +51,6 @@
           }
         }
 
-
         this.getLayerData = function (id) {
           return this.layersData[id].data
         }
@@ -62,7 +61,7 @@
         this.regions = []
         RegionData.getRegions().then(
           function (regions) {
-            this.regions = regions
+            this.regions = regions.filter(function (r) { return r.id != this.regionid }.bind(this))
           }.bind(this)
         )
 
@@ -72,7 +71,7 @@
           regionTopics.topics.forEach(function (topic) {
             topic.layers.forEach(function (layer) {
               var layerData = []
-              layerData.push({values: layer.data.map(function (d) { return { value: d.value, year: d.year } }), key: layer.name})
+              layerData.push({values: layer.data.map(function (d) { return { value: d.value, year: d.year } }), key: regionTopics.region.name})
               layerData.push({values: layer.data.map(function (d) { return {value: d.averageUF.toPrecision(2), year: d.year} }), key: 'Oberfranken', color: '#CCC'})
               layersData[layer.id] = {options: getOptions(layer.name, layer.unit), data: layerData}
             })
@@ -86,7 +85,6 @@
 
         // [{id: regionTopics.region.id, name: this.region, value: 100, year: 0}]
         }.bind(this))
-
 
         function getOptions (name, unit) {
           return {
@@ -126,9 +124,9 @@
             caption: {
               enable: true,
               html: '<div class="chart_caption">' + name + '</div>'
-
             }
           }
         }
-    }})
+      }
+    })
 })()

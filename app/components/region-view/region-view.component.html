@@ -13,10 +13,18 @@
             </div>
         </div>
     </div>
-    <div ng-repeat="topic in regionView.topics" class="topic-container">
-        <div ng-if="topic.layers.length > 0">
-            <h2><a href="#/topic/{{topic.id}}">{{topic.name}}</a> </h2>
-            <div ng-repeat="layer in topic.layers">
+    <div ng-repeat="topic in regionView.topics" class="topic-container" ng-init="visibleLayer = false">
+        <div ng-if="topic.layers.length > 0" >
+            <h2>
+                <small>
+                    <a ng-click="visibleLayer = !visibleLayer">
+                        <span ng-show="visibleLayer" class="glyphicon glyphicon-minus-sign"></span>
+                        <span ng-hide="visibleLayer" class="glyphicon glyphicon-plus-sign"></span>
+                    </a>
+                </small>
+                <a href="#/topic/{{topic.id}}">{{topic.name}}</a>
+            </h2>
+            <div ng-repeat="layer in topic.layers" ng-show="visibleLayer">
                 <h3>{{layer.name}}</h3>
                 <div class="row">
                     <div class="col-md-6">
@@ -41,7 +49,7 @@
                             <div class="col-md-10"><small>{{layer.calculation}}</small></div>
                         </div>
                     </div>
-                    <div class="col-md-6 well">
+                    <div class="col-md-6 well" ng-hide="regionView.getLayerData(layer.id).length === 0">
                         <nvd3 options="regionView.getLayerOptions(layer.id)" data="regionView.getLayerData(layer.id)"></nvd3>
                     </div>
                 </div>

@@ -14,5 +14,5 @@
         RegionData.getRegionById(this.regionid).then(function (response) {
           this.region = response.region
         }.bind(this))
-    }})
+      }})
 })()

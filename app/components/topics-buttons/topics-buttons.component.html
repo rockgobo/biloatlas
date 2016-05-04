@@ -2,6 +2,7 @@
     <div class="row">
         <div regions-map stats="$ctrl.mapData" year="0" selection=""  schemecolors="['#FFF','#009ee2']" options="{tooltips: {value: false}}"" class="col-md-12"></div>
     </div>  
+    <div ng-show="$ctrl.loading" class="alert alert-info">Atlas Daten werden geladen.</div>
     <div class="row" ng-repeat="topics in $ctrl.chunkedTopics" style="margin-bottom: 20px;">
         <div ng-repeat="topic in topics" class="col-md-4"  ng-class="{disabled: topic.layers.length == 0}">
             

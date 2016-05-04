@@ -2,14 +2,15 @@
 <table class="table table-condensed table-hover" style="margin-top: 40px;"> 
     <thead>
         <tr style="cursor: pointer">
-            <th ng-click="$ctrl.sortOrder = 'name'">Region <small><span ng-show="$ctrl.sortOrder == 'name'" class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span></small></th>
-            <th ng-click="$ctrl.sortOrder = '-value'"  style="text-align: right; padding-right: 20px;">Wert <small><span ng-show="$ctrl.sortOrder == '-value'" class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span></small></th>
-            <th ng-show="$ctrl.stats2" ng-click="$ctrl.sortOrder = '-value2'"  style="text-align: right; padding-right: 20px;">Wert 2<small><span ng-show="$ctrl.sortOrder == '-value2'" class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span></small></th>
+            <th ng-click="topicTable.sortOrder = 'name'">Region <small><span ng-show="topicTable.sortOrder == 'name'" class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span></small></th>
+            <th ng-repeat="headline in topicTable.headlines track by $index" style="text-align: right; padding-right: 20px;">
+                <small><span ng-show="topicTable.sortOrder == '-value'" class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span></small>{{headline}}
+            </th>
+            
         </tr>
     </thead>
-    <tr ng-repeat="stat in $ctrl.stats | orderBy: $ctrl.sortOrder">
-        <td><a href="#/region/{{stat.id}}">{{stat.name}}</a></td>
-        <td style="text-align: right; padding-right: 20px;">{{stat.value.toFixed(1)}}{{$ctrl.unit}}</td>
-        <td ng-show="$ctrl.stats2" style="text-align: right; padding-right: 20px;">{{stat.value2.toFixed(1)}}{{$ctrl.unit}}</td>
+    <tr ng-repeat="stats in topicTable.stats | orderBy: topicTable.sortOrder">
+        <td><a href="#/region/{{stats.id}}">{{stats.name}}</a></td>
+        <td ng-repeat="stat in stats.data" style="text-align: right; padding-right: 20px;">{{stat}}{{topicTable.unit}}</td>
     </tr>
 </table>

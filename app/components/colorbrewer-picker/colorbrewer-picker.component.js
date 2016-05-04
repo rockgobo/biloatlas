@@ -14,6 +14,7 @@
     },
     controller: function (ColorBrewer) {
       this.colors = ColorBrewer.colors
+      this.opencolors = false
     }
   })
 })()

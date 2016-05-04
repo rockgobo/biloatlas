@@ -36,15 +36,30 @@
     
     <!-- FOOTER -->
     <footer class="atlas-footer" role="contentinfo" id="footer"> 
-        <div class="container"> 
-            <ul class="bs-docs-footer-links"> 
-                <li><a href="#/impressum">Impressum</a></li>  
-            </ul>
+        <div class="container-fluid"> 
+            <div class="row">
+                <div class="col-sm-10">
+                    <ul class="bs-docs-footer-links"> 
+                        <li><a href="#/impressum">Impressum</a></li>
+                    </ul>
+                </div>
+                <div class="col-sm-1" style="background: white; padding: 5px; border-radius: 2px">
+                    <a href="http://www.oberfrankenstiftung.de/">
+                        <img src="images/OFS.png" class="img-responsive"/>
+                    </a>
+                </div>
+                <div class="col-sm-1">
+                    <a href="https://bilo-studie.de">
+                        <img src="images/lifbi.png" class="img-responsive" style="border-radius: 2px" />
+                    </a>
+                </div>
+            </div>
         </div>
     </footer>
 
 
     <script src="app/vendor/jquery/dist/jquery.min.js"></script>
+    <script src="app/vendor/folyfills.js"></script>
     <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="app/common/lifbi.tooltip.js"></script>
     <script src="app/vendor/angular/angular.js"></script>
@@ -70,6 +85,7 @@
     <script src="app/components/topics-selection/topics-selection.component.js"></script>
     <script src="app/components/topic-badge/topic-badge.component.js"></script>
     <script src="app/components/topic-view/topic-view.component.js"></script>
+    <script src="app/components/topic-ring/topic-ring.component.js"></script>
     <script src="app/components/topic-table/topic-table.component.js"></script>
     <script src="app/components/region-badge/region-badge.component.js"></script>
     <script src="app/components/region-view/region-view.component.js"></script>

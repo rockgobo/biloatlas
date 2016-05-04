@@ -33,6 +33,7 @@
           if (topic === undefined || topic.id === undefined) return
           TopicData.getTopicById(topic.id).then(function (t) {
             this.topic_ = t
+            this.topic.name = t.name
             if (this.topic_.layers.length > 0) {
               this.selectLayer(this.topic_.layers[0])
             }
@@ -46,8 +47,12 @@
 
         // Functions
         this.selectLayer = function (layer) {
+          console.log('select layer')
+
           this.layer = layer
           this.years = []
+
+          this.topic.layerName = layer.name
 
           if (layer.data) {
             layer.data.forEach(function (d) {

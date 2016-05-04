@@ -11,6 +11,7 @@
           stats: '=',
           stats2: '=',
           schemecolors: '=',
+          schemecolors2: '=',
           options: '=',
           selection: '=?'
         },
@@ -19,7 +20,9 @@
           var regions
           var regionsRendered = false
           var regionColors
+          var regionColors2
           var colors = scope.schemecolors
+          var colors2 = scope.schemecolors2
           var pathTopo, projection_oberfranken
 
           /*   SETTINGS
@@ -45,6 +48,9 @@
           if (colors === undefined) {
             colors = ColorBrewer.colors.PuBu[9]
           }
+          if (colors2 === undefined) {
+            colors2 = ColorBrewer.colors.YlOrRd[9]
+          }
 
           // utility log function
           function log (m) {
@@ -55,7 +61,12 @@
            * D3 expects updated data in the same sort order as the
            * original data, it also has to be the same length.
            */
-          function prepareData2 (data2_ = []) {
+          function prepareData2 (data2_) {
+            /**
+             * Defaults (IE support)
+             */
+            if (!data2_) data2_ = []
+
             var data2_template = GeoData.getDataByValue(0, 0, data2_.length > 0 ? data2_[0].year : 0)
             return data2_template.map(function (d1) {
               var d2 = data2_.find(function (element) { return element.id === d1.id })
@@ -79,16 +90,26 @@
             angular.merge(options, scope.options)
 
             colors = scope.schemecolors
+            colors2 = scope.schemecolors2 ? scope.schemecolors2 : []
             // set some defaults
             if (colors === undefined) {
               colors = ColorBrewer.colors.PuBu[9]
             }
+
             var regionScale = d3.scale.linear()
               .domain([scope.minValue, scope.maxValue])
               .range([0, colors.length - 1])
             var regionColors = function (value) {
               if (value === 0) return '#FFF'
               return colors[Math.floor(regionScale(value))]
+            }
+
+            var regionScale2 = d3.scale.linear()
+              .domain([scope.minValue2, scope.maxValue2])
+              .range([0, colors2.length - 1])
+            var regionColors2 = function (value) {
+              if (value === 0) return '#FFF'
+              return colors2[Math.floor(regionScale2(value))]
             }
 
             regions.selectAll('path')
@@ -118,12 +139,13 @@
                 if (max_height === 0) return 0 // otherwise division by 0
                 return (d.value / max_height) * options.stats2.height
               })
+              .style('fill', function (d) { return regionColors2(d.value) })
               .style('visibility', options.stats2.visible ? 'visible' : 'hidden')
             regions.selectAll('rect')
               .data(data2).on('mouseover', function (d) {
                 lifbi.tooltip.showTooltip(
                 (options.tooltips.name ? GeoData.getRegionData(d.id).properties.NAME_3 + ' ' : '') +
-                (options.tooltips.value ? d.value : ''))
+                (options.tooltips.value ? d.value.toFixed(1) : ''))
               })
               .on('mouseout', function (d) {
                 lifbi.tooltip.hideTooltip()
@@ -137,7 +159,7 @@
               .style('visibility', options.stats2.visible ? 'visible' : 'hidden')
             regions.selectAll('g text')
               .data(data2)
-              .text(function (d) { return options.stats2.label ? d.value : '' })
+              .text(function (d) { return options.stats2.label ? d.value.toFixed(1) : '' })
           }
 
 
@@ -163,7 +185,7 @@
             var active = d3.select(null)
 
             var regionScale = d3.scale.linear()
-              .domain([0, scope.maxValue])
+              .domain([scope.minValue, scope.maxValue])
               .range([0, colors.length - 1])
             // .range(ColorBrewer.colors.PuBu[9])
             regionColors = function (value) {
@@ -171,6 +193,15 @@
               return colors[Math.floor(regionScale(value))]
             }
             scope.regionColors = ['#FFF'].concat(colors)
+
+
+            var regionScale2 = d3.scale.linear()
+              .domain([scope.minValue2, scope.maxValue2])
+              .range([0, colors2.length - 1])
+            var regionColors2 = function (value) {
+              if (value === 0) return '#FFF'
+              return colors2[Math.floor(regionScale2(value))]
+            }
 
             // Remove entire map, data will be updated later on
             d3.select(element[0]).select('svg').remove()
@@ -226,7 +257,7 @@
               .on('mouseover', function (d) {
                 lifbi.tooltip.showTooltip(
                   (options.tooltips.name ? GeoData.getRegionData(d.id).properties.NAME_3 + ' ' : '') +
-                  (options.tooltips.value ? d.value : ''))
+                  (options.tooltips.value ? d.value.toFixed(1) : ''))
                 d3.select(this).attr('stroke', '#666')
                 scope.selection = d.id
                 scope.$apply() // need to refresh scope manually as data is set in backend code
@@ -250,10 +281,11 @@
               .data(data2)
               .enter()
               .append('rect')
+              .style('fill', function (d) { return regionColors2(d.value) })
               .attr('x', function (d) { return projection_oberfranken(GeoData.getCentroid(d.id))[0] - (options.stats2.width / 2) })
               .attr('y', function (d) {
                 if (max_height === 0) return '' // otherwise division by 0
-                return projection_oberfranken(GeoData.getCentroid(d.id))[1] - ((d.value / max_height) * options.stats2.height) 
+                return projection_oberfranken(GeoData.getCentroid(d.id))[1] - ((d.value / max_height) * options.stats2.height)
               })
               .attr('width', options.stats2.width)
               .attr('height', function (d) {
@@ -267,7 +299,7 @@
               .on('mouseover', function (d) {
                 lifbi.tooltip.showTooltip(
                   (options.tooltips.name ? GeoData.getRegionData(d.id).properties.NAME_3 + ' ' : '') +
-                  (options.tooltips.value ? d.value : ''))
+                  (options.tooltips.value ? d.value.toFixed(1) : ''))
               })
               .on('mouseout', function (d) {
                 lifbi.tooltip.hideTooltip()
@@ -296,7 +328,7 @@
               .append('text')
               .style('text-anchor', 'middle')
               .style('font-size', '10px')
-              .text(function (d) { return options.stats2.label ? d.value : '' })
+              .text(function (d) { return options.stats2.label ? d.value.toFixed(1) : '' })
 
 
             regionsRendered = true
@@ -359,6 +391,19 @@
             if (scope.stats === undefined) {
               return
             }
+            // Calculate max using all years
+            scope.maxValue2 = 0
+            scope.minValue2 = Number.MAX_VALUE
+            if (data === undefined) {
+              return
+            }
+            data.forEach(
+              function (d) { if (d.value > scope.maxValue2) scope.maxValue2 = d.value }
+            )
+            data.forEach(
+              function (d) { if (d.value < scope.minValue2) scope.minValue2 = d.value }
+            )
+
             scope.render(scope.stats, data)
           })
           scope.$watch('options', function (data) {
@@ -369,6 +414,13 @@
           }, true)
 
           scope.$watch('schemecolors', function () {
+            if (scope.stats === undefined) {
+              return
+            }
+            scope.render(scope.stats, scope.stats2)
+          })
+
+          scope.$watch('schemecolors2', function () {
             if (scope.stats === undefined) {
               return
             }

@@ -1,6 +1,8 @@
 /**
  * Created by CMatyas on 15.12.2015.
  */
+
+/*globals angular:true*/
 ;(function () {
   'use strict'
 
@@ -8,12 +10,14 @@
     templateUrl: 'app/components/topics-buttons/topics-buttons.component.html',
     controller: function (TopicData, GeoData, $routeParams) {
       this.chunkedTopics = []
-
+      this.loading = true
       TopicData.getTopics().then(function (topics) {
-        topics = topics.sort(function (a, b) {return a.layers.length < b.layers.length})
+        topics = topics
+                    .filter(function (t) { return t.layers.length > 0 })
+                    .sort(function (a, b) { return a.layers.length < b.layers.length })
         this.chunkedTopics = chunk(topics, 3)
+        this.loading = false
       }.bind(this))
-
 
       this.mapData = GeoData.getDataByValue()
 

@@ -88,7 +88,14 @@
         console.log('Error in GeoData service. Region not found or not singular. Looked for region id ' + id)
         return null
       }
-      function getDataByValue (id = 0, value = 0, year = 0) {
+      function getDataByValue (id, value, year) {
+        /**
+         * Defaults (IE support)
+         */
+        if (!id) id = 0
+        if (!value) value = 0
+        if (!year) year = 0
+        
         var regions = geoCollection.features.map(function (f) {
           if (f.properties.ID_3 === id) {
             return {id: id, name: f.properties.VARNAME_3, value: value, year: year}

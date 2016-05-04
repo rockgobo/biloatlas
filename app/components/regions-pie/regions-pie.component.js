@@ -24,7 +24,7 @@
             }
             scope.regionColors = ['#FFF'].concat(colors)
 
-            data = data.map(function (i) { return {label: i.name, value: i.value, color: regionColors(i.value)}})
+            data = data.map(function (i) { return {label: i.name, value: i.value, color: regionColors(i.value)} })
 
             console.log('starting rendering pie function')
 
