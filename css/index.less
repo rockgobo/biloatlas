@@ -297,3 +297,301 @@ body {
         fill: #99979d
     }
 }
+body {
+}
+
+#content{
+}
+
+#tooltip{
+    position: absolute;
+    font-size: 10px;
+    height: auto;
+    padding: 4px;
+    background-color: #000000;
+    color: #efefef;
+    z-index: 10000;
+    display: none;
+    -webkit-border-radius: 2px; 
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    opacity: 0.5;    
+    font: "arial";
+}
+
+#tooltip span{
+    color: white;
+    opacity: 1.0 !important;
+}
+
+#legend{
+    margin-top:20px;
+}
+#legend .colors{
+    border: 1px solid #CCC;
+    height: 20px;
+}
+
+#legend .legenditem{
+    display: inline-block;
+    height: 12px;
+}
+
+.coatsofarms{
+    filter: gray; /* IE6-9 */
+    filter: grayscale(1); /* Microsoft Edge and Firefox 35+ */
+    -webkit-filter: grayscale(1); /* Google Chrome, Safari 6+ & Opera 15+ */
+}
+.coatsofarms:hover{
+  filter: none;
+  -webkit-filter: grayscale(0);
+  text-decoration: none;
+}
+
+#coats{ 
+    margin-top:10px;
+}
+
+.mapinfo{
+    margin-left: 10px;
+    margin-top: 5px;
+    float:right; 
+    text-align: center; 
+    background-color: #00F; 
+    color: #FFF; 
+    font-size: 14px; 
+    border-radius: 30px;
+    z-index: 50000;
+    border: 10px solid #ddd;
+}
+div.disabled{
+    opacity: .5;
+}
+a.disabled,a.disabled:hover,a.disabled:visited{
+    color: black;
+    text-decoration: none;
+    cursor: default;
+}
+
+nav .pagination li a{
+    color: black;
+    cursor: pointer;
+}
+
+.clickable{
+    cursor: pointer;
+}
+
+select.clean{
+    -webkit-appearance: none; 
+    -moz-appearance: none;
+    text-indent: 1px;
+    text-overflow: '';
+}
+
+.atlas-footer{
+    padding-top: 20px;
+    padding-bottom: 50px;
+    color: #99979c;
+    text-align: left;
+    background-color: #2a2730;
+}
+
+.atlas-footer ul li{
+    list-style-type: none;
+}
+.atlas-footer ul li a, .atlas-footer ul li a:visited, .atlas-footer ul li a:hover{
+    color: white;
+}
+
+.colorpicker{
+    width: 100%; 
+    background-color: white  
+}
+
+.colorpanel{
+    padding: 4px;
+    margin-top: 2px;
+    margin-right: 2px;
+    display: inline-block;
+    cursor: pointer;
+    border-radius: 4px;
+    border: 1px solid white;
+}
+.colorpickerColors{
+    position: absolute;
+    z-index: 1000;
+    height:250px;
+    overflow: auto;
+    padding: 5px;
+    box-shadow: 5px 5px 5px #99979c;
+    background-color: #FFF;
+    border: 1px solid #CCC;
+}
+.colorpanel:hover{
+    border: 1px solid #CCC;
+}
+.colorpicker_colorbag{
+    display: inline-block; 
+    height: 12px;
+}
+
+#topic-badge, #region-badge { 
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background-size:cover;
+    
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    -webkit-box-shadow: inset 0px -10px 30px -8px rgba(0,0,0,0.3);
+    -moz-box-shadow: inset 0px -10px 30px -8px rgba(0,0,0,0.3);
+    box-shadow: inset 0px -10px 30px -8px rgba(0,0,0,0.3);
+}
+
+.topic-container{
+    margin-bottom:60px;
+}
+
+.chart_caption {
+    text-align: 'center';
+    font-size: 12px;
+    margin-top:10px;
+}
+
+h3 select.form-control{
+    font-size: 18px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-weight: 500;
+    line-height: 1.1;
+    padding: 0px;
+    box-shadow: none;
+    color: rgb(51, 51, 51);
+    border: 1px solid white;
+}
+select.form-control:hover{
+        border: 1px solid #ccc !important;
+}
+
+select.bilo-inline-control{
+    padding: 0px;
+    box-shadow: none;
+    color: black;
+    font-size: 85%;
+    height:20px;
+    border: 1px solid white;
+}
+
+a{
+    cursor: pointer;
+}
+
+h2 a:hover, #coats a:hover{
+    text-decoration: none;
+}
+
+/*
+    Additional layer
+    -----------------------------------------------------
+*/
+#addition_layer{
+    margin-top: 5px;
+    font-size: 10px;
+    padding: 10px;
+}
+
+#addition_layer .btn-remove{
+    margin-top: 10px;
+}
+#addition_layer h1{
+    /*display: none;*/
+}
+#addition_layer h3 select.form-control{
+    font-size: 12px;
+}
+.container_additional_layer{
+    margin-top: 20px;
+}
+
+
+/* Sticky footer styles
+-------------------------------------------------- */
+
+html,
+body {
+    height: 100%;
+    /* The html and body elements cannot have any padding or margin. */
+}
+
+#wrap {
+	min-height: 100%;
+	height: auto !important; /* This line and the next line are not necessary unless you need IE6 support */
+	height: 100%;
+	margin: 0 auto -120px; /* the bottom margin is the negative value of the footer's height */
+}
+
+/* Set the fixed height of the footer here */
+#push,
+#footer {
+    height: 120px;
+}
+
+/* Lastly, apply responsive CSS fixes as necessary */
+@media (max-width: 767px) {
+    #footer {
+        margin-left: -20px;
+        margin-right: -20px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}
+
+/* Custom page CSS
+-------------------------------------------------- */
+/* Not required for template or sticky footer method. */
+
+#wrap > .container {
+    padding-top: 60px;
+}
+
+/* Custom Bootstrap Theme
+-------------------------------------------------- */
+#wrap .jumbotron{
+    background-color: #009ee2;
+    color: white ;
+    border-radius: 0px;
+}
+#wrap .jumbotron h1 small{
+    color: lightgrey;
+}
+
+/* Ring component
+-------------------------------------------------- */
+
+#topic-ring{ 
+    path.slice{
+        stroke-width:1px;
+    }
+    line{
+        opacity: .3;
+        stroke: black;
+        stroke-width: 1px;
+        fill: none;
+        stroke-dasharray: 2 2 
+    }
+    polyline {
+        opacity: .3;
+        stroke: black;
+        stroke-width: 2px;
+        fill: none;
+    }
+    text{
+        font-size: 11px;
+        width: 120px;
+    }
+
+    .value-label{
+        fill: #99979d
+    }
+}

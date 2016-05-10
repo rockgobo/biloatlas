@@ -1,9 +1,13 @@
 {
-    // See https://go.microsoft.com/fwlink/?LinkId=733558
-    // for the documentation about the tasks.json format
     "version": "0.1.0",
-    "command": "lessc",
+    "command": "gulp",
     "isShellCommand": true,
-    "args": ["--clean-css","css/index.less", "css/index.min.css"],
-    "showOutput": "always"
+    "tasks": [
+        {
+            "taskName": "default",
+            "isBuildCommand": true,
+            "showOutput": "always",
+            "isWatching": true
+        }
+    ]
 }
