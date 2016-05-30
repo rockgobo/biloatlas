@@ -10,7 +10,7 @@
       data2: '=?'
     },
     controllerAs: 'topicsCollection',
-    controller: function (TopicData, ColorBrewer, RegionData, $routeParams) {
+    controller: function (TopicData, Colors, RegionData, $routeParams) {
       this.topicId1 = {id: $routeParams.topicid}
       this.topicId2 = {}
       this.additionLayer = false
@@ -20,8 +20,8 @@
       this.maxValue
       this.minValue2
       this.maxValue2
-      this.colors = ColorBrewer.colors.PuBu[9]
-      this.colors2 = ColorBrewer.colors.YlOrRd[9]
+      this.colors = Colors.getPrimary()
+      this.colors2 = Colors.getSecondary()
       this.averageColor1 = '#FFF'
       this.averageColor2 = '#FFF'
 

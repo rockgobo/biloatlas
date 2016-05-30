@@ -7,10 +7,11 @@
       templateUrl: 'app/components/region-view/region-view.component.html',
       binding: {},
       controllerAs: 'regionView',
-      controller: function (RegionData, GeoData, $routeParams) {
+      controller: function (RegionData, Colors, GeoData, $routeParams) {
         this.topics = []
         this.selection = 0
         this.regionid = $routeParams.regionid
+        this.colorSchema = ['#FFF', Colors.getSecondaryColor()]
 
         this.options = {
           chart: {

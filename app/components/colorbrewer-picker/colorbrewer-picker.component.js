@@ -12,8 +12,16 @@
       min: '=',
       max: '='
     },
-    controller: function (ColorBrewer) {
-      this.colors = ColorBrewer.colors
+    controller: function (ColorBrewer, Colors) {
+      // this.colors = ColorBrewer.colors
+      this.colors = {
+        color1: {
+          9: Colors.getPrimary()
+        },
+        color2: {
+          9: Colors.getSecondary()
+        }
+      }
       this.opencolors = false
     }
   })

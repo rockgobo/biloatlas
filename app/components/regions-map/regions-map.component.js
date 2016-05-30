@@ -179,7 +179,7 @@
              *             D3 TEST
              *******************************/
             var width = element[0].clientWidth
-            var height = 400
+            var height = 450
 
             // currently selected region
             var active = d3.select(null)
