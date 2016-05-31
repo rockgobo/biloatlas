@@ -21,6 +21,11 @@
       var m = 4
       var c = 9
 
+      var slices = tinycolor(colors[m]).analogous(12)
+      slices = slices.map(function (t) { return t.toHexString() })
+
+      slices = ['#a6cee3', '#1f78b4', '#b2df8a', '#33a02c', '#fb9a99', '#e31a1c', '#fdbf6f', '#ff7f00', '#cab2d6', '#6a3d9a', '#ffff99', '#b15928']
+
       return {
         getColors: function (id, count = c) {
           var scale = []
@@ -36,7 +41,9 @@
           console.log(scale)
           return scale
         },
-
+        getColor: function (id) {
+          return colors[(id + 0) % 6]
+        },
         getPrimary: function () {
           return this.getColors(p, c)
         },
@@ -48,6 +55,9 @@
         },
         getSecondaryColor: function () {
           return colors[m]
+        },
+        getPrimarySlices: function () {
+          return slices
         }
       }
     })

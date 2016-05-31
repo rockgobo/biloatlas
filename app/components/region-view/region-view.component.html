@@ -3,17 +3,24 @@
 
 <div class="container">
     <div class="row hidden-xs">
-        <div regions-map stats="regionView.mapData" year="0" selection="regionView.selection"  schemecolors="regionView.colorSchema" options="{tooltips: {value: false}}"" class="col-md-8"></div>
-        <div class="col-md-4">
+        <div class="col-md-6">
+            <h4 style="border-bottom: 1px solid #CCC">Oberfranken</h4>
+            <div regions-map stats="regionView.mapData" year="0" selection="regionView.selection"  schemecolors="regionView.colorSchema" options="{tooltips: {value: false}}"></div>
+            
             <div id="coats">
                 <a ng-repeat="region in regionView.regions" ng-href="#/region/{{region.id}}" >
                     <img  ng-src="images/{{region.id}}.png" title="{{region.name}}" width="60px" height="64px" ng-class="region.id!=regionView.selection?'coatsofarms':''" style="margin-bottom: 2px;"></img>
                 </a>
             </div>
         </div>
+        
+        <div class="col-md-6">
+            <h4 style="border-bottom: 1px solid #CCC">{{regionView.region.name}}</h4>
+            <div region-details-map region="regionView.regionid" pois="regionView.pois"></div>
+            <a class="btn btn-default pull-right" href="#/location/{{regionView.regionid}}">Detailansicht</a>
+        </div>
     </div>
     
-    <div region-details-map region="regionView.regionid"></div>
         
     <div ng-repeat="topic in regionView.topics" class="topic-container" ng-init="visibleLayer = false">
         <div ng-if="topic.layers.length > 0" >

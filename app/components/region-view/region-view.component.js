@@ -7,7 +7,7 @@
       templateUrl: 'app/components/region-view/region-view.component.html',
       binding: {},
       controllerAs: 'regionView',
-      controller: function (RegionData, Colors, GeoData, $routeParams) {
+      controller: function (RegionData, PoiData, Colors, GeoData, $routeParams) {
         this.topics = []
         this.selection = 0
         this.regionid = $routeParams.regionid
@@ -62,7 +62,7 @@
         this.regions = []
         RegionData.getRegions().then(
           function (regions) {
-            this.regions = regions.filter(function (r) { return r.id != this.regionid }.bind(this))
+            this.regions = regions.filter(function (r) { return r.id !== this.regionid }.bind(this))
           }.bind(this)
         )
 
@@ -85,6 +85,10 @@
           this.mapData = GeoData.getDataByValue(regionTopics.region.id, 100)
 
         // [{id: regionTopics.region.id, name: this.region, value: 100, year: 0}]
+        }.bind(this))
+
+        PoiData.getPoisByRegion(this.regionid).then(function (response) {
+          this.pois = response.features
         }.bind(this))
 
         function getOptions (name, unit) {
