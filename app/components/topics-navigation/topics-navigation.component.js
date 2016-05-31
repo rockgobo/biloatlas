@@ -30,14 +30,14 @@
       }
 
       this.activeRegion = function (r) {
-        return $location.path() === '/region/' + r.id
+        return $location.path() === '/region/' + r.id || $location.path() === '/location/' + r.id
       }
 
       this.topicSelected = function () {
         return $location.path().indexOf('topic') !== -1
       }
       this.regionSelected = function () {
-        return $location.path().indexOf('region') !== -1
+        return $location.path().indexOf('region') !== -1 || $location.path().indexOf('location') !== -1
       }
 
       this.startSelected = function () {
