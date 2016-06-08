@@ -11,13 +11,13 @@
 @bgcolor_light: #F7FBFF;
 @bgcolor_dark: #DEEBF7;
 
-#topicView{
+#topicView, #wrap #topicView .container{
     a, a:visited{ color: @main_color }
 }
 
-#regionView{
+#regionView, #wrap #regionView .container{
     a, a:visited{ color: @secondary_color }
-}
+} 
 
 #tooltip{
     position: absolute;
@@ -278,13 +278,20 @@ body {
 
 /* Custom Bootstrap Theme
 -------------------------------------------------- */
-#wrap .jumbotron{
-    background-color: #009ee2;
-    color: white ;
-    border-radius: 0px;
-}
-#wrap .jumbotron h1 small{
-    color: lightgrey;
+#wrap {
+    .container {
+        a, a:visited{
+            color: @color_2
+        }
+    }
+    .jumbotron{
+        background-color: @color_2;
+        color: white ;
+        border-radius: 0px;
+    }
+   .jumbotron h1 small{
+        color: lightgrey;
+    }
 }
 
 /* Ring component
@@ -335,5 +342,21 @@ body {
         width: 12px;
         height: 12px;
         margin-right: 5px;
+    }
+    
+    ul{
+        -webkit-padding-start: 0px;
+        padding-left: 0px;
+        
+        li{
+            list-style: none;
+            
+            b{
+                font-weight: normal;
+                margin-bottom: 5px;
+                display: block;
+                margin-top: 20px;
+            }
+        }
     }
 }
