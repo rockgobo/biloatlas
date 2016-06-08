@@ -114,13 +114,13 @@
 
             markers.enter()
               .append('circle')
-              .attr('fill', function (d) { return colors[d.properties.type] })
+              .attr('fill', function (d) { return colors[d.properties.type.id] })
               .attr('title', function (d) { return d.properties.name })
               .attr('cx', function (d) { return projection_oberfranken(d.geometry.coordinates)[0].toFixed(4) })
               .attr('cy', function (d) { return projection_oberfranken(d.geometry.coordinates)[1].toFixed(4) })
               .attr('r', 6)
               .attr('stroke-width', 0)
-              .attr('class', function (d) { return 'marker marker_' + d.properties.id + ' markertype_' + d.properties.type })
+              .attr('class', function (d) { return 'marker marker_' + d.properties.id + ' markertype_' + d.properties.type.id })
               .attr('stroke', '#666')
               .on('mouseover', function (d) {
                 lifbi.tooltip.showTooltip('<div class="poi_info"><b>' + d.properties.name + '</b><br/>' + d.properties.street + ' ' + d.properties.streetNr + '<br/>' + d.properties.city + '</div>')
@@ -133,11 +133,9 @@
 
             markers.transition()
               .duration(500)
-              .attr('fill', function (d) { return colors[d.properties.type] })
+              .attr('fill', function (d) { return colors[d.properties.type.id] })
 
-            markers.exit().transition()
-              .duration(500)
-              .attr('fill', '#D5D5D5')
+            markers.exit().remove()
           }
 
           /*   WATCHERS
