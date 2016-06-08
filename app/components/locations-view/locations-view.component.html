@@ -8,20 +8,25 @@
 <div class="container">
     
     <div class="row">
-        <div class="col-md-10">
+        <div class="col-md-9">
             <div region-details-map region="locationsView.regionid" pois="results"></div>
         </div>
         
-        <div class="col-md-2">
+        <div class="col-md-3">
             <div id="legend">
-                <div ng-repeat="(index, type) in locationsView.types" 
-                    class="legend-item" 
-                    ng-mouseover="locationsView.highlightType(index)" 
-                    ng-mouseleave="locationsView.dehighlightType()" 
-                    ng-click="locationsView.selectedType === index ? locationsView.selectedType = undefined : locationsView.selectedType = index">
-                    <div style="background-color: {{type.color}}" class="legend-color"></div>
-                    <span ng-style="locationsView.selectedType === index ? {'background-color':'#CCC'} : {'background-color':'none'}">{{type.name}}</span>
-                </div>
+                <ul>
+                <li ng-repeat="parent in locationsView.parent_types">
+                    <b>{{parent.name}}</b>
+                    <div ng-repeat="type in parent.children" 
+                        class="legend-item" 
+                        ng-mouseover="locationsView.highlightType(type.id)" 
+                        ng-mouseleave="locationsView.dehighlightType()" 
+                        ng-click="locationsView.selectedType === type.id ? locationsView.selectedType = undefined : locationsView.selectedType = type.id">
+                        <div style="background-color: {{type.color}}" class="legend-color"></div>
+                        <span ng-style="locationsView.selectedType === type.id ? {'background-color':'#CCC'} : {'background-color':'none'}">{{type.name}}</span>
+                    </div>
+                </li>
+                </ul>
             </div>
         </div>
     </div>
@@ -38,7 +43,7 @@
                         | filter:{properties : {name : searchTerm}}
                         | filter:{properties : {street : searchStreet}}
                         | filter:{properties : {city : searchCity}}
-                        | filter:{properties : {type : locationsView.selectedType}}
+                        | filter:{properties : {type : {id : locationsView.selectedType }}}:true
                         as results" class="poi" ng-mouseover="locationsView.highlightPoi(poi.properties.id)" ng-mouseleave="locationsView.dehighlightPoi(poi.properties.id)">
             <td>{{poi.properties.name}}</td>
             <td>{{poi.properties.street}} {{poi.properties.streetNr}}</td>

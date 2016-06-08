@@ -15,18 +15,56 @@
         this.searchTerm = ''
         this.selectedType = undefined
 
-        this.types = [{name: 'Grundschulen', color: Colors.getPrimarySlices()[0]},
-                      {name: 'Grund- und Mittelschulen', color: Colors.getPrimarySlices()[1]},
-                      {name: 'Mittelschulen', color: Colors.getPrimarySlices()[2]},
-                      {name: 'Grund- und Hautschulen', color: Colors.getPrimarySlices()[3]},
-                      {name: 'Gesamtschulen', color: Colors.getPrimarySlices()[4]},
-                      {name: 'Gymnasien', color: Colors.getPrimarySlices()[5]},
-                      {name: 'Realschulen', color: Colors.getPrimarySlices()[6]},
-                      {name: 'Förderschulen', color: Colors.getPrimarySlices()[7]},
-                      {name: 'Waldorfschulen', color: Colors.getPrimarySlices()[8]}]
+        this.types = []
+        this.parent_types = []
 
         PoiData.getPoisByRegion(this.regionid).then(function (response) {
           this.pois = response.features
+          var types = []
+          var parent_types = []
+
+          this.pois.forEach(function (p) {
+            var type = p.properties.type
+            var parent_type = p.properties.parent_type
+
+            // Get all types
+            var test_includes = false
+            for (var i = 0; i < types.length; ++i) {
+              if (types[i].id === type.id) {
+                test_includes = true
+                break
+              }
+            }
+
+            if (!test_includes) {
+              type.color = Colors.getPrimarySlices()[type.id]
+              type.parent_id = parent_type.id
+              types.push(type)
+            }
+
+            // Get all parent types
+            test_includes = false
+            for (var j = 0; j < parent_types.length; ++j) {
+              if (parent_types[j].id === parent_type.id) {
+                test_includes = true
+                break
+              }
+            }
+
+            if (!test_includes) {
+              parent_types.push(parent_type)
+            }
+          })
+
+          // include all type in the parent_types
+          parent_types.map(function (parent) {
+            parent.children = types.filter(function (t) {
+              return t.parent_id === parent.id
+            })
+            return parent
+          })
+          this.types = types
+          this.parent_types = parent_types
         }.bind(this))
 
         this.filterPois = function (poi) {
