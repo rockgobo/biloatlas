@@ -13,6 +13,7 @@
       max: '='
     },
     controller: function (ColorBrewer, Colors) {
+      this.clickable = false
       // this.colors = ColorBrewer.colors
       this.colors = {
         color1: {
