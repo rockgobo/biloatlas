@@ -5,7 +5,7 @@
     <div class="row hidden-xs">
         <div class="col-md-6">
             <h4 style="border-bottom: 1px solid #CCC">Oberfranken</h4>
-            <div regions-map stats="regionView.mapData" year="0" selection="regionView.selection"  schemecolors="regionView.colorSchema" options="{tooltips: {value: false}}"></div>
+            <div id="ofr-map" regions-map stats="regionView.mapData" year="0" selection="regionView.selection"  schemecolors="regionView.colorSchema" options="{tooltips: {value: false}}"></div>
             
             <div id="coats">
                 <a ng-repeat="region in regionView.regions" ng-href="#/region/{{region.id}}" >
@@ -22,16 +22,17 @@
     </div>
     
         
-    <div ng-repeat="topic in regionView.topics" class="topic-container" ng-init="visibleLayer = false">
+    <div ng-repeat="(index,topic) in regionView.topics" class="topic-container" ng-init="visibleLayer = (index == 0)">
         <div ng-if="topic.layers.length > 0" >
-            <h2>
+            <h2  ng-click="visibleLayer = !visibleLayer">
+                
                 <small>
-                    <a ng-click="visibleLayer = !visibleLayer">
+                    <a>
                         <span ng-show="visibleLayer" class="glyphicon glyphicon-minus-sign"></span>
                         <span ng-hide="visibleLayer" class="glyphicon glyphicon-plus-sign"></span>
                     </a>
                 </small>
-                <a href="#/topic/{{topic.id}}">{{topic.name}}</a>
+                <a>{{topic.name}}</a>
             </h2>
             <div ng-repeat="layer in topic.layers" ng-show="visibleLayer">
                 <h3>{{layer.name}}</h3>
