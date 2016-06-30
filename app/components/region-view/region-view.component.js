@@ -11,7 +11,7 @@
         this.topics = []
         this.selection = 0
         this.regionid = $routeParams.regionid
-        this.colorSchema = ['#FFF', Colors.getSecondaryColor()]
+        this.colorSchema = [Colors.getPrimaryColor(), Colors.getSecondaryColor()]
 
         this.options = {
           chart: {
