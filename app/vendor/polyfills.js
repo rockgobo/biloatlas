@@ -1,5 +1,6 @@
-/*globals Array:true*/
+/*globals Array:true, String:true*/
 
+// POLYFILL Array.find
 if (!Array.prototype.find) {
   Array.prototype.find = function (predicate) {
     if (this == null) {
@@ -23,8 +24,20 @@ if (!Array.prototype.find) {
   }
 }
 
+// POLYFILL Array.isArray
 if (!Array.isArray) {
   Array.isArray = function (vArg) {
     return Object.prototype.toString.call(vArg) === '[object Array]'
   }
+}
+
+// POLYFILL String.trim()
+if (!String.prototype.trim) {
+  (function () {
+    // Make sure we trim BOM and NBSP
+    var rtrim = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g
+    String.prototype.trim = function () {
+      return this.replace(rtrim, '')
+    }
+  })()
 }
