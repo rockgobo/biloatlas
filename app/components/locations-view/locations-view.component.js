@@ -11,7 +11,6 @@
         this.topics = []
         this.selection = 0
         this.regionid = $routeParams.id
-        this.colorSchema = ['#FFF', Colors.getSecondaryColor()]
         this.searchTerm = ''
         this.selectedType = undefined
 
