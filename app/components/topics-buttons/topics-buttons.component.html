@@ -1,16 +1,18 @@
 <div class="container">
+    
+    <div ng-show="$ctrl.loading" class="atlas-loading"><img src="images/loading.gif"></div>
     <div class="row">
-        <div regions-map stats="$ctrl.mapData" year="0" selection=""  schemecolors="['#FFF','#009ee2']" options="{tooltips: {value: false}}"" class="col-md-12"></div>
-    </div>  
-    <div ng-show="$ctrl.loading" class="alert alert-info">Atlas Daten werden geladen.</div>
+            <div regions-map stats="$ctrl.mapData" year="0" selection=""  schemecolors="['#FFF','#009ee2']" options="{tooltips: {value: false}}"" class="col-md-12"></div>
+    </div> 
     <div class="row" ng-repeat="topics in $ctrl.chunkedTopics" style="margin-bottom: 20px;">
-        <div ng-repeat="topic in topics" class="col-md-4"  ng-class="{disabled: topic.layers.length == 0}">
+        <div ng-repeat="topic in topics" class="col-md-4"  ng-class="{disabled: (topic.layers.length === 0 && topic.layerGroups.length === 0)}">
             
-            <h3><a ng-href="#/topic/{{topic.id}}" ng-class="{disabled: topic.layers.length == 0}">{{topic.name}}</a></h3>
+            <h3><a ng-href="#/topic/{{topic.id}}" ng-class="{disabled: (topic.layers.length === 0 && topic.layerGroups.length === 0)}">{{topic.name}}</a></h3>
             <p>{{topic.description}}</p>
             
             <ul  class="media-body" style="margin-bottom: 20px;">
                 <li ng-repeat="layer in topic.layers"><small>{{layer.name}}</small></li>
+                <li ng-repeat="layerGroup in topic.layerGroups"><small>{{layerGroup.name}}</small></li>
             </ul>
             
         </div>
