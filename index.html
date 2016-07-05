@@ -2,8 +2,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <meta charset="utf-8" />
-
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--
         Passen Sie die Inhaltssicherheitsrichtlinie im META-Tag unten nach Bedarf an. Fügen Sie "default-src" die Option "unsafe-inline" hinzu, um Inline-JavaScript zu aktivieren.
         Details finden Sie unter "http://go.microsoft.com/fwlink/?LinkID=617521".
@@ -26,7 +27,7 @@
         
         <!-- VIEWS -->
         <div class="container-fluid" style="margin-top: 50px;">
-            <div ng-view>Loading...</div>
+            <div ng-view><img src="images/loading.gif" alt="Lade..."></div>
         </div>
 
         <!-- TOOLTIP -->
@@ -84,6 +85,7 @@
     <script src="app/services/GeoData.service.js"></script>
     <script src="app/services/PoiData.service.js"></script>
     <script src="app/services/Colors.service.js"></script>
+    <script src="app/services/Calculations.service.js"></script>
     <script src="app/components/locations-view/locations-view.component.js"></script>
     <script src="app/components/topics-navigation/topics-navigation.component.js"></script>
     <script src="app/components/topics-buttons/topics-buttons.component.js"></script>
@@ -112,7 +114,5 @@
     
     <link rel="stylesheet" href="app/vendor/d3/nv.d3.css">
 
-    <!--<script src="app/controllers.js"></script>
-    <script src="app/directives.js"></script>-->
 </body>
 </html>

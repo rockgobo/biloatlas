@@ -23,10 +23,9 @@
           /*   Icons
           ---------------------------------------------------------------*/
           var icon_size = 12
-          var child_path = '<g width="' + icon_size + '" height="' + icon_size + '"><path d="M0 0h24v24H0z" fill="none"/><circle cx="14.5" cy="10.5" r="1.25"/><circle cx="9.5" cy="10.5" r="1.25"/><path d="M22.94 12.66c.04-.21.06-.43.06-.66s-.02-.45-.06-.66c-.25-1.51-1.36-2.74-2.81-3.17-.53-1.12-1.28-2.1-2.19-2.91C16.36 3.85 14.28 3 12 3s-4.36.85-5.94 2.26c-.92.81-1.67 1.8-2.19 2.91-1.45.43-2.56 1.65-2.81 3.17-.04.21-.06.43-.06.66s.02.45.06.66c.25 1.51 1.36 2.74 2.81 3.17.52 1.11 1.272.09 2.17 2.89C7.62 20.14 9.71 21 12 21s4.38-.86 5.97-2.28c.9-.8 1.65-1.79 2.17-2.89 1.44-.43 2.55-1.65 2.8-3.17zM19 14c-.1 0-.19-.02-.29-.03-.2.67-.49 1.29-.86 1.86C16.6 17.74 14.45 19 12 19s-4.6-1.26-5.85-3.17c-.37-.57-.66-1.19-.86-1.86-.1.01-.19.03-.29.03-1.1 0-2-.9-2-2s.9-2 2-2c.1 0 .19.02.29.03.2-.67.49-1.29.86-1.86C7.4 6.26 9.55 5 12 5s4.6 1.26 5.85 3.17c.37.57.66 1.19.86 1.86.1-.01.19-.03.29-.03 1.1 0 2 .9 2 2s-.9 2-2 2zM7.5 14c.76 1.77 2.49 3 4.5 3s3.74-1.23 4.5-3h-9z"/></g>'
-
-          var domain_path = '<g width="' + icon_size + '" height="' + icon_size + '"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2z"/></g>'
-          var school_path = '<g width="' + icon_size + '" height="' + icon_size + '"><path d="M0 0h24v24H0z" fill="none"/><path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z"/></g>'
+          var child_path = '<circle cx="12" cy="12" r="8"/>'
+          var domain_path = '<path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>'
+          var school_path = '<path d="M6 6h12v12H6z"/>'
 
           var icons = {
             101: school_path,
@@ -122,11 +121,13 @@
             })
 
           var render = function (pois) {
-            var markers = regions.selectAll('circle')
+            var markers = regions.selectAll('g')
               .data(pois, function (p) { return p.properties.id }) // Adding key function to data binding
 
             markers.enter()
               .append('g')
+              .attr('stroke', function (d) { return colors[d.properties.type.id] })
+              .attr('stroke-width', 0)
               .attr('transform', function (d) {
                 var pixel_coords = projection_oberfranken(d.geometry.coordinates)
                 return 'translate(' + (pixel_coords[0].toFixed(4) - (icon_size / 2)) + ',' + (pixel_coords[1].toFixed(4) - (icon_size / 2)) + ') scale(' + (icon_size / 18) + ')'

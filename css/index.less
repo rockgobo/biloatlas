@@ -4,20 +4,77 @@
 @color_4 : #6D2A6E;
 @color_5 : #980043;
 @color_6 : #9B8995;
+@color_link: #333;
+@color_headlines: #272B5F;
 
 @main_color: @color_3;
-@secondary_color: @color_5;
+@secondary_color: @color_4;
 
 @bgcolor_light: #F7FBFF;
 @bgcolor_dark: #DEEBF7;
 
+@color_badge: @bgcolor_dark;
+
+@purple1: #110711;
+@purple2: #2b112c;
+@purple3: #451b46;
+@purple4: #602561;
+@purple5: #7a2f7b;
+@purple6: #953897;
+@purple7: #b041b2;
+
+@green1: #264d0f;
+@green2: #326514;
+@green3: #3d7d18;
+@green4: #49951c;
+@green5: #54ae20;
+@green6: #60c624;
+@green7: #6cda2d;
+@green8: #7ddf44;
+@green9: #8ee35c;
+
+@blue1: #091317;
+@blue2: #11272f;
+@blue3: #193b46;
+@blue4: #214e5e;
+@blue5: #296276;
+@blue6: #30768f;
+@blue7: #388aa7;
+
+@red1: #370119;
+@red2: #570227;
+@red3: #760235;
+@red4: #960243;
+@red5: #b60251;
+@red6: #d6015f;
+@red7: #f7016d;
+
+/* Link colors
+--------------------------------*/
+a.disabled,a.disabled:hover,a.disabled:visited{
+    color: @color_link;
+    text-decoration: none;
+    cursor: default;
+}
+
 #topicView, #wrap #topicView .container{
-    a, a:visited{ color: @main_color }
+    a, a:visited{ color: @color_link }
 }
 
 #regionView, #wrap #regionView .container{
-    a, a:visited{ color: @secondary_color }
+    a, a:visited{ color: @color_link }
 } 
+
+.atlas-loading{
+    text-align: center;
+    width: 100%;
+
+    img{
+       margin-top: 40px;
+    }
+}
+
+
 
 #tooltip{
     position: absolute;
@@ -86,11 +143,6 @@
 div.disabled{
     opacity: .5;
 }
-a.disabled,a.disabled:hover,a.disabled:visited{
-    color: black;
-    text-decoration: none;
-    cursor: default;
-}
 
 nav .pagination li a{
     color: black;
@@ -121,6 +173,11 @@ select.clean{
 }
 .atlas-footer ul li a, .atlas-footer ul li a:visited, .atlas-footer ul li a:hover{
     color: white;
+}
+
+.container-step{
+    margin-top: 60px;
+    margin-bottom: 60px;
 }
 
 .colorpicker{
@@ -160,18 +217,12 @@ select.clean{
         width: 100%;
         height: 100%;
         z-index: 1;
-        background-color: @main_color;
-        -webkit-box-shadow: inset 0px -10px 30px -8px rgba(0,0,0,0.3);
-        -moz-box-shadow: inset 0px -10px 30px -8px rgba(0,0,0,0.3);
-        box-shadow: inset 0px -10px 30px -8px rgba(0,0,0,0.3);
-    }
-    #region-badge {
-        background-color: @secondary_color;
+        background-color: @color_badge;
     }
 }
 
 .topic-container{
-    margin-bottom:60px;
+    margin-bottom: 30px;
 }
 
 .chart_caption {
@@ -218,7 +269,6 @@ h2 a:hover, #coats a:hover{
 */
 #addition_layer{
     margin-top: 5px;
-    font-size: 10px;
     padding: 10px;
 }
 
@@ -285,12 +335,35 @@ body {
         }
     }
     .jumbotron{
-        background-color: @color_2;
-        color: white ;
+        background-color: @color_badge;
+        color: @color_headlines;
         border-radius: 0px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+ 
+        h1{
+            color: @color_headlines ;
+            text-align: left;
+            font-size: 48px;
+        }
+        h1.text-center{
+                text-align: center;
+            }
     }
    .jumbotron h1 small{
         color: lightgrey;
+    }
+}
+#topicView, #regionView{
+    .well{
+        background-image: -webkit-linear-gradient(top,@bgcolor_dark 0,@bgcolor_light 100%);
+        background-image: -o-linear-gradient(top,@bgcolor_dark 0,@bgcolor_light 100%);
+        background-image: -webkit-gradient(linear,left top,left bottom,from(@bgcolor_dark),to(@bgcolor_light));
+        background-image: linear-gradient(to bottom,@bgcolor_dark 0,@bgcolor_light 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='@bgcolor_dark', endColorstr='@bgcolor_light', GradientType=0);
+        background-color: @bgcolor_light;
+        border-radius: 0px;
+        border: 1px solid @bgcolor_dark;
     }
 }
 
@@ -358,5 +431,47 @@ body {
                 margin-top: 20px;
             }
         }
+    }
+}
+
+/* Region-map
+-------------------------------------------------- */
+#regions-map{
+    path {
+        stroke: #AAA;
+    }
+    path:hover {
+        stroke: #666;
+    }
+}
+
+/* Region view
+-------------------------------------------------- */
+#regionView{
+    #ofr-map{
+        path {
+            stroke: #FFF;
+        }
+        path:hover {
+            stroke: #666;
+        }
+    }
+
+    .well {
+        background-image: -webkit-linear-gradient(top,@bgcolor_dark 0,@bgcolor_light 100%);
+        background-image: -o-linear-gradient(top,@bgcolor_dark 0,@bgcolor_light 100%);
+        background-image: -webkit-gradient(linear,left top,left bottom,from(@bgcolor_dark),to(@bgcolor_light));
+        background-image: linear-gradient(to bottom,@bgcolor_dark 0,@bgcolor_light 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='@bgcolor_dark', endColorstr='@bgcolor_light', GradientType=0);
+        background-color: @bgcolor_light;
+        border-radius: 0;
+        border: 1px solid @bgcolor_dark;
+        box-shadow: none;
+    }
+
+    img.coat {
+        margin-bottom: -290px;
+        margin-top: -60px;
+        z-index: 999999;
     }
 }

@@ -1,10 +1,31 @@
- <h3>
-    <select class="form-control" ng-options="layer as layer.name for layer in topicView.topic_.layers track by layer.id" ng-model="topicView.layer"></select>
-</h3>
-<p>
-    {{topicView.layer.description}}
+<!-- Top Navigation: Selector Layer -->
+<p class="topic-view-navigation">
+    <div class="dropdown">
+        <button class="btn btn-default dropdown-toggle" type="button" id="LayersDropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {{topicView.layer.name}}
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-left" aria-labelledby="LayersDropdownMenu">
+            <li ng-repeat="layer in topicView.topic_.layers track by layer.id" ng-click="topicView.layer = layer"><a>{{layer.name}}</a></li>
+            <li ng-repeat-start="layerGroup in topicView.topic_.layerGroups"  class="dropdown-header">{{layerGroup.name}}</li>
+            <li ng-repeat="layer_sub in layerGroup.layers track by layer_sub.id" ng-click="topicView.layer = layer_sub"><a>{{layer_sub.name}}</a></li>
+            <li ng-repeat-end  role="separator" class="divider"></li>
+        </ul>
+    </div>
 </p>
 
+<!-- Content -->
+<p ng-init="showInfo = false">
+        <small>{{topicView.layer.description}}</small>
+        <span class="btn" ng-show="topicView.layer.infos" ng-click="showInfo = !showInfo">
+            <span class="glyphicon glyphicon-info-sign"></span>
+        </span>
+    </div>
+
+    <div ng-show="showInfo" class="well" ng-click="showInfo = false">
+        {{topicView.layer.infos}}
+    </div>
+</p>
 <div class="row" style="margin-left: 0">
     <div class="col-md-4" style="padding-left: 0">
         <small><b>Jahr:</b></small>
@@ -18,15 +39,15 @@
     <div class="col-md-4" style="padding-left: 0">
         <small><b>Quelle:</b></small>
     </div> 
-    <div class="col-md-8"><small>{{topicView.layer.source}}</small></div>
+    <div class="col-md-8"><small>{{topicView.layer.source}}</small>&nbsp;</div>
     
     <div class="col-md-4" style="padding-left: 0">
         <small><b>Berechnung:</b></small>
     </div> 
-    <div class="col-md-8"><small>{{topicView.layer.calculation}}</small></div>
+    <div class="col-md-8"><small>{{topicView.layer.calculation}}</small>&nbsp;</div>
     <div class="col-md-4" style="padding-left: 0">
-        <small><b>Durchschnitt Oberfranken:</b></small>
+        <small><b>&#216; Oberfranken:</b></small>
     </div> 
-    <div class="col-md-8"><small>{{topicView.average()}}{{topicView.unit()}}</small></div>
+    <div class="col-md-8"><small>{{topicView.average()}}{{topicView.unit()}}</small>&nbsp;</div>
 </div>
 

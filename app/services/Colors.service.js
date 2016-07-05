@@ -19,16 +19,28 @@
       var cutcolors = ['#DDD', '#DDD', '#5ABA22', '#DCC', '#C6246B', '#DDD']
 
       var primaryColor = '#5ABA22'
-      var secondaryColor = '#980043'
+      var secondaryColor = '#6D2A6E'
 
-      var p = 2
-      var m = 4
-      var c = 9
+      var greens = ['#264d0f', '#326514', '#3d7d18', '#49951c', '#54ae20', '#60c624', '#6cda2d', '#7ddf44', '#8ee35c']
+      var purples = ['#110711', '#2b112c', '#451b46', '#602561', '#7a2f7b', '#953897', '#b041b2']
+      var blues = ['#091317', '#11272f', '#193b46', '#214e5e', '#296276', '#30768f', '#388aa7']
+      var reds = ['#370119', '#570227', '#760235', '#960243', '#b60251', '#d6015f', '#f7016d']
 
-      var slices = tinycolor(colors[m]).analogous(12)
-      slices = slices.map(function (t) { return t.toHexString() })
+      var p = 2 // primary color index
+      var m = 4 // minor color index
+      var c = 9 // count of colors for the color schemes
 
-      slices = ['#a6cee3', '#1f78b4', '#b2df8a', '#33a02c', '#fb9a99', '#e31a1c', '#fdbf6f', '#ff7f00', '#cab2d6', '#6a3d9a', '#ffff99', '#b15928', '#8dd3c7', '#ffffb3', '#bebada', '#fb8072', '#80b1d3', '#fdb462', '#b3de69', '#fccde5', '#d9d9d9', '#bc80bd', '#ccebc5', '#ffed6f']
+      var slices = []
+      var type_colors = [{colors: greens, count: 9}, {colors: purples, count: 2}, {colors: blues, count: 5}]
+      type_colors.forEach(function (element) {
+        var slice = element.colors.slice((-1) * element.count)
+        slices = slices.concat(slice)
+      })
+
+
+      slices = ['#111344', '#214E5E', '#5ABA22', '#6D2A6E', '#980043', '#9B8995']
+      var slices_transparent = ['#B8ED9B', '#DDAADE', '#65AFC9', '#FFABD1', '#CFC7CD', '#9498E4']
+      slices = slices.concat(slices_transparent).concat(slices).concat(slices_transparent)
 
       return {
         getColors: function (id, count) {
@@ -47,8 +59,6 @@
           for (i; i < count; ++i) {
             scale.push(tinycolor.mix(cutcolor, color, (i - cut) * 100 / (count - cut)).toHexString())
           }
-          // scale = tinycolor(this.colors[id]).monochromatic(9).map(function (t) { return t.toHexString() })
-          console.log(scale)
           return scale
         },
         getColor: function (id) {

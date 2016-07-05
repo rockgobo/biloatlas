@@ -10,7 +10,7 @@
       data2: '=?'
     },
     controllerAs: 'topicsCollection',
-    controller: function (TopicData, Colors, RegionData, $routeParams) {
+    controller: function (TopicData, Colors, RegionData, Calculations, $routeParams) {
       this.topicId1 = {id: $routeParams.topicid}
       this.topicId2 = {}
       this.additionLayer = false
@@ -25,10 +25,13 @@
       this.averageColor1 = '#FFF'
       this.averageColor2 = '#FFF'
 
-      this.visibleMap = false
+      this.layer = []
+      this.layer2 = []
+
+      this.visibleMap = true
       this.visiblePie = false
       this.visibleTable = false
-      this.visibleRing = true
+      this.visibleRing = false
 
       this.showMap = function () {
         this.visibleMap = true
@@ -67,30 +70,26 @@
       this.average = function (data) {
         if (data && data.length > 0) {
           var sum = data.reduce(function (p, c) { return p + c })
-          var average = parseFloat((sum / data.length) + '').toFixed(2)
+          var average = parseFloat((sum / data.length) + '').toFixed(1)
           return average
         }
         return 0
-      }
-
-      /**
-       * Todo: get real unit
-       */
-      this.unit = function () {
-        return '%'
       }
 
       this.average1 = function () {
         if (!this.data1 || this.data1.length === 0) return 0
         var data_ = this.data1.map(function (d) { return d.value })
         var average = this.average(data_)
+        if (this.layer.unit.trim() !== '%') {
+          average = parseFloat(average).toFixed(0)
+        }
 
         this.maxValue = 0
         this.minValue = Number.MAX_VALUE
 
         data_.forEach(function (d) {
-          if (d > this.maxValue) this.maxValue = d
-          if (d < this.minValue) this.minValue = d
+          if (d > this.maxValue) this.maxValue = Calculations.trim(d, this.layer.unit)
+          if (d < this.minValue) this.minValue = Calculations.trim(d, this.layer.unit)
         }.bind(this))
         var regionScale = d3.scale.linear()
           .domain([this.minValue, this.maxValue])
@@ -104,12 +103,15 @@
         if (!this.data2 || this.data2.length === 0) return 0
         var data_ = this.data2.map(function (d) { return d.value })
         var average = this.average(data_)
+        if (this.layer2.unit.trim() !== '%') {
+          average = parseFloat(average).toFixed(0)
+        }
 
         this.maxValue2 = 0
         this.minValue2 = Number.MAX_VALUE
         data_.forEach(function (d) {
-          if (d > this.maxValue2) this.maxValue2 = d
-          if (d < this.minValue2) this.minValue2 = d
+          if (d > this.maxValue2) this.maxValue2 = Calculations.trim(d, this.layer2.unit)
+          if (d < this.minValue2) this.minValue2 = Calculations.trim(d, this.layer2.unit)
         }.bind(this))
 
         var regionScale = d3.scale.linear()

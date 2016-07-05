@@ -22,9 +22,9 @@
                         ng-mouseover="locationsView.highlightType(type.id)" 
                         ng-mouseleave="locationsView.dehighlightType()" 
                         ng-click="locationsView.selectedType === type.id ? locationsView.selectedType = undefined : locationsView.selectedType = type.id">
-                        <i class="material-icons md-18" ng-style="{'color': type.color}" ng-show="type.parent_id == 101">&#xE80C;</i> <!-- school -->
-                        <i class="material-icons md-18" ng-style="{'color': type.color}" ng-show="type.parent_id == 102">&#xE7EE;</i> <!-- education -->
-                        <i class="material-icons md-18" ng-style="{'color': type.color}" ng-show="type.parent_id == 103">&#xEB41;</i> <!-- child care -->
+                        <i class="material-icons md-18" ng-style="{'color': type.color}" ng-show="type.parent_id == 101">&#xE061;</i> <!-- school (circle) -->
+                        <i class="material-icons md-18" ng-style="{'color': type.color}" ng-show="type.parent_id == 102">&#xE885;</i> <!-- education (star) -->
+                        <i class="material-icons md-18" ng-style="{'color': type.color}" ng-show="type.parent_id == 103">&#xE047;</i> <!-- child care (square) -->
                         <span ng-style="locationsView.selectedType === type.id ? {'background-color':'#CCC'} : {'background-color':'none'}">{{type.name}}</span>
                     </div>
                 </li>

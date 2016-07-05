@@ -4,7 +4,7 @@
   'use strict'
 
   angular.module('biloAtlas')
-    .directive('topicRing', function (ColorBrewer, GeoData) {
+    .directive('topicRing', function (ColorBrewer, GeoData, Calculations) {
       return {
         restrict: 'EA',
         scope: {
@@ -255,9 +255,9 @@
                 })
 
                 if (d2 === undefined) {
-                  return d.data.value.toFixed(1) + scope.unit
+                  return Calculations.trim(d.value, scope.unit) + scope.unit
                 }
-                return d.data.value.toFixed(1) + scope.unit + ' (' + d2.value.toFixed(1) + scope.unit + ')'
+                return Calculations.trim(d.value, scope.unit) + scope.unit + ' (' + Calculations.trim(d2.value, scope.unit2) + scope.unit2 + ')'
               })
 
             function midAngle (d) {
@@ -352,12 +352,14 @@
             var options = {
               stats: [],
               headlines: [],
-              unit: ''
+              units: ''
             }
 
             // Override defaults
             angular.merge(options, scope.data)
-            scope.unit = options.unit
+            scope.unit = options.units == null ? '' : options.units[0]
+            scope.unit2 = options.units == null ? '' : options.units[1]
+
             if (options.stats[0] === undefined) return
 
             scope.render(options.stats[0], options.stats[1] === undefined ? [] : options.stats[1])

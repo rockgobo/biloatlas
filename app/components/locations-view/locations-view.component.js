@@ -72,13 +72,13 @@
         }.bind(this)
 
         this.highlightPoi = function (id) {
-          $('.marker_' + id).css('stroke-width', 2)
+          $('.marker_' + id).css('stroke-width', 7)
         }
         this.dehighlightPoi = function (id) {
           $('.marker_' + id).css('stroke-width', 0)
         }
         this.highlightType = function (type) {
-          $('.markertype_' + type).css('stroke-width', 2)
+          $('.markertype_' + type).css('stroke-width', 7)
         }
         this.dehighlightType = function () {
           $('.marker').css('stroke-width', 0)

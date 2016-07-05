@@ -24,6 +24,7 @@
           var colors = scope.schemecolors
           var colors2 = scope.schemecolors2
           var pathTopo, projection_oberfranken
+          var key = function (d) { return d.id }
 
           /*   SETTINGS
           ---------------------------------------------------------------*/
@@ -113,31 +114,32 @@
             }
 
             regions.selectAll('path')
-              .data(data)
+              .data(data, key)
               .transition()
               .duration(1000)
               .attr('fill', function (d) { return regionColors(d.value) })
 
             var max_height = data2.reduce(function (p, c) {
-              if (p < c.value) {
-                return c.value
+              if (p < Math.abs(c.value)) {
+                return Math.abs(c.value)
               } else {
                 return p
               } }, 0)
 
             regions.selectAll('rect')
-              .data(data2)
+              .data(data2, key)
               .transition()
               .duration(1000)
               .attr('y', function (d) {
                 log(d.id + ' ' + d.value + ' ' + max_height)
                 if (max_height === 0) return '' // otherwise division by 0
+                if (d.value < 0) return projection_oberfranken(GeoData.getCentroid(d.id))[1]
                 return projection_oberfranken(GeoData.getCentroid(d.id))[1] - ((d.value / max_height) * options.stats2.height)
               })
               .attr('width', options.stats2.width)
               .attr('height', function (d) {
                 if (max_height === 0) return 0 // otherwise division by 0
-                return (d.value / max_height) * options.stats2.height
+                return (Math.abs(d.value) / max_height) * options.stats2.height
               })
               .style('fill', function (d) { return regionColors2(d.value) })
               .style('visibility', options.stats2.visible ? 'visible' : 'hidden')
@@ -242,7 +244,7 @@
               .projection(projection_oberfranken)
 
             regions.selectAll('path')
-              .data(data)
+              .data(data, key)
               .enter()
               .append('a')
               .attr('xlink:href', function (d) { return '#/region/' + d.id })
@@ -258,13 +260,11 @@
                 lifbi.tooltip.showTooltip(
                   (options.tooltips.name ? GeoData.getRegionData(d.id).properties.NAME_3 + ' ' : '') +
                   (options.tooltips.value ? d.value.toFixed(1) : ''))
-                d3.select(this).attr('stroke', '#666')
                 scope.selection = d.id
                 scope.$apply() // need to refresh scope manually as data is set in backend code
               })
               .on('mouseout', function (d) {
                 lifbi.tooltip.hideTooltip()
-                d3.select(this).attr('stroke', '#BBB')
                 scope.selection = 0
                 scope.$apply() // need to refresh scope manually as data is set in backend code
               })
@@ -278,19 +278,20 @@
               } }, 0)
 
             regions.selectAll('rect')
-              .data(data2)
+              .data(data2, key)
               .enter()
               .append('rect')
               .style('fill', function (d) { return regionColors2(d.value) })
               .attr('x', function (d) { return projection_oberfranken(GeoData.getCentroid(d.id))[0] - (options.stats2.width / 2) })
               .attr('y', function (d) {
                 if (max_height === 0) return '' // otherwise division by 0
+                if (d.value < 0) return projection_oberfranken(GeoData.getCentroid(d.id))[1]
                 return projection_oberfranken(GeoData.getCentroid(d.id))[1] - ((d.value / max_height) * options.stats2.height)
               })
               .attr('width', options.stats2.width)
               .attr('height', function (d) {
                 if (max_height === 0) return 0 // otherwise division by 0
-                return (d.value / max_height) * options.stats2.height
+                return (Math.abs(d.value) / max_height) * options.stats2.height
               })
               .attr('fill', '#FFF')
               .attr('stroke', '#666')
@@ -332,32 +333,6 @@
 
 
             regionsRendered = true
-
-            // Zoom on click
-            /*
-            function fitToScreen () {
-              var d = oberfranken
-              var bounds = pathTopo.bounds(d),
-                dx = bounds[1][0] - bounds[0][0],
-                dy = bounds[1][1] - bounds[0][1],
-                x = (bounds[0][0] + bounds[1][0]) / 2,
-                y = (bounds[0][1] + bounds[1][1]) / 2,
-                scale = .9 / Math.max(dx / width, dy / height),
-                translatex = width / 2 - scale * x,
-                translatey = height / 2 - scale * y,
-                translate = [translatex, translatey]
-              regions // .transition()
-                // .duration(750)
-                .style('stroke-width', 1.5 / scale + 'px')
-                .attr('transform', 'translate(' + translate + ')scale(' + scale + ')')
-              locations // .transition()
-                // .duration(750)
-                .attr('cx', translatex)
-                .attr('cy', translatey)
-              labels // .transition()
-                // .duration(750)
-                .attr('transform', 'translate(' + translate + ')')
-            }*/
 
             // Zoom on click
             function clicked (d) {

@@ -11,6 +11,6 @@
     </thead>
     <tr ng-repeat="stats in topicTable.stats | orderBy: topicTable.sortOrder">
         <td><a href="#/region/{{stats.id}}">{{stats.name}}</a></td>
-        <td ng-repeat="stat in stats.data" style="text-align: right; padding-right: 20px;">{{stat}}{{topicTable.unit}}</td>
+        <td ng-repeat="(index, stat) in stats.data" style="text-align: right; padding-right: 20px;">{{stat}}{{topicTable.units[index]}}</td>
     </tr>
 </table>

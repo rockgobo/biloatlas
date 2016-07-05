@@ -9,11 +9,11 @@
       bindings: {
         topic: '=',
         data: '=?',
-        unit: '&',
-        average: '&'
+        average: '&',
+        layer: '=?'
       },
       controllerAs: 'topicView',
-      controller: function (TopicData, $scope) {
+      controller: function (TopicData, Calculations, $scope) {
         this.layer = []
         this.selection = 0
         this.years = []
@@ -29,6 +29,7 @@
         }
 
         // Watch topic
+        // If topic changes select the first layer if possible
         $scope.$watch('topicView.topic', function (topic) {
           if (topic === undefined || topic.id === undefined) return
           TopicData.getTopicById(topic.id).then(function (t) {
@@ -36,10 +37,18 @@
             this.topic.name = t.name
             if (this.topic_.layers.length > 0) {
               this.selectLayer(this.topic_.layers[0])
+            } else {
+              if (this.topic_.layerGroups !== undefined) {
+                for (var i = 0; i < this.topic_.layerGroups.length; ++i) {
+                  if (this.topic_.layerGroups[i].layers.length > 0) {
+                    this.selectLayer(this.topic_.layerGroups[i].layers[0])
+                    break
+                  }
+                }
+              }
             }
           }.bind(this))
         }.bind(this))
-
 
         $scope.$watch('topicView.layer', function (layer) {
           this.selectLayer(layer)
@@ -47,7 +56,7 @@
 
         // Functions
         this.selectLayer = function (layer) {
-          console.log('select layer')
+          layer.unit = layer.unit == null ? '' : layer.unit
 
           this.layer = layer
           this.years = []
@@ -80,13 +89,11 @@
         }
 
         this.average = function () {
+          var data = []
           if (this.data && this.data.length > 0) {
-            var data = this.data.map(function (d) { return d.value })
-            var sum = data.reduce(function (p, c) { return p + c })
-            var average = parseFloat((sum / this.data.length) + '').toFixed(2)
-            return average
+            data = this.data.map(function (d) { return d.value })
           }
-          return 0.0
+          return Calculations.average(data, this.layer.unit)
         }
 
         this.switchYearLast = function () {

@@ -10,6 +10,8 @@
       },
       controllerAs: 'regionBadge',
       controller: function (RegionData, $scope) {
+        this.region = {name: ' . '}
+
         // initial load
         RegionData.getRegionById(this.regionid).then(function (response) {
           this.region = response.region

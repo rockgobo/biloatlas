@@ -13,6 +13,8 @@
         this.regionid = $routeParams.regionid
         this.colorSchema = [Colors.getPrimaryColor(), Colors.getSecondaryColor()]
 
+        this.mapData = GeoData.getDataByValue(this.regionid, 100)
+
         this.options = {
           chart: {
             type: 'lineChart',
@@ -69,18 +71,23 @@
         RegionData.getRegionById(this.regionid).then(function (regionTopics) {
           // Prepare data for linecharts
           var layersData = []
+          this.region = regionTopics.region
           regionTopics.topics.forEach(function (topic) {
             topic.layers.forEach(function (layer) {
               var layerData = []
               layerData.push({values: layer.data.map(function (d) { return { value: d.value, year: d.year } }), key: regionTopics.region.name})
-              layerData.push({values: layer.data.map(function (d) { return {value: d.averageUF.toPrecision(2), year: d.year} }), key: 'Oberfranken', color: '#CCC'})
-              layersData[layer.id] = {options: getOptions(layer.name, layer.unit), data: layerData}
+              layerData.push({values: layer.data.map(function (d) { return {value: d.averageUF.toPrecision(2), year: d.year} }), key: 'Oberfranken', color: Colors.getPrimaryColor()})
+
+              if (layer.data.length > 2) {
+                layersData[layer.id] = {options: getOptions(layer.name, layer.unit), data: layerData}
+              } else {
+                layersData[layer.id] = {options: getBarOptions(layer.name, layer.unit, layer.data.length), data: layerData}
+              }
             })
           })
 
           this.layersData = layersData
           this.topics = regionTopics.topics
-          this.region = regionTopics.region
 
           this.mapData = GeoData.getDataByValue(regionTopics.region.id, 100)
 
@@ -118,7 +125,12 @@
                 axisLabel: unit,
                 axisLabelDistance: -10
               },
-              callback: function (chart) {}
+              callback: function (chart) {},
+              color: function (d, i) {
+                if (i === 1) return Colors.getPrimaryColor()
+                if (i === 0) return Colors.getSecondaryColor()
+                return Colors.getSecondaryColor()
+              }
             },
             title: {
               enable: false
@@ -129,6 +141,31 @@
             caption: {
               enable: true,
               html: '<div class="chart_caption">' + name + '</div>'
+            }
+          }
+        }
+
+        function getBarOptions (name, unit, count) {
+          return {
+            chart: {
+              type: 'multiBarHorizontalChart',
+              height: (count * 60) + 100,
+              showControls: false,
+              showValues: true,
+              duration: 500,
+              xAxis: {
+                showMaxMin: false
+              },
+              yAxis: {
+                axisLabel: name
+              },
+              x: function (d) { return d.year },
+              y: function (d) { return d.value },
+              color: function (d, i) {
+                if (i === 1) return Colors.getPrimaryColor()
+                if (i === 0) return Colors.getSecondaryColor()
+                return Colors.getSecondaryColor()
+              }
             }
           }
         }

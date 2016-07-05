@@ -1,7 +1,7 @@
 <div class="container">
     
-    <div ng-show="$ctrl.loading" class="atlas-loading"><img src="images/loading.gif"></div>
-    <div class="row">
+    <div ng-show="$ctrl.loading" class="atlas-loading"><img src="images/loading.gif" alt="Lade..."></div>
+    <div ng-hide="$ctrl.loading" class="row">
             <div regions-map stats="$ctrl.mapData" year="0" selection=""  schemecolors="['#FFF','#009ee2']" options="{tooltips: {value: false}}"" class="col-md-12"></div>
     </div> 
     <div class="row" ng-repeat="topics in $ctrl.chunkedTopics" style="margin-bottom: 20px;">

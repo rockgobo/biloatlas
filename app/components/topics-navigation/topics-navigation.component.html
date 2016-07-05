@@ -20,7 +20,7 @@
                 <li class="dropdown" ng-class="{active: $ctrl.topicSelected()}">
                     <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Themen <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li ng-repeat="topic in $ctrl.topics" ng-class="{active: $ctrl.activeTopic(topic), disabled: topic.layers.length  == 0}">
+                        <li ng-repeat="topic in $ctrl.topics" ng-class="{active: $ctrl.activeTopic(topic), disabled: (topic.layers.length === 0 && topic.layerGroups.length === 0)}">
                             <a ng-href="#/topic/{{topic.id}}">
                                 {{topic.name}}
                             </a>
