@@ -7,7 +7,7 @@
       templateUrl: 'app/components/region-view/region-view.component.html',
       binding: {},
       controllerAs: 'regionView',
-      controller: function (RegionData, PoiData, Colors, GeoData, $routeParams) {
+      controller: function (RegionData, Calculations, PoiData, Colors, GeoData, $routeParams) {
         this.topics = []
         this.selection = 0
         this.regionid = $routeParams.regionid
@@ -75,14 +75,15 @@
           regionTopics.topics.forEach(function (topic) {
             topic.layers.forEach(function (layer) {
               var layerData = []
-              layerData.push({values: layer.data.map(function (d) { return { value: d.value, year: d.year } }), key: regionTopics.region.name})
-              layerData.push({values: layer.data.map(function (d) { return {value: d.averageUF.toPrecision(2), year: d.year} }), key: 'Oberfranken', color: Colors.getPrimaryColor()})
+              layerData.push({values: layer.data.map(function (d) { return { value: Calculations.trim(d.value, layer.unit), year: d.year } }), key: regionTopics.region.name})
+              layerData.push({values: layer.data.map(function (d) { return { value: Calculations.trim(d.averageUF, layer.unit), year: d.year } }), key: 'Oberfranken', color: Colors.getPrimaryColor()})
 
               if (layer.data.length > 2) {
                 layersData[layer.id] = {options: getOptions(layer.name, layer.unit), data: layerData}
               } else {
                 layersData[layer.id] = {options: getBarOptions(layer.name, layer.unit, layer.data.length), data: layerData}
               }
+              console.log(layerData)
             })
           })
 
@@ -90,8 +91,6 @@
           this.topics = regionTopics.topics
 
           this.mapData = GeoData.getDataByValue(regionTopics.region.id, 100)
-
-        // [{id: regionTopics.region.id, name: this.region, value: 100, year: 0}]
         }.bind(this))
 
         PoiData.getPoisByRegion(this.regionid).then(function (response) {
