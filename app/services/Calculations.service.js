@@ -23,7 +23,7 @@
     }
 
     function trim (value, unit = '') {
-      if (unit.trim() === '%') {
+      if (unit && unit.trim() === '%') {
         return parseFloat(value).toFixed(1)
       }
       return parseFloat(value).toFixed(0)
