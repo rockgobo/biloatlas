@@ -15,6 +15,10 @@
           template: '<div id="locationView"> <locations-view>Lade...</locations-view> </div>'
         }).when('/impressum', {
           templateUrl: 'app/views/impressum.html'
+        }).when('/admin/layers/', {
+          template: '<admin-layers>Lade...</admin-layers>'
+        }).when('/admin/layer/:id', {
+          template: '<admin-layer>Lade...</admin-layer>'
         }).otherwise({
           redirectTo: '/'
         })

@@ -1,0 +1,25 @@
+<div class="container">
+    <h1>Admin- Layers</h1>
+    <table class="table table-hover table-striped">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Aktionen</th>
+        </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="layer in $ctrl.layers | orderBy: 'sortOrder'">
+        <td>
+            {{layer.sortOrder}}
+        </td>
+        <td ng-class="{'text-deleted': layer.isDeleted}">
+            {{layer.name}}
+        </td>
+        <td>
+            <a href="#/admin/layer/{{layer.id}}" ng-hide="layer.isDeleted"><span class="glyphicon glyphicon-pencil"></span></a>
+        </td>
+    </tr>
+    </tbody>
+    <table>
+</div>
