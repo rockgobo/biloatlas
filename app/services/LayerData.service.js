@@ -15,7 +15,8 @@
 
   angular.module('biloAtlas')
     .factory('LayerData', function ($http) {
-      var webRoot = 'http://localhost/dnn7_4/DesktopModules/Bilo.Services.Atlas/API/Layers/'
+      // var webRoot = 'http://localhost/dnn7_4/DesktopModules/Bilo.Services.Atlas/API/Layers/'
+      var webRoot = 'http://web-dev.neps-data.de/dnn/DesktopModules/Bilo.Services.Atlas/API/Layers/'
 
 
       /**
