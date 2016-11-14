@@ -83,7 +83,6 @@
               } else {
                 layersData[layer.id] = {options: getBarOptions(layer.name, layer.unit, layer.data.length), data: layerData}
               }
-              console.log(layerData)
             })
           })
 
