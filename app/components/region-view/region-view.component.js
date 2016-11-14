@@ -9,7 +9,7 @@
       controllerAs: 'regionView',
       controller: function (RegionData, Calculations, PoiData, Colors, GeoData, $routeParams) {
         this.topics = []
-        this.selection = 0
+        this.selection = $routeParams.regionid
         this.regionid = $routeParams.regionid
         this.colorSchema = [Colors.getPrimaryColor(), Colors.getSecondaryColor()]
 
