@@ -28,8 +28,9 @@
                         <span ng-style="locationsView.selectedType === type.id ? {'background-color':'#CCC'} : {'background-color':'none'}">{{type.name}}</span>
                     </div>
                 </li>
-                <li><a ng-click="locationsView.selectedType = undefined" ng-show="locationsView.selectedType !== undefined">Alle Einrichtungen anzeigen</a></li>
+                
                 </ul>
+                <p><a ng-click="locationsView.selectedType = undefined" ng-show="locationsView.selectedType !== undefined">alle Einrichtungen anzeigen</a></p>
             </div>
         </div>
     </div>
