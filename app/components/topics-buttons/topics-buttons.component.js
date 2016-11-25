@@ -13,8 +13,8 @@
       this.loading = true
       TopicData.getTopics().then(function (topics) {
         topics = topics
-                    .filter(function (t) { return t.layers.length > 0 || t.layerGroups.length > 0 })
-                    .sort(function (a, b) { return a.layers.length < b.layers.length })
+                    //.filter(function (t) { return t.layers.length > 0 || t.layerGroups.length > 0 })
+                    //.sort(function (a, b) { return a.layers.length < b.layers.length })
         this.chunkedTopics = chunk(topics, 3)
         this.loading = false
       }.bind(this))
