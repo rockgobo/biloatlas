@@ -12,7 +12,7 @@
       },
       controllerAs: 'topicTable',
       controller: function ($scope) {
-        this.sortOrder = 'name'
+        this.sortOrder = 'id'
         this.stats = []
 
         /*   SETTINGS
