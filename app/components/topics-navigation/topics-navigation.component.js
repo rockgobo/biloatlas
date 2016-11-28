@@ -28,13 +28,12 @@
           var t2 = r2.name
           var prefix1 = t1.slice(0,t1.indexOf(" "))
           var prefix2 = t2.slice(0,t2.indexOf(" "))
-          console.log(prefix1)
           var name1 = r1.shortName
           var name2 = r2.shortName
 
           if(prefix1 == 'Stadt' && prefix2 == 'Lkr.') return -1
           if(prefix1 == 'Lkr.' && prefix2 == 'Stadt') return 1
-          else return name1 > name2
+          else return name1 > name2 ? 1 : -1
         });
         this.regions = regions
       }.bind(this))
