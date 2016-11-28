@@ -19,7 +19,7 @@
         this.loading = false
       }.bind(this))
 
-      this.mapData = GeoData.getDataByValue()
+      this.mapData = GeoData.getDataByValue(0,1)
 
       function chunk (arr, size) {
         var newArr = []
