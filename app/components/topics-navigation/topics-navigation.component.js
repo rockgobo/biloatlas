@@ -21,6 +21,17 @@
       }.bind(this))
 
       RegionData.getRegions().then(function (regions) {
+        //#42 sort by prefix first and then by name
+        regions.sort(function(t1, t2){
+          var prefix1 = t1.slice(0,t1.indexOf(" "))
+          var prefix2 = t2.slice(0,t2.indexOf(" "))
+          var name1 = t1.slice(t1.indexOf(" "), t1.length)
+          var name2 = t2.slice(t2.indexOf(" "), t2.length)
+
+          if(prefix1 == 'Stadt' && prefix2 == 'Lkr.') return 1
+          if(prefix1 == 'Lkr.' && prefix2 == 'Stadt') return -1
+          else return name1 > name2
+        });
         this.regions = regions
       }.bind(this))
 
