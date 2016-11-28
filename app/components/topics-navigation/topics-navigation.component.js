@@ -22,7 +22,9 @@
 
       RegionData.getRegions().then(function (regions) {
         //#42 sort by prefix first and then by name
-        regions.sort(function(t1, t2){
+        regions.sort(function(r1, r2){
+          var t1 = r1.name
+          var t2 = r2.name
           var prefix1 = t1.slice(0,t1.indexOf(" "))
           var prefix2 = t2.slice(0,t2.indexOf(" "))
           var name1 = t1.slice(t1.indexOf(" "), t1.length)
