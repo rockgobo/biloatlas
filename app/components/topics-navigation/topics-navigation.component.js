@@ -29,8 +29,8 @@
           var t2 = r2.name
           var prefix1 = t1.slice(0,t1.indexOf(" "))
           var prefix2 = t2.slice(0,t2.indexOf(" "))
-          var name1 = t1.slice(t1.indexOf(" "), t1.length)
-          var name2 = t2.slice(t2.indexOf(" "), t2.length)
+          var name1 = r1.shortName
+          var name2 = r2.shortName
 
           if(prefix1 == 'Stadt' && prefix2 == 'Lkr.') return -1
           if(prefix1 == 'Lkr.' && prefix2 == 'Stadt') return 1
