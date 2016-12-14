@@ -8,6 +8,7 @@
 
   angular.module('biloAtlas').component('topicsNavigation', {
     templateUrl: 'app/components/topics-navigation/topics-navigation.component.html',
+    controllerAs: 'topicNavigation',
     controller: function (TopicData, RegionData, $routeParams, $location) {
       this.topics = []
       this.regions = []
