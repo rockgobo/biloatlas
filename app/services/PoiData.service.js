@@ -13,9 +13,8 @@
    * @description Service that provides information about regions
    */
   angular.module('biloAtlas')
-    .factory('PoiData', function ($http) {
-      // var webRoot = 'http://localhost/dnn7_4/DesktopModules/Bilo.Services.Atlas/API/Poi/Region/'
-      var webRoot = 'http://web-dev.neps-data.de/dnn/DesktopModules/Bilo.Services.Atlas/API/Poi/Region/'
+    .factory('PoiData', function ($http, ServiceConfig) {
+      var webRoot = ServiceConfig.url + 'Region/'
 
       /**
        * @name getRegions
