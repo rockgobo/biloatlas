@@ -9,7 +9,7 @@
   angular.module('biloAtlas').component('topicsNavigation', {
     templateUrl: 'app/components/topics-navigation/topics-navigation.component.html',
     controllerAs: 'topicNavigation',
-    controller: function (TopicData, RegionData, $routeParams, $location) {
+    controller: function ($routeParams, $location, TopicData, RegionData, Calculations) {
       this.topics = []
       this.regions = []
 
@@ -23,19 +23,7 @@
 
       RegionData.getRegions().then(function (regions) {
         //#42 sort by prefix first and then by name
-        regions.sort(function(r1, r2){
-
-          var t1 = r1.name
-          var t2 = r2.name
-          var prefix1 = t1.slice(0,t1.indexOf(" "))
-          var prefix2 = t2.slice(0,t2.indexOf(" "))
-          var name1 = r1.shortName
-          var name2 = r2.shortName
-
-          if(prefix1 == 'Stadt' && prefix2 == 'Lkr.') return -1
-          if(prefix1 == 'Lkr.' && prefix2 == 'Stadt') return 1
-          else return name1 > name2 ? 1 : -1
-        });
+        regions.sort(Calculations.sortRegions);
         this.regions = regions
       }.bind(this))
 
