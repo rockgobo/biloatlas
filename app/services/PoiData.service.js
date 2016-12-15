@@ -14,7 +14,7 @@
    */
   angular.module('biloAtlas')
     .factory('PoiData', function ($http, ServiceConfig) {
-      var webRoot = ServiceConfig.url + 'Region/'
+      var webRoot = ServiceConfig.url + 'Poi/Region/'
 
       /**
        * @name getRegions
