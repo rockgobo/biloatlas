@@ -11,7 +11,7 @@
         data: '='
       },
       controllerAs: 'topicTable',
-      controller: function ($scope) {
+      controller: function ($scope, Calculations) {
         this.sortOrder = 'id'
         this.stats = []
 
@@ -38,11 +38,8 @@
 
             s.forEach(function (stat) {
               var value = stat.value
-              if (options.units[columns].trim() === '%') {
-                value = value.toFixed(1)
-              } else {
-                value = value.toFixed(0)
-              }
+              value =  Calculations.trim (value, options.units[columns].trim() === '%')
+                
               if (stats[stat.id] === undefined) {
                 stats[stat.id] = {id: stat.id, name: stat.name, data: [value]}
               } else {
@@ -63,7 +60,8 @@
             headlines.push(options.headlines[i] === undefined ? '&nbsp;' : options.headlines[i])
           }
           this.headlines = headlines
-          this.stats = array
+          this.stats = array.sort(Calculations.sortRegions)
+          console.log(this.stats)
         }.bind(this))
       }
     })
