@@ -120,7 +120,7 @@
                 axisLabel: 'Jahr'
               },
               yAxis: {
-                axisLabel: unit,
+                axisLabel: name,
                 axisLabelDistance: -10
               },
               callback: function (chart) {},
@@ -137,7 +137,7 @@
               enable: false
             },
             caption: {
-              enable: true,
+              enable: false,
               html: '<div class="chart_caption">' + name + '</div>'
             }
           }
