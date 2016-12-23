@@ -48,6 +48,6 @@
     <div class="col-md-4" style="padding-left: 0">
         <small><b>Oberfranken:</b></small>
     </div> 
-    <div class="col-md-8"><small>{{topicView.average()}}{{topicView.unit()}}</small>&nbsp;</div>
+    <div class="col-md-8"><small>{{topicView.average() | number : topicView.unit().trim() == '%'?1:0}}{{topicView.unit()}}</small>&nbsp;</div>
 </div>
 

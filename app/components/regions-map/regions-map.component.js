@@ -9,6 +9,7 @@
         restrict: 'EA',
         scope: {
           stats: '=',
+          unit: '=',
           stats2: '=',
           schemecolors: '=',
           schemecolors2: '=',
@@ -33,7 +34,8 @@
             debug: false,
             tooltips: {
               value: true,
-              name: true
+              name: true,
+              unit: ''
             },
             stats2: {
               visible: false,
@@ -44,6 +46,7 @@
           }
           // Override defaults
           angular.merge(options, scope.options)
+          options.tooltips.unit = scope.unit
 
           // set some defaults
           if (colors === undefined) {
@@ -147,7 +150,8 @@
               .data(data2).on('mouseover', function (d) {
                 lifbi.tooltip.showTooltip(
                 (options.tooltips.name ? GeoData.getRegionData(d.id).properties.NAME_3 + ' ' : '') +
-                (options.tooltips.value ? d.value.toFixed(1) : ''))
+                (options.tooltips.value ? d.value.toFixed(1) : '') +
+                options.tooltips.unit)
               })
               .on('mouseout', function (d) {
                 lifbi.tooltip.hideTooltip()

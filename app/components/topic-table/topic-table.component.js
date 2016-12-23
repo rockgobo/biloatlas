@@ -38,7 +38,7 @@
 
             s.forEach(function (stat) {
               var value = stat.value
-              value =  Calculations.trim (value, options.units[columns].trim() === '%')
+              value =  Calculations.trim (value, options.units[columns])
                 
               if (stats[stat.id] === undefined) {
                 stats[stat.id] = {id: stat.id, name: stat.name, data: [value]}
@@ -61,7 +61,6 @@
           }
           this.headlines = headlines
           this.stats = array.sort(Calculations.sortRegions)
-          console.log(this.stats)
         }.bind(this))
       }
     })

@@ -4,7 +4,7 @@
   'use strict'
 
   angular.module('biloAtlas')
-    .directive('topicRing', function (ColorBrewer, GeoData, Calculations) {
+    .directive('topicRing', function ($filter, ColorBrewer, GeoData, Calculations) {
       return {
         restrict: 'EA',
         scope: {
@@ -169,7 +169,7 @@
               .style('stroke', 'white')
               .style('fill', function (d) { return regionColors1(d.data.value) })
               .attr('class', function (d) { return 'slice region_' + d.data.id })
-              .attr('title', function (d) { return d.data.value.toFixed(1) })
+              .attr('title', function (d) { return $filter('number')(d.data.value, 1) })
               .on('mouseover', function (d) {
                 lifbi.tooltip.showTooltip(d.data.value.toFixed(1))
                 $('.region_' + d.data.id).css('stroke', 'gray').css('stroke-width', '2px')
