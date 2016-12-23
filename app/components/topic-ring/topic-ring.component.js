@@ -169,7 +169,7 @@
               .style('stroke', 'white')
               .style('fill', function (d) { return regionColors1(d.data.value) })
               .attr('class', function (d) { return 'slice region_' + d.data.id })
-              .attr('title', function (d) { return $filter('number')(d.data.value, 1) })
+              .attr('title', function (d) { return $filter('numberUnit')(d.data.value, scope.unit) })
               .on('mouseover', function (d) {
                 lifbi.tooltip.showTooltip(d.data.value.toFixed(1))
                 $('.region_' + d.data.id).css('stroke', 'gray').css('stroke-width', '2px')
@@ -255,9 +255,9 @@
                 })
 
                 if (d2 === undefined) {
-                  return Calculations.trim(d.value, scope.unit) + scope.unit
+                  return $filter('numberUnit')(d.data.value, scope.unit) + scope.unit
                 }
-                return Calculations.trim(d.value, scope.unit) + scope.unit + ' (' + Calculations.trim(d2.value, scope.unit2) + scope.unit2 + ')'
+                return $filter('numberUnit')(d.data.value, scope.unit) + ' (' + $filter('numberUnit')(d.data.value, scope.unit2) + scope.unit2 + ')'
               })
 
             function midAngle (d) {
