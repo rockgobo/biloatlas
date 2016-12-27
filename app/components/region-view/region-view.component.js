@@ -179,11 +179,10 @@
             var d = data[i]
             if(i === 0) { 
               lastYear = d.year
-            } else {
-              if (d.year - lastYear > 1){
+            } else if (d.year - lastYear > 1){
                 return false
-              }
             }
+            lastYear = d.year
           }
 
           return true

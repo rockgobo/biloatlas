@@ -68,18 +68,16 @@
       }
 
       this.average = function (data) {
-        if (data && data.length > 0) {
-          var sum = data.reduce(function (p, c) { return p + c })
-          var average = parseFloat((sum / data.length) + '').toFixed(1)
-          return average
-        }
+        //TODO: Read average from the data instead of calculating  it
         return 0
       }
 
       this.average1 = function () {
         if (!this.data1 || this.data1.length === 0) return 0
         var data_ = this.data1.map(function (d) { return d.value })
+        
         var average = this.average(data_)
+        
         if (this.layer.unit.trim() !== '%') {
           average = parseFloat(average).toFixed(0)
         }
@@ -95,7 +93,11 @@
           .domain([this.minValue, this.maxValue])
           .range([0, this.colors.length - 1])
 
-        if (average === 0) { this.averageColor1 = '#FFF' } else { this.averageColor1 = this.colors[Math.floor(regionScale(average))] }
+        if (average === 0) { 
+          this.averageColor1 = '#FFF' 
+        } else { 
+          this.averageColor1 = this.colors[Math.floor(regionScale(average))] 
+        }
 
         return average
       }
