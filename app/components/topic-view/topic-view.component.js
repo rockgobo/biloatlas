@@ -23,14 +23,13 @@
         this.data_ = []
 
         this.filterData = function () {
+          // #71: Merge the filtered data to a basic data table with 0 for each region
+          // Maybe use a method with faster computation
           var basic_data = GeoData.getDataByValue(0,0,this.year,0)
-          console.log(basic_data)
           var data = this.data_.filter(function (d) {
             return d.year === this.year
           }.bind(this))
-          console.log(data)
           this.data = angular.merge(basic_data, data)
-          console.log(this.data)  
         }
 
         // Watch topic
