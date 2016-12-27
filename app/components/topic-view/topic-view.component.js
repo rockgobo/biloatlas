@@ -13,7 +13,7 @@
         layer: '=?'
       },
       controllerAs: 'topicView',
-      controller: function (TopicData, Calculations, $scope) {
+      controller: function (TopicData, GeoData, Calculations, $scope) {
         this.layer = []
         this.selection = 0
         this.years = []
@@ -23,9 +23,11 @@
         this.data_ = []
 
         this.filterData = function () {
-          this.data = this.data_.filter(function (d) {
+          var basic_data = GeoData.getDataByValue(0,0,this.year)
+          var data = this.data_.filter(function (d) {
             return d.year === this.year
           }.bind(this))
+          this.data = angular.merge(basic_data, data)  
         }
 
         // Watch topic
