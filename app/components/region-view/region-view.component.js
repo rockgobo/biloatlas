@@ -79,7 +79,7 @@
               var max = -99999999999999999
               layerData.push({values: layer.data.map(function (d) { return { value: Calculations.trim(d.value, layer.unit), year: d.year } }), key: regionTopics.region.name})
               layerData.push({values: layer.data.map(function (d) { return { value: Calculations.trim(d.averageUF, layer.unit), year: d.year } }), key: 'Oberfranken', color: Colors.getPrimaryColor()})
-              layerData.map(function(d){
+              layer.data.map(function(d){
                 if (d.value > max) max = d.value 
                 if (d.value < min) min = d.value
               })
