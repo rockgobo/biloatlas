@@ -128,7 +128,7 @@
               yAxis: {
                 axisLabel: name,
                 axisLabelDistance: -10,
-                showMaxMin: true
+                showMaxMin: false
               },
               // THIS is the important one you can specify an array the min and max value the x axis will have
               yDomain: [Math.abs(min)-5,Math.abs(max)+5],
