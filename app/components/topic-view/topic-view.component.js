@@ -23,7 +23,7 @@
         this.data_ = []
 
         this.filterData = function () {
-          var basic_data = GeoData.getDataByValue(0,0,this.year)
+          var basic_data = GeoData.getDataByValue(0,0,this.year,0)
           console.log(basic_data)
           var data = this.data_.filter(function (d) {
             return d.year === this.year
