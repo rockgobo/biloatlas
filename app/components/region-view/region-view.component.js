@@ -7,7 +7,7 @@
       templateUrl: 'app/components/region-view/region-view.component.html',
       binding: {},
       controllerAs: 'regionView',
-      controller: function ($filter, RegionData, PoiData, Colors, GeoData, $routeParams) {
+      controller: function ($filter, Calculations, RegionData, PoiData, Colors, GeoData, $routeParams) {
         this.topics = []
         this.selection = $routeParams.regionid
         this.regionid = $routeParams.regionid
@@ -75,8 +75,8 @@
           regionTopics.topics.forEach(function (topic) {
             topic.layers.forEach(function (layer) {
               var layerData = []
-              layerData.push({values: layer.data.map(function (d) { return { value: $filter('numberUnit')(d.value, layer.unit), year: d.year } }), key: regionTopics.region.name})
-              layerData.push({values: layer.data.map(function (d) { return { value: $filter('numberUnit')(d.averageUF, layer.unit), year: d.year } }), key: 'Oberfranken', color: Colors.getPrimaryColor()})
+              layerData.push({values: layer.data.map(function (d) { return { value: Calculations.trim(d.value, layer.unit), year: d.year } }), key: regionTopics.region.name})
+              layerData.push({values: layer.data.map(function (d) { return { value: Calculations.trim(d.averageUF, layer.unit), year: d.year } }), key: 'Oberfranken', color: Colors.getPrimaryColor()})
 
               if (isLongitudinalData(layer.data)) {
                 layersData[layer.id] = {options: getOptions(layer.name, layer.unit), data: layerData}
