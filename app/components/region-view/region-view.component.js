@@ -176,6 +176,7 @@
 
           var lastYear = 0
           for(var i = 0; i <data.length; ++i){
+            var d = data[i]
             if(i === 0) { 
               lastYear = d.year
             } else {
