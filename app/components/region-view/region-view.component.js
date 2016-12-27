@@ -138,7 +138,7 @@
                 showMaxMin: false
               },
               // THIS is the important one you can specify an array the min and max value the x axis will have
-              yDomain: [Math.abs(min)-5,Math.abs(max)+5],
+              yDomain: [Math.abs(min)-1,Math.abs(max)+1],
               callback: function (chart) {},
               color: function (d, i) {
                 if (i === 1) return Colors.getPrimaryColor()
