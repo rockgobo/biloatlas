@@ -173,7 +173,7 @@
           if (data.length <= 2) {
             return false
           } 
-
+          data = data.sort(function(a,b){return b.year > a.year ? -1 : 1})
           var lastYear = 0
           for(var i = 0; i <data.length; ++i){
             var d = data[i]
