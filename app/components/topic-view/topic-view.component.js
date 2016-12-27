@@ -24,10 +24,13 @@
 
         this.filterData = function () {
           var basic_data = GeoData.getDataByValue(0,0,this.year)
+          console.log(basic_data)
           var data = this.data_.filter(function (d) {
             return d.year === this.year
           }.bind(this))
-          this.data = angular.merge(basic_data, data)  
+          console.log(data)
+          this.data = angular.merge(basic_data, data)
+          console.log(this.data)  
         }
 
         // Watch topic
