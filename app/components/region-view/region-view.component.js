@@ -75,11 +75,16 @@
           regionTopics.topics.forEach(function (topic) {
             topic.layers.forEach(function (layer) {
               var layerData = []
+              var min = 99999999999999999
+              var max = -99999999999999999
               layerData.push({values: layer.data.map(function (d) { return { value: Calculations.trim(d.value, layer.unit), year: d.year } }), key: regionTopics.region.name})
               layerData.push({values: layer.data.map(function (d) { return { value: Calculations.trim(d.averageUF, layer.unit), year: d.year } }), key: 'Oberfranken', color: Colors.getPrimaryColor()})
-
+              layerData.map(function(d){
+                if (d.value > max) max = d.value 
+                if (d.value < min) min = d.value
+              })
               if (isLongitudinalData(layer.data)) {
-                layersData[layer.id] = {options: getOptions(layer.name, layer.unit), data: layerData}
+                layersData[layer.id] = {options: getOptions(layer.name, layer.unit, min, max), data: layerData}
               } else {
                 layersData[layer.id] = {options: getBarOptions(layer.name, layer.unit, layer.data.length), data: layerData}
               }
@@ -96,10 +101,10 @@
           this.pois = response.features
         }.bind(this))
 
-        function getOptions (name, unit) {
+        function getOptions (name, unit, min, max) {
           return {
             chart: {
-              type: 'lineChart',
+              type: 'scatterChart',
               height: 250,
               margin: {
                 top: 20,
@@ -117,12 +122,16 @@
                 tooltipHide: function (e) { console.log('tooltipHide') }
               },
               xAxis: {
-                axisLabel: 'Jahr'
+                axisLabel: 'Jahr',
+                showMaxMin: false
               },
               yAxis: {
                 axisLabel: name,
-                axisLabelDistance: -10
+                axisLabelDistance: -10,
+                showMaxMin: true
               },
+              // THIS is the important one you can specify an array the min and max value the x axis will have
+              yDomain: [Math.abs(min)-5,Math.abs(max)+5],
               callback: function (chart) {},
               color: function (d, i) {
                 if (i === 1) return Colors.getPrimaryColor()
