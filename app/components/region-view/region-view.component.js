@@ -75,16 +75,23 @@
           regionTopics.topics.forEach(function (topic) {
             topic.layers.forEach(function (layer) {
               var layerData = []
-              var min = 99999999999999999
+              var min = 0 // set minumum to default zero
               var max = -99999999999999999
               layerData.push({values: layer.data.map(function (d) { return { value: Calculations.trim(d.value, layer.unit), year: d.year } }), key: regionTopics.region.name})
               layerData.push({values: layer.data.map(function (d) { return { value: Calculations.trim(d.averageUF, layer.unit), year: d.year } }), key: 'Oberfranken', color: Colors.getPrimaryColor()})
               layer.data.map(function(d){
                 if (d.value > max) max = d.value 
                 if (d.value < min) min = d.value
+                
+                if (d.averageUF > max) max = d.averageUF 
+                if (d.averageUF < min) min = d.averageUF
               })
               if (isLongitudinalData(layer.data)) {
-                layersData[layer.id] = {options: getOptions(layer.name, layer.unit, min, max), data: layerData}
+                var options = getOptions(layer.name, layer.unit, min, max)
+                if(isContinous(layer.data)){
+                  options.chart.type = 'lineChart'
+                }
+                layersData[layer.id] = {options: options, data: layerData}
               } else {
                 layersData[layer.id] = {options: getBarOptions(layer.name, layer.unit, layer.data.length), data: layerData}
               }
@@ -179,9 +186,10 @@
 
         //checks the data if the data has values from each year
         function isLongitudinalData(data){
-          if (data.length <= 2) {
-            return false
-          } 
+          return data.length > 2
+        }
+
+        function isContinous(data){
           data = data.sort(function(a,b){return b.year > a.year ? -1 : 1})
           var lastYear = 0
           for(var i = 0; i <data.length; ++i){
@@ -193,7 +201,6 @@
             }
             lastYear = d.year
           }
-
           return true
         }
 
