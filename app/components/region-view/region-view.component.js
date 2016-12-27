@@ -7,7 +7,7 @@
       templateUrl: 'app/components/region-view/region-view.component.html',
       binding: {},
       controllerAs: 'regionView',
-      controller: function (RegionData, Calculations, PoiData, Colors, GeoData, $routeParams) {
+      controller: function ($filter, RegionData, PoiData, Colors, GeoData, $routeParams) {
         this.topics = []
         this.selection = $routeParams.regionid
         this.regionid = $routeParams.regionid
@@ -75,10 +75,10 @@
           regionTopics.topics.forEach(function (topic) {
             topic.layers.forEach(function (layer) {
               var layerData = []
-              layerData.push({values: layer.data.map(function (d) { return { value: Calculations.trim(d.value, layer.unit), year: d.year } }), key: regionTopics.region.name})
-              layerData.push({values: layer.data.map(function (d) { return { value: Calculations.trim(d.averageUF, layer.unit), year: d.year } }), key: 'Oberfranken', color: Colors.getPrimaryColor()})
+              layerData.push({values: layer.data.map(function (d) { return { value: $filter('numberUnit')(d.value, layer.unit), year: d.year } }), key: regionTopics.region.name})
+              layerData.push({values: layer.data.map(function (d) { return { value: $filter('numberUnit')(d.averageUF, layer.unit), year: d.year } }), key: 'Oberfranken', color: Colors.getPrimaryColor()})
 
-              if (layer.data.length > 2) {
+              if (isLongitudinalData(layer.data)) {
                 layersData[layer.id] = {options: getOptions(layer.name, layer.unit), data: layerData}
               } else {
                 layersData[layer.id] = {options: getBarOptions(layer.name, layer.unit, layer.data.length), data: layerData}
@@ -167,6 +167,27 @@
             }
           }
         }
+
+        //checks the data if the data has values from each year
+        function isLongitudinalData(data){
+          if (data.length <= 2) {
+            return false
+          } 
+
+          var lastYear = 0
+          for(var i = 0; i <data.length; ++i){
+            if(i === 0) { 
+              lastYear = d.year
+            } else {
+              if (d.year - lastYear > 1){
+                return false
+              }
+            }
+          }
+
+          return true
+        }
+
       }
     })
 })()
