@@ -151,7 +151,7 @@
               .data(data2).on('mouseover', function (d) {
                 lifbi.tooltip.showTooltip(
                 (options.tooltips.name ? GeoData.getRegionData(d.id).properties.NAME_3 + ' ' : '') +
-                (options.tooltips.value ? $filter('numberUnit')(d.value, scope.unit)  : '') +
+                (options.tooltips.value ? $filter('numberUnit')(d.value, options.tooltips.unit)  : '') +
                 options.tooltips.unit)
               })
               .on('mouseout', function (d) {
