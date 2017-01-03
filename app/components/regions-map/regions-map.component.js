@@ -4,7 +4,7 @@
   'use strict'
 
   angular.module('biloAtlas')
-    .directive('regionsMap', function (ColorBrewer, GeoData) {
+    .directive('regionsMap', function ($filter, ColorBrewer, GeoData) {
       return {
         restrict: 'EA',
         scope: {
@@ -151,7 +151,7 @@
               .data(data2).on('mouseover', function (d) {
                 lifbi.tooltip.showTooltip(
                 (options.tooltips.name ? GeoData.getRegionData(d.id).properties.NAME_3 + ' ' : '') +
-                (options.tooltips.value ? d.value.toFixed(1) : '') +
+                (options.tooltips.value ? $filter('numberUnit')(d.value, scope.unit)  : '') +
                 options.tooltips.unit)
               })
               .on('mouseout', function (d) {
@@ -166,7 +166,7 @@
               .style('visibility', options.stats2.visible ? 'visible' : 'hidden')
             regions.selectAll('g text')
               .data(data2)
-              .text(function (d) { return options.stats2.label ? d.value.toFixed(1) : '' })
+              .text(function (d) { return options.stats2.label ? $filter('numberUnit')(d.value, scope.unit) : '' })
           }
 
 
