@@ -139,8 +139,6 @@
           */
 
           scope.render = function (data_, data2_) {
-            console.log('render ring')
-
             // prepare data2
             var data = prepareData(data_)
             var data2 = []

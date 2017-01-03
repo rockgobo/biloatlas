@@ -41,8 +41,6 @@
               }
               return d1
             })
-          
-          console.log(this.data)
         }
 
         // Watch topic
