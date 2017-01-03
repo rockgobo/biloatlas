@@ -111,7 +111,7 @@
           if (f.properties.ID_3 === id) {
             return {id: id, name: f.properties.VARNAME_3, shortName: f.properties.NAME_3, value: value, year: year, isMissing: false}
           }
-          return {id: f.properties.ID_3, name: f.properties.VARNAME_3,shortName: f.properties.NAME_3, value: defaultValue, year: year, isMissing: true}
+          return {id: f.properties.ID_3, name: f.properties.VARNAME_3,shortName: f.properties.NAME_3, value: defaultValue, year: year, isMissing: defaultValue === 0}
         })
 
         if (regions.length > 0) {
