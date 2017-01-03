@@ -109,9 +109,9 @@
         })
         .map(function (f) {
           if (f.properties.ID_3 === id) {
-            return {id: id, name: f.properties.NAME_3, value: value, year: year}
+            return {id: id, name: f.properties.NAME_3, shortName: f.properties.NAME_3, value: value, year: year}
           }
-          return {id: f.properties.ID_3, name: f.properties.NAME_3, value: defaultValue, year: year}
+          return {id: f.properties.ID_3, name: f.properties.NAME_3,shortName: f.properties.NAME_3, value: defaultValue, year: year}
         })
 
         if (regions.length > 0) {
