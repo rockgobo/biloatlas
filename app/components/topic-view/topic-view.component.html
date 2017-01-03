@@ -5,7 +5,7 @@
             {{topicView.layer.name}}
             <span class="caret"></span>
         </button>
-        <ul class="dropdown-menu dropdown-menu-left" aria-labelledby="LayersDropdownMenu">
+        <ul class="dropdown-menu dropdown-menu-left scrollable-menu" aria-labelledby="LayersDropdownMenu">
             <li ng-repeat="layer in topicView.topic_.layers track by layer.id" ng-click="topicView.layer = layer"><a>{{layer.name}}</a></li>
             <li ng-repeat-start="layerGroup in topicView.topic_.layerGroups"  class="dropdown-header">{{layerGroup.name}}</li>
             <li ng-repeat="layer_sub in layerGroup.layers track by layer_sub.id" ng-click="topicView.layer = layer_sub"><a>{{layer_sub.name}}</a></li>
