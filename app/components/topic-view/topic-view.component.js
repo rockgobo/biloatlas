@@ -30,13 +30,14 @@
             return d.year === this.year
           }.bind(this))
           //this.data = angular.merge(basic_data, data)
-          //Merge data into basic_data
+          //Merge data into basic_data, remove missing flag
           this.data = basic_data.map(function (d1) {
               var d2 = data.find(function (element) { return element.id === d1.id })
               if (d2) {
                 d1.value = d2.value
                 d1.name = d2.name
                 d1.shortName = d2.shortName
+                d1.isMissing = false
               }
               return d1
             })

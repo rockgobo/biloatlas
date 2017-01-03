@@ -38,6 +38,9 @@
 
             s.forEach(function (stat) {
               var value = stat.value
+
+              //Add missing value if missing flag is set
+              if(stat.isMissing) value = '.'
                 
               if (stats[stat.id] === undefined) {
                 stats[stat.id] = {id: stat.id, name: stat.name, data: [value]}

@@ -14,6 +14,9 @@
 /*globals angular:true*/
   angular.module('biloAtlas')
     .filter('numberUnit', function($filter) { return function(input, unit) {
+        //don´t change missing values
+        if(input === '.') return input
+
         if(unit && unit.trim() === '%'){
             return $filter('number')(input, 1);
         }
