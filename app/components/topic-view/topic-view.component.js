@@ -30,6 +30,7 @@
             return d.year === this.year
           }.bind(this))
           this.data = angular.merge(basic_data, data)
+          console.log(this.data)
         }
 
         // Watch topic

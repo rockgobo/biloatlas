@@ -26,7 +26,7 @@
              */
             if (!data_) data_ = []
 
-            var data_template = GeoData.getDataByValue(0, 0, 0)
+            var data_template = GeoData.getDataByValue(0, 0, 0, 0)
             return data_template.map(function (d1) {
               var d2 = data_.find(function (element) { return element.id === d1.id })
               if (d2) {
