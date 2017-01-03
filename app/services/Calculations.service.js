@@ -32,6 +32,8 @@
     function sortRegions(r1, r2){
       var t1 = r1.name
       var t2 = r2.name
+      if(t1 === null || t2 === null) return 1
+
       var prefix1 = t1.slice(0,t1.indexOf(" "))
       var prefix2 = t2.slice(0,t2.indexOf(" "))
       var name1 = r1.shortName
