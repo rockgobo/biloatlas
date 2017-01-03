@@ -29,7 +29,18 @@
           var data = this.data_.filter(function (d) {
             return d.year === this.year
           }.bind(this))
-          this.data = angular.merge(basic_data, data)
+          //this.data = angular.merge(basic_data, data)
+          //Merge data into basic_data
+          this.data = basic_data.map(function (d1) {
+              var d2 = data.find(function (element) { return element.id === d1.id })
+              if (d2) {
+                d1.value = d2.value
+                d1.name = d2.name
+                d1.shortName = d2.shortName
+              }
+              return d1
+            })
+          
           console.log(this.data)
         }
 
