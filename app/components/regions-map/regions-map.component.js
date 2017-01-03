@@ -71,12 +71,13 @@
              */
             if (!data2_) data2_ = []
 
-            var data2_template = GeoData.getDataByValue(0, 0, data2_.length > 0 ? data2_[0].year : 0)
+            var data2_template = GeoData.getDataByValue(0, 0, data2_.length > 0 ? data2_[0].year : 0, 0)
             return data2_template.map(function (d1) {
               var d2 = data2_.find(function (element) { return element.id === d1.id })
               if (d2) {
                 d1.value = d2.value
                 d1.name = d2.name
+                d1.isMissing = false
               }
               return d1
             })
