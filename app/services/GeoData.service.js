@@ -102,12 +102,12 @@
         if (!year) year = 0
         if (defaultValue === undefined) defaultValue = 1
         
-        var regions = geoCollection.features.map(function (f) {
-          //skip Oberbayern
-          if (f.properties.ID_3 === 24) {
-            continue
-          }
-
+        var regions = geoCollection.features
+        .filter(function(d){
+           //skip Oberbayern
+          return f.properties.ID_3 === 24 
+        })
+        .map(function (f) {
           if (f.properties.ID_3 === id) {
             return {id: id, name: f.properties.VARNAME_3, value: value, year: year}
           }
