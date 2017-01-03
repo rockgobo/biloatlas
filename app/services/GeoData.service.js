@@ -105,7 +105,7 @@
         var regions = geoCollection.features
         .filter(function(d){
            //skip Oberbayern
-          return f.properties.ID_3 !== 24 
+          return d.properties.ID_3 !== 24 
         })
         .map(function (f) {
           if (f.properties.ID_3 === id) {
