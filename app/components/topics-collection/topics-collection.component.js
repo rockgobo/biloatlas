@@ -10,15 +10,11 @@
       data2: '=?'
     },
     controllerAs: 'topicsCollection',
-    controller: function (TopicData, Colors, RegionData, Calculations, $routeParams) {
+    controller: function ($filter, TopicData, Colors, RegionData, Calculations, $routeParams) {
       this.topicId1 = {id: $routeParams.topicid}
       this.topicId2 = {}
       this.additionLayer = false
 
-      this.minValue
-      this.maxValue
-      this.minValue2
-      this.maxValue2
       this.colors = Colors.getPrimary()
       this.colors2 = Colors.getSecondary()
       this.averageColor1 = '#FFF'
@@ -57,6 +53,8 @@
         this.visibleRing = true
       }
 
+      this.mapOptions = { stats2: { visible: false }, unit: '' }
+
       this.showAdditionalLayer = function () {
         this.mapOptions.stats2.visible = true
         this.additionLayer = true
@@ -71,6 +69,54 @@
         return 0
       }
 
+      this.minValue = function(){
+        if (!this.data1 || this.data1.length === 0) return 0
+        var data_ = this.data1.map(function (d) { return d.value })
+        var min = Number.MAX_VALUE
+
+        data_.forEach(function (d) {
+          if (d < min) min = d
+        })
+
+        return min
+      }
+
+      this.minValue2 = function(){
+        if (!this.data2 || this.data2.length === 0) return 0
+        var data_ = this.data2.map(function (d) { return d.value })
+        var min = Number.MAX_VALUE
+
+        data_.forEach(function (d) {
+          if (d < min) min = d
+        })
+
+        return min
+      }
+
+      this.maxValue = function(){
+        if (!this.data1 || this.data1.length === 0) return 0
+        var data_ = this.data1.map(function (d) { return d.value })
+        var max = 0
+
+        data_.forEach(function (d) {
+          if (d > max) max = d
+        })
+
+        return max
+      }
+
+      this.maxValue2 = function(){
+        if (!this.data2 || this.data2.length === 0) return 0
+        var data_ = this.data2.map(function (d) { return d.value })
+        var max = 0
+
+        data_.forEach(function (d) {
+          if (d > max) max = d
+        })
+        return max
+      }
+
+/*
       this.average1 = function () {
         if (!this.data1 || this.data1.length === 0) return 0
         var data_ = this.data1.map(function (d) { return d.value })
@@ -85,8 +131,8 @@
         this.minValue = Number.MAX_VALUE
 
         data_.forEach(function (d) {
-          if (d > this.maxValue) this.maxValue = Calculations.trim(d, this.layer.unit)
-          if (d < this.minValue) this.minValue = Calculations.trim(d, this.layer.unit)
+          if (d > this.maxValue) this.maxValue = d
+          if (d < this.minValue) this.minValue = d
         }.bind(this))
         var regionScale = d3.scale.linear()
           .domain([this.minValue, this.maxValue])
@@ -100,6 +146,7 @@
 
         return average
       }
+
       this.average2 = function () {
         if (!this.data2 || this.data2.length === 0) return 0
         var data_ = this.data2.map(function (d) { return d.value })
@@ -111,8 +158,8 @@
         this.maxValue2 = 0
         this.minValue2 = Number.MAX_VALUE
         data_.forEach(function (d) {
-          if (d > this.maxValue2) this.maxValue2 = Calculations.trim(d, this.layer2.unit)
-          if (d < this.minValue2) this.minValue2 = Calculations.trim(d, this.layer2.unit)
+          if (d > this.maxValue2) this.maxValue2 = d
+          if (d < this.minValue2) this.minValue2 = d
         }.bind(this))
 
         var regionScale = d3.scale.linear()
@@ -123,6 +170,7 @@
 
         return average
       }
+    */
     }
   })
 })()
