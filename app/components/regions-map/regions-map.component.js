@@ -264,7 +264,7 @@
               .on('mouseover', function (d) {
                 lifbi.tooltip.showTooltip(
                   (options.tooltips.name ? GeoData.getRegionData(d.id).properties.NAME_3 + ' ' : '') +
-                  (options.tooltips.value ? d.value.toFixed(1) : ''))
+                  (options.tooltips.value ? $filter('numberUnit')(d.value, scope.unit) : ''))
                 scope.selection = d.id
                 scope.$apply() // need to refresh scope manually as data is set in backend code
               })
@@ -305,7 +305,7 @@
               .on('mouseover', function (d) {
                 lifbi.tooltip.showTooltip(
                   (options.tooltips.name ? GeoData.getRegionData(d.id).properties.NAME_3 + ' ' : '') +
-                  (options.tooltips.value ? d.value.toFixed(1) : ''))
+                  (options.tooltips.value ? $filter('numberUnit')(d.value, scope.unit) : ''))
               })
               .on('mouseout', function (d) {
                 lifbi.tooltip.hideTooltip()
@@ -334,7 +334,7 @@
               .append('text')
               .style('text-anchor', 'middle')
               .style('font-size', '10px')
-              .text(function (d) { return options.stats2.label ? d.value.toFixed(1) : '' })
+              .text(function (d) { return options.stats2.label ? $filter('numberUnit')(d.value, scope.unit) : '' })
 
 
             regionsRendered = true

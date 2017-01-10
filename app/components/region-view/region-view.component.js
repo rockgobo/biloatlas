@@ -136,7 +136,8 @@
               yAxis: {
                 axisLabel: name,
                 axisLabelDistance: -10,
-                showMaxMin: false
+                showMaxMin: false,
+                tickFormat: function(d) {return $filter('numberUnit')(d, unit)+((unit && unit.length < 3)?unit:'')}
               },
               // THIS is the important one you can specify an array the min and max value the x axis will have
               yDomain: [Math.floor(min)-1,Math.floor(max)+1],
@@ -172,7 +173,8 @@
                 showMaxMin: false
               },
               yAxis: {
-                axisLabel: name
+                axisLabel: name,
+                tickFormat: function(d) {return $filter('numberUnit')(d, unit)+((unit && unit.length < 3)?unit:'')}
               },
               x: function (d) { return d.year },
               y: function (d) { return d.value },
