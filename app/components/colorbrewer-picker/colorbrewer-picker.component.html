@@ -2,7 +2,8 @@
 <div class="colorpicker colorpanel" ng-click="$ctrl.opencolors ? $ctrl.opencolors=false : $ctrl.opencolors=$ctrl.clickable">
     <div class="row">
         <div class="col-md-2" style="text-align: right; padding-right:2px"> 
-                <small>{{$ctrl.min | numberUnit}}</small><span class="glyphicon glyphicon-triangle-right" style="font-size: 0.7em"></span>  
+                <!-- Nach DIN 5008 kommt immer ein Leerzeichen zwischen Wert und Einheit -->
+                <small>{{$ctrl.min | numberUnit : $ctrl.unit}} {{$ctrl.unit}}</small><span class="glyphicon glyphicon-triangle-right" style="font-size: 0.7em"></span>  
             </div>
         <div class="col-md-8"style="text-align: center; height:12px; padding: 4px;"> 
             <span ng-repeat="c in $ctrl.schema" class="colorpicker_colorbag" ng-style="{'background-color': c, 'width': (100/$ctrl.schema.length)+'%'}" >
@@ -10,7 +11,8 @@
             </span>
         </div>
         <div class="col-md-2"  style="text-align: left; padding-left:2px">
-            <span class="glyphicon glyphicon-triangle-left"  style="font-size: 0.7em"></span><small>{{$ctrl.max | numberUnit : ''}}</small>
+                <!-- Nach DIN 5008 kommt immer ein Leerzeichen zwischen Wert und Einheit -->
+            <span class="glyphicon glyphicon-triangle-left"  style="font-size: 0.7em"></span><small>{{$ctrl.max | numberUnit : $ctrl.unit}} {{$ctrl.unit}}</small>
         </div>
     </div>
 </div>
