@@ -36,16 +36,17 @@
         <span ng-style="topicView.switchYearNextEnbled()?{opacity:1.0}:{opacity:0.5, cursor: 'default'}" ng-click="topicView.switchYearNext()" class="glyphicon glyphicon-triangle-right clickable" style="font-size: 0.7em"></span>
     </div>
 
-    <div class="col-md-4" style="padding-left: 0">
+    <div class="col-md-4 stats_label" ng-if="topicView.layer.source">
         <small><b>Quelle:</b></small>
     </div> 
-    <div class="col-md-8"><small>{{topicView.layer.source}}</small>&nbsp;</div>
+    <div class="col-md-8" ng-if="topicView.layer.source"><small>{{topicView.layer.source}}</small>&nbsp;</div>
     
-    <div class="col-md-4" style="padding-left: 0">
+    <div class="col-md-4 stats_label" ng-if="topicView.layer.calculation">
         <small><b>Eigene Berechnung:</b></small>
     </div> 
-    <div class="col-md-8"><small>{{topicView.layer.calculation}}</small>&nbsp;</div>
-    <div class="col-md-4" style="padding-left: 0">
+    <div class="col-md-8" ng-if="topicView.layer.calculation"><small>{{topicView.layer.calculation}}</small>&nbsp;</div>
+    
+    <div class="col-md-4 stats_label">
         <small><b>Oberfranken:</b></small>
     </div> 
     <div class="col-md-8"><small>{{topicView.average() | numberUnit : topicView.unit()}}{{topicView.unit()}}</small>&nbsp;</div>
