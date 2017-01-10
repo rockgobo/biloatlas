@@ -40,7 +40,7 @@
 
             <!-- Map -->
             <div ng-if="topicsCollection.visibleMap">
-                <div regions-map stats="topicsCollection.data1" unit="topicsCollection.layer.unit " stats2="topicsCollection.data2" schemecolors="topicsCollection.colors" schemecolors2="topicsCollection.colors2" options="{ stats2: { visible: false }, unit: topicsCollection.layer.unit, tooltips: {unit: topicsCollection.layer.unit}}">Lade...</div>
+                <div regions-map stats="topicsCollection.data1" unit="topicsCollection.layer.unit " stats2="topicsCollection.data2" schemecolors="topicsCollection.colors" schemecolors2="topicsCollection.colors2" options="topicsCollection.mapOptions">Lade...</div>
             </div>
             <div regions-pie stats="topicsCollection.data1" schemecolors="topicsCollection.colors" ng-if="topicsCollection.visiblePie">Lade...</div>
             <topic-table data="{stats :[topicsCollection.data1, (topicsCollection.additionLayer && topicsCollection.layer.id !== topicsCollection.layer2.id ? topicsCollection.data2:[])], units: [topicsCollection.layer.unit, topicsCollection.layer2.unit], headlines:[topicsCollection.layer.name,topicsCollection.layer2.name]}" ng-if="topicsCollection.visibleTable">Loading...</topic-table>
