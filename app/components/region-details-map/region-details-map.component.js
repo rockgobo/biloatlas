@@ -8,9 +8,9 @@
       return {
         restrict: 'EA',
         scope: {
-          region: '=',
-          options: '=',
-          pois: '='
+          region: '<',
+          options: '<',
+          pois: '<'
         },
         templateUrl: 'app/components/region-details-map/region-details-map.component.html',
         link: function (scope, element, attrs) {
