@@ -27,7 +27,6 @@
             },
             x: function (d) { return d.year },
             y: function (d) { return d.value },
-            useInteractiveGuideline: true,
             dispatch: {
               stateChange: function (e) { console.log('stateChange') },
               changeState: function (e) { console.log('changeState') },
@@ -78,6 +77,7 @@
               var layerData = []
               var min = 0 // set minumum to default zero
               var max = -99999999999999999
+              layer.unit = layer.unit?layer.unit:''
               layerData.push({values: layer.data.map(function (d) { return { value: Calculations.trim(d.value, layer.unit), year: d.year } }), key: regionTopics.region.name})
               layerData.push({values: layer.data.map(function (d) { return { value: Calculations.trim(d.averageUF, layer.unit), year: d.year } }), key: 'Oberfranken', color: Colors.getPrimaryColor()})
               layer.data.map(function(d){
@@ -110,10 +110,12 @@
         }.bind(this))
 
         function getOptions (name, unit, min, max) {
+          var diagram_height = name.length * 7
+          if (diagram_height < 250) diagram_height = 250
           return {
             chart: {
               type: 'scatterChart',
-              height: 250,
+              height: diagram_height,
               margin: {
                 top: 20,
                 right: 20,
@@ -122,7 +124,6 @@
               },
               x: function (d) { return d.year },
               y: function (d) { return d.value },
-              useInteractiveGuideline: true,
               dispatch: {
                 stateChange: function (e) { console.log('stateChange') },
                 changeState: function (e) { console.log('changeState') },
@@ -136,8 +137,8 @@
               yAxis: {
                 axisLabel: name,
                 axisLabelDistance: -10,
-                showMaxMin: false,
-                tickFormat: function(d) {return $filter('numberUnit')(d, unit)+((unit && unit.length < 3)?unit:'')}
+                showMaxMin: false
+                //,tickFormat: function(d) {return $filter('numberUnit')(d, unit)+((unit.length < 3)?unit:'')}
               },
               // THIS is the important one you can specify an array the min and max value the x axis will have
               yDomain: [Math.floor(min)-1,Math.floor(max)+1],
@@ -146,6 +147,12 @@
                 if (i === 1) return Colors.getPrimaryColor()
                 if (i === 0) return Colors.getSecondaryColor()
                 return Colors.getSecondaryColor()
+              },
+              tooltip: {
+                contentGenerator: function (values) { 
+                  var region1 = values.series[0]
+                  return '<b>'+values.value+'</b><p><div style="width: 14px; height:14px; margin-right:5px; display: inline-block; background-color:'+region1.color+'">&nbsp;</div>'+region1.key +' <b>' + $filter('numberUnit')(region1.value, unit)+' '+unit+'</b></p>'
+                }
               }
             },
             title: {
@@ -167,14 +174,17 @@
               type: 'multiBarHorizontalChart',
               height: (count * 60) + 100,
               showControls: false,
-              showValues: true,
+              showValues: false,
               duration: 500,
               xAxis: {
-                showMaxMin: false
+                showMaxMin: false,
               },
               yAxis: {
                 axisLabel: name,
-                tickFormat: function(d) {return $filter('numberUnit')(d, unit)+((unit && unit.length < 3)?unit:'')}
+                tickFormat: function(d) {
+                  console.log($filter('numberUnit')(d, unit)+((unit && unit.length < 3)?unit:''))
+                  return $filter('numberUnit')(d, unit)+((unit && unit.length < 3)?unit:'')
+                }
               },
               x: function (d) { return d.year },
               y: function (d) { return d.value },
