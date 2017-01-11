@@ -166,7 +166,7 @@
               html: '<div class="chart_caption">' + name + '</div>'
             }
           } 
-        }
+        } 
 
         function getBarOptions (name, unit, count) {
           return {
