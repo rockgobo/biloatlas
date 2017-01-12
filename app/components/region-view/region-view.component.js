@@ -79,13 +79,15 @@
               var max = -99999999999999999
               layer.unit = layer.unit?layer.unit:''
               layerData.push({values: layer.data.map(function (d) { return { value: Calculations.trim(d.value, layer.unit), year: d.year } }), key: regionTopics.region.name})
-              layerData.push({values: layer.data.map(function (d) { return { value: Calculations.trim(d.averageUF, layer.unit), year: d.year } }), key: 'Oberfranken', color: Colors.getPrimaryColor()})
+              //Add values for upper frankconia, if available
+              if(layer.dataUF && layer.dataUF.length > 0) layerData.push({values: layer.dataUF.map(function (d) { return { value: Calculations.trim(d.value, layer.unit), year: d.year } }), key: 'Oberfranken', color: Colors.getPrimaryColor()})
               layer.data.map(function(d){
                 if (d.value > max) max = d.value 
                 if (d.value < min) min = d.value
-                
-                if (d.averageUF > max) max = d.averageUF 
-                if (d.averageUF < min) min = d.averageUF
+              })
+              layer.dataUF.map(function(d){
+                if (d.value > max) max = d.value 
+                if (d.value < min) min = d.value
               })
               if (isLongitudinalData(layer.data)) {
                 var options = getOptions(layer.name, layer.unit, min, max)

@@ -21,6 +21,7 @@
         this.topic_ = {}
 
         this.data_ = []
+        this.dataUF = []
 
         this.filterData = function () {
           // #71: Merge the filtered data to a basic data table with 0 for each region
@@ -89,6 +90,7 @@
             this.year = this.years[this.years.length - 1]
 
             this.data_ = layer.data
+            this.dataUF = layer.dataUF
             this.filterData()
           } else {
             this.data_ = []
@@ -104,11 +106,15 @@
         }
 
         this.average = function () {
-          var data = []
-          if (this.data && this.data.length > 0) {
-            data = this.data.map(function (d) { return d.value })
+          if (this.dataUF) {
+            return (function(scope){
+              var valueUF = scope.dataUF.find(function (d) {return d.year === scope.year }.bind(scope))
+              if(valueUF){
+                return valueUF.value
+              }
+            })(this)
           }
-          return Calculations.average(data, this.layer.unit)
+          return false
         }
 
         this.switchYearLast = function () {
