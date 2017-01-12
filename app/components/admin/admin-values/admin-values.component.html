@@ -1,0 +1,23 @@
+<div class="container">
+    <h1>Bearbeite Values</h1>
+    <form>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th ng-click="$ctrl.sortOrder = 'id'"><strong>Region</strong></th>
+                    <th ng-click="$ctrl.sortOrder = 'id'"><strong>Region Id</strong></th>
+                    <th ng-click="$ctrl.sortOrder = 'year'"><strong>Jahr</strong></th>
+                    <th><strong>Wert</strong></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="value in $ctrl.layerValues.values | orderBy: $ctrl.sortOrder">
+                    <td>{{$ctrl.getRegionName(value.id)}}</td>
+                    <td>{{value.id}}</td>
+                    <td>{{value.year}}</td>
+                    <td><input ng-value="value.value"></td>
+                </tr>
+            </tbody>
+        <table>
+    </form>
+</div>

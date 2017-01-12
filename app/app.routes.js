@@ -19,6 +19,8 @@
           template: '<admin-layers>Lade...</admin-layers>'
         }).when('/admin/layer/:id', {
           template: '<admin-layer>Lade...</admin-layer>'
+        }).when('/admin/values/:id', {
+          template: '<admin-values>Lade...</admin-values>'
         }).otherwise({
           redirectTo: '/'
         })

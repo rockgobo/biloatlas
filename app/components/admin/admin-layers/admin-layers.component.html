@@ -5,7 +5,8 @@
         <tr>
             <th>#</th>
             <th>Name</th>
-            <th>Aktionen</th>
+            <th>Bearbeite Layer</th>
+            <th>Bearbeite Daten</th>
         </tr>
     </thead>
     <tbody>
@@ -18,6 +19,9 @@
         </td>
         <td>
             <a href="#/admin/layer/{{layer.id}}" ng-hide="layer.isDeleted"><span class="glyphicon glyphicon-pencil"></span></a>
+        </td>
+        <td>
+            <a href="#/admin/values/{{layer.id}}" ng-hide="layer.isDeleted"><span class="glyphicon glyphicon-pencil"></span></a>
         </td>
     </tr>
     </tbody>
