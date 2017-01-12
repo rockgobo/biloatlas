@@ -240,8 +240,12 @@ select.clean{
         width: 100%;
         height: 100%;
         z-index: 1;
-        background-color: @color_badge;
-    }
+        background-color: @color_badge; /* fallback color if gradients are not supported */    
+        background-image: -webkit-linear-gradient(to bottom right, @color_badge, white);
+        background-image: -o-linear-gradient(to bottom right, @color_badge, white);
+        background-image: linear-gradient(to bottom right, @color_badge, white );
+    
+        }
 }
 
 .topic-container{
