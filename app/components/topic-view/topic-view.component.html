@@ -27,7 +27,7 @@
     </div>
 </p>
 <div class="row" style="margin-left: 0">
-    <div class="col-md-4" style="padding-left: 0">
+    <div class="col-md-4 stats_label">
         <small><b>Jahr:</b></small>
     </div> 
     <div class="col-md-8">
@@ -46,9 +46,9 @@
     </div> 
     <div class="col-md-8" ng-if="topicView.layer.calculation"><small>{{topicView.layer.calculation}}</small>&nbsp;</div>
     
-    <div class="col-md-4 stats_label">
+    <div class="col-md-4 stats_label" ng-if="topicView.average()">
         <small><b>Oberfranken:</b></small>
     </div> 
-    <div class="col-md-8"><small>{{topicView.average() | numberUnit : topicView.unit()}}{{topicView.unit()}}</small>&nbsp;</div>
+    <div class="col-md-8" ng-if="topicView.average()"><small>{{topicView.average() | numberUnit : topicView.unit()}}{{topicView.unit()}}</small>&nbsp;</div>
 </div>
 
