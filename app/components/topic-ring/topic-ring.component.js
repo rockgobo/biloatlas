@@ -251,11 +251,10 @@
                 var d2 = data2.find(function (d2) {
                   return d2.id === d.data.id
                 })
-
                 if (d2 === undefined) {
                   return $filter('numberUnit')(d.data.value, scope.unit) + scope.unit
                 }
-                return $filter('numberUnit')(d.data.value, scope.unit) + ' (' + $filter('numberUnit')(d.data.value, scope.unit2) + scope.unit2 + ')'
+                return $filter('numberUnit')(d.data.value, scope.unit) + ' (' + $filter('numberUnit')(d2.value, scope.unit2) + scope.unit2 + ')'
               })
 
             function midAngle (d) {
