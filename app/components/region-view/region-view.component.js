@@ -184,7 +184,6 @@
               yAxis: {
                 axisLabel: name,
                 tickFormat: function(d) {
-                  console.log($filter('numberUnit')(d, unit)+((unit && unit.length < 3)?unit:''))
                   return $filter('numberUnit')(d, unit)+((unit && unit.length < 3)?unit:'')
                 }
               },
