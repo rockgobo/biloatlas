@@ -8,14 +8,14 @@
   angular.module('biloAtlas').component('colorbrewerPicker', {
     templateUrl: 'app/components/colorbrewer-picker/colorbrewer-picker.component.html',
     bindings: {
-      schema: '<',
+      schema: '=',
       min: '<',
       max: '<',
       unit: '<'
     },
     controller: function (ColorBrewer, Colors) {
-      this.clickable = false
-      // this.colors = ColorBrewer.colors
+      this.clickable = true
+      //this.colors = ColorBrewer.colors
       this.colors = {
         color1: {
           9: Colors.getPrimary()

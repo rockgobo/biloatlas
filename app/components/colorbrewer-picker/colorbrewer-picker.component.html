@@ -3,7 +3,7 @@
     <div class="row">
         <div class="col-md-2" style="text-align: right; padding-right:2px"> 
                 <!-- Nach DIN 5008 kommt immer ein Leerzeichen zwischen Wert und Einheit -->
-                <small>{{$ctrl.min | numberUnit : $ctrl.unit}}&nbsp;{{$ctrl.unit}}</small><span class="glyphicon glyphicon-triangle-right" style="font-size: 0.7em"></span>  
+                <small>{{$ctrl.min | numberUnit : $ctrl.unit}} {{$ctrl.unit}}</small><span class="glyphicon glyphicon-triangle-right" style="font-size: 0.7em"></span>  
             </div>
         <div class="col-md-8"style="text-align: center; height:12px; padding: 4px;"> 
             <span ng-repeat="c in $ctrl.schema" class="colorpicker_colorbag" ng-style="{'background-color': c, 'width': (100/$ctrl.schema.length)+'%'}" >
@@ -12,8 +12,14 @@
         </div>
         <div class="col-md-2"  style="text-align: left; padding-left:2px">
                 <!-- Nach DIN 5008 kommt immer ein Leerzeichen zwischen Wert und Einheit -->
-            <span class="glyphicon glyphicon-triangle-left"  style="font-size: 0.7em"></span><small>{{$ctrl.max | numberUnit : $ctrl.unit}}&nbsp;{{$ctrl.unit}}</small>
+            <span class="glyphicon glyphicon-triangle-left"  style="font-size: 0.7em"></span><small>{{$ctrl.max | numberUnit : $ctrl.unit}} {{$ctrl.unit}}</small>
         </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-10"><span style="display: inline-block; width: 15px; height: 15px; border: 1px solid #ccc; background-color: white">
+        </span> <span style="font-size: 10px;">Keine Angabe<span></div>
+        
     </div>
 </div>
  
