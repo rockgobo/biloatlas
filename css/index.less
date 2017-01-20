@@ -12,6 +12,7 @@
 
 @bgcolor_light: #F7FBFF;
 @bgcolor_dark: #DEEBF7;
+@color_light: #AAA;
 
 @color_badge: @bgcolor_dark;
 
@@ -486,7 +487,7 @@ body {
 
 /* Region view
 -------------------------------------------------- */
-#regionView, #locationView{
+#regionView, #locationView, #buttonsView{
     #ofr-map{
         path {
             stroke: #FFF;
@@ -514,9 +515,13 @@ body {
         z-index: 999999;
     }
 
-    h4{
-        border-bottom: 1px solid #CCC;
+    h4{ 
+        border-bottom: 1px solid @color_light;
         padding-bottom: 3px;
+        color: @color_light;
+        font-weight: 100;
+        font-size: 14px;
+        margin-bottom: 20px;
     }
 
     
