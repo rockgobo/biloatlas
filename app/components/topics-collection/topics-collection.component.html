@@ -37,7 +37,13 @@
                 <div><small>{{topicsCollection.layer.name}} in Ofr.: {{topicsCollection.average1() | numberUnit : topicsCollection.layer.unit }}{{topicsCollection.layer.unit}}</small></div>
             </div>
             -->
-
+            
+            <!-- Comments -->
+            <div class="comment">   
+                <p ng-if="topicsCollection.topicId1.comment" class="alert alert-info" role="alert"> {{topicsCollection.topicId1.comment}} </p>
+                <p ng-if="topicsCollection.topicId2.comment && topicsCollection.topicId2.comment !== topicsCollection.topicId1.comment" class="alert alert-info" role="alert"> {{topicsCollection.topicId2.comment}} </p>
+            </div>
+            
             <!-- Map -->
             <div ng-if="topicsCollection.visibleMap">
                 <div regions-map stats="topicsCollection.data1" unit="topicsCollection.layer.unit " stats2="topicsCollection.data2" schemecolors="topicsCollection.colors" schemecolors2="topicsCollection.colors2" options="topicsCollection.mapOptions">Lade...</div>

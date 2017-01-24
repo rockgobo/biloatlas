@@ -10,7 +10,7 @@
       data2: '=?'
     },
     controllerAs: 'topicsCollection',
-    controller: function ($filter, TopicData, Colors, RegionData, Calculations, $routeParams) {
+    controller: function ($filter, $routeParams, TopicData, Colors, RegionData, Calculations) {
       this.topicId1 = {id: $routeParams.topicid}
       this.topicId2 = {}
       this.additionLayer = false
@@ -115,62 +115,6 @@
         })
         return max
       }
-
-/*
-      this.average1 = function () {
-        if (!this.data1 || this.data1.length === 0) return 0
-        var data_ = this.data1.map(function (d) { return d.value })
-        
-        var average = this.average(data_)
-        
-        if (this.layer.unit.trim() !== '%') {
-          average = parseFloat(average).toFixed(0)
-        }
-
-        this.maxValue = 0
-        this.minValue = Number.MAX_VALUE
-
-        data_.forEach(function (d) {
-          if (d > this.maxValue) this.maxValue = d
-          if (d < this.minValue) this.minValue = d
-        }.bind(this))
-        var regionScale = d3.scale.linear()
-          .domain([this.minValue, this.maxValue])
-          .range([0, this.colors.length - 1])
-
-        if (average === 0) { 
-          this.averageColor1 = '#FFF' 
-        } else { 
-          this.averageColor1 = this.colors[Math.floor(regionScale(average))] 
-        }
-
-        return average
-      }
-
-      this.average2 = function () {
-        if (!this.data2 || this.data2.length === 0) return 0
-        var data_ = this.data2.map(function (d) { return d.value })
-        var average = this.average(data_)
-        if (this.layer2.unit.trim() !== '%') {
-          average = parseFloat(average).toFixed(0)
-        }
-
-        this.maxValue2 = 0
-        this.minValue2 = Number.MAX_VALUE
-        data_.forEach(function (d) {
-          if (d > this.maxValue2) this.maxValue2 = d
-          if (d < this.minValue2) this.minValue2 = d
-        }.bind(this))
-
-        var regionScale = d3.scale.linear()
-          .domain([this.minValue2, this.maxValue2])
-          .range([0, this.colors2.length - 1])
-
-        if (average === 0) { this.averageColor2 = '#FFF' } else { this.averageColor2 = this.colors2[Math.floor(regionScale(average))] }
-
-        return average
-      }
-    */
     }
   })
 })()
