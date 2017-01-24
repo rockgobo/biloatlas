@@ -23,6 +23,9 @@
       this.layer = []
       this.layer2 = []
 
+      this.year = ''
+      this.year2 = ''
+
       this.visibleMap = true
       this.visiblePie = false
       this.visibleTable = false

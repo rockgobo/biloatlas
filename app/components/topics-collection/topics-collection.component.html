@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-md-5">
             <topics-selection topic="topicsCollection.topicId1"></topics-selection>           
-            <topic-view topic="topicsCollection.topicId1" data="topicsCollection.data1" average="topicsCollection.average1()" averageColor="topicsCollection.averageColor1" layer="topicsCollection.layer"></topic-view>
+            <topic-view topic="topicsCollection.topicId1" data="topicsCollection.data1" layer="topicsCollection.layer" year="topicsCollection.year"></topic-view>
             
             <div class="container_additional_layer">
                 <div role="button" class="btn btn-default" ng-click="topicsCollection.showAdditionalLayer()" ng-hide="topicsCollection.additionLayer">Weitere Kennzahl hinzufügen</div>
@@ -12,7 +12,7 @@
                 <!-- Addional Layer -->
                 <div id="addition_layer" class="panel panel-default" ng-show="topicsCollection.additionLayer">
                     <topics-selection topic="topicsCollection.topicId2"></topics-selection>        
-                    <topic-view topic="topicsCollection.topicId2" data="topicsCollection.data2" layer="topicsCollection.layer2"></topic-view>
+                    <topic-view topic="topicsCollection.topicId2" data="topicsCollection.data2" layer="topicsCollection.layer2" year="topicsCollection.year2"></topic-view>
                     <div class="text-right">
                         <div role="button" class="btn btn-default btn-sm btn-remove" ng-click="topicsCollection.removeAdditionalLayer()">Entfernen</div>
                     </div>
@@ -42,6 +42,21 @@
                 </p>
             </div>
             
+
+            <!-- Current Year -->
+            <div class="years">
+                <h4 class="year pull-right" ng-if="topicsCollection.additionLayer && (topicsCollection.year != topicsCollection.year2)">
+                    <span class="sr-only">Ausgewähltes Jahr (für zweiten Layer): </span>
+                    <span class="label label-default label-secondary" ng-bind="topicsCollection.year2"></span>
+                </h4> 
+                <h4 class="year pull-right">
+                    <span class="sr-only">Ausgewähltes Jahr: </span>
+                    <span class="label label-default" ng-bind="topicsCollection.year"></span>
+                </h4>
+            </div>
+             
+            
+
             <!-- Map -->
             <div ng-if="topicsCollection.visibleMap">
                 <div regions-map stats="topicsCollection.data1" unit="topicsCollection.layer.unit " stats2="topicsCollection.data2" schemecolors="topicsCollection.colors" schemecolors2="topicsCollection.colors2" options="topicsCollection.mapOptions">Lade...</div>

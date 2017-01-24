@@ -9,7 +9,7 @@
       bindings: {
         topic: '=',
         data: '=?',
-        average: '&',
+        year: '=?',
         layer: '=?'
       },
       controllerAs: 'topicView',
