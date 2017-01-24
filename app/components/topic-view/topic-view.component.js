@@ -17,7 +17,7 @@
         this.layer = []
         this.selection = 0
         this.years = []
-        this.year = false
+        this.year = 0
         this.topic_ = {}
 
         this.data_ = []
