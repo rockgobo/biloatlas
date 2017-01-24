@@ -20,7 +20,7 @@
         if(unit && unit.trim() === '%'){
             return $filter('number')(input, 1);
         }
-        return $filter('number')(input, 0);
+        return $filter('number')(input, 0)+' ';
     };
 })
 })()
