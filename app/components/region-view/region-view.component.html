@@ -28,7 +28,7 @@
     <div class="container-step">    
         <div ng-repeat="(index,topic) in regionView.topics" class="topic-container" ng-init="visibleLayer = false">
             <div ng-if="topic.layers.length > 0" >
-                <h3  ng-click="visibleLayer = !visibleLayer">
+                <h3  ng-click="visibleLayer = !visibleLayer" id="topic_{{topic.id}}">
                     
                     <small>
                         <a>
@@ -39,7 +39,11 @@
                     <a>{{topic.name}}</a>
                 </h3>
                 <div ng-repeat="layer in topic.layers" ng-if="visibleLayer">
-                    <h4>{{layer.name}}</h4>
+                    <h4>
+                        {{layer.name}} 
+                        <!-- Moves the scope to parent of parent and sets the visibleLayer to false -->
+                        <span class="btn btn-xs pull-right" ng-click="$parent.$parent.visibleLayer = false">ausblenden</span> 
+                    </h4>
                     <div class="row">
                         <div class="col-md-6">
                             <p>

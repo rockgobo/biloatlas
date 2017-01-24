@@ -7,7 +7,7 @@
       templateUrl: 'app/components/region-view/region-view.component.html',
       binding: {},
       controllerAs: 'regionView',
-      controller: function ($filter, Calculations, RegionData, PoiData, Colors, GeoData, $routeParams) {
+      controller: function ($filter, $routeParams, $location, Calculations, RegionData, PoiData, Colors, GeoData) {
         this.topics = []
         this.selection = $routeParams.regionid
         this.regionid = $routeParams.regionid
@@ -111,6 +111,10 @@
           this.pois = response.features
         }.bind(this))
 
+        /**
+         * Private functions
+         * 
+         */
         function getOptions (name, unit, min, max) {
           var diagram_height = name.length * 7
           if (diagram_height < 250) diagram_height = 250
