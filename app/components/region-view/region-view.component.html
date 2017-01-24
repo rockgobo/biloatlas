@@ -6,10 +6,12 @@
         <div class="col-md-6">
             <h4>Oberfranken</h4>
             <div id="ofr-map" regions-map stats="regionView.mapData" year="0" selection="regionView.selection"  schemecolors="regionView.colorSchema" options="{tooltips: {value: false}}"></div>
-            
-            <div id="coats">
-                <a ng-repeat="region in regionView.regions" ng-href="#/region/{{region.id}}" >
-                    <img  ng-src="images/{{region.id}}_coats.png" title="{{region.name}}" ng-class="region.id!=regionView.selection?'coatsofarms':''" style="margin-bottom: 2px;"></img>
+            <div class="well">
+                <a type="button" class="btn btn-default" href="#/location/{{regionView.regionid}}">
+                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Detailansicht
+                </a>
+                <a type="button" class="btn btn-default" href="{{regionView.region.url}}">
+                    <span class="glyphicon glyphicon-save-file" aria-hidden="true"></span> Kreisprofil herunterladen (PDF)
                 </a>
             </div>
         </div>
@@ -17,15 +19,12 @@
         <div class="col-md-6">
             <h4>{{regionView.region.name}}</h4>
             <div region-details-map region="regionView.regionid" pois="regionView.pois"></div>
-            <div class="well">
-                <a class="btn btn-default" href="#/location/{{regionView.regionid}}">Detailansicht</a>
-                <a class="btn btn-default" href="{{regionView.region.url}}" target="_blank">Kreisprofil herunterladen (PDF)</a>
-            </div>
+            
         </div>
     </div>
     
 
-    <div class="container-step">    
+    <div>    
         <div ng-repeat="(index,topic) in regionView.topics" class="topic-container" ng-init="visibleLayer = false">
             <div ng-if="topic.layers.length > 0" >
                 <h3  ng-click="visibleLayer = !visibleLayer" id="topic_{{topic.id}}">
