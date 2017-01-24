@@ -30,8 +30,16 @@
             
             <!-- Comments -->
             <div class="comment">   
-                <p ng-if="topicsCollection.topicId1.comment" class="alert alert-info" role="alert"> {{topicsCollection.topicId1.comment}} </p>
-                <p ng-if="topicsCollection.topicId2.comment && topicsCollection.topicId2.comment !== topicsCollection.topicId1.comment" class="alert alert-info" role="alert"> {{topicsCollection.topicId2.comment}} </p>
+                <p ng-if="topicsCollection.topicId1.comment" class="alert alert-info" role="alert">    
+                    <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                    <span class="sr-only">Information:</span>
+                    {{topicsCollection.topicId1.comment}} 
+                </p>
+                <p ng-if="topicsCollection.topicId2.comment && topicsCollection.topicId2.comment !== topicsCollection.topicId1.comment" class="alert alert-info" role="alert">
+                    <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                    <span class="sr-only">Information:</span>
+                    {{topicsCollection.topicId2.comment}} 
+                </p>
             </div>
             
             <!-- Map -->
