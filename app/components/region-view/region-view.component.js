@@ -72,6 +72,8 @@
           // Prepare data for linecharts
           var layersData = []
           this.region = regionTopics.region
+
+          // Prepare for each topic 
           regionTopics.topics.forEach(function (topic) {
             topic.layers.forEach(function (layer) {
               var layerData = []
