@@ -1,0 +1,34 @@
+<div class="alert alert-danger" role="alert" ng-if="!$ctrl.security.isValid()">
+    Sie müssen angemeldet sein um diesen Bereich zu nutzen
+</div>
+
+<div class="container" ng-if="$ctrl.security.isValid()">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <a href="#/admin/topics" class="btn btn-default" role="button">Themen ändern</a>
+            <a href="#/admin/layers" class="btn btn-default" role="button">Themenbereiche ändern</a>
+        </div>  
+    </div>
+</div>
+
+<div class="container"  ng-if="$ctrl.security.isValid()">
+    <h1>Bearbeite Thema {{$ctrl.topic.name}}</h1>
+    <form>
+        <div class="form-group">
+            <label for="topicName">Name</label>
+            <input type="text" ng-model="$ctrl.topic.name" id="topicName" class="form-control"/>
+        </div>
+        <div class="form-group">
+            <label for="topicDescription">Beschreibung</label>
+            <textarea rows="6"  type="text" ng-model="$ctrl.topic.description" id="topicDescription" class="form-control"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="topicInfos">Kommentar</label>
+            <textarea rows="6" type="text" ng-model="$ctrl.topic.comment" id="topicInfos" class="form-control"></textarea>
+        </div>
+    
+        <button class="btn btn-default" ng-click="$ctrl.save()">Speichern</button>
+        
+        <a class="btn" href="#/admin/topics">Abbrechen</a>
+    </form>
+</div>

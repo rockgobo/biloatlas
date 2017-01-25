@@ -9,15 +9,16 @@
   angular.module('biloAtlas')
   .component('adminLayer', {
     templateUrl: 'app/components/admin/admin-layer/admin-layer.component.html',
-    controller: function (LayerData, $routeParams) {
+    controller: function (LayerData, AdminSecurity, $routeParams) {
       LayerData.getLayerById($routeParams.id).then(function (layer) {
         this.layer = layer
       }.bind(this))
 
       this.save = function () {
-        console.log('saving layer')
         LayerData.saveLayer(this.layer)
       }
+
+      this.security = AdminSecurity
     }
   })
 })()

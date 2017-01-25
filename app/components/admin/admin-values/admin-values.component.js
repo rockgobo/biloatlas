@@ -9,7 +9,7 @@
   angular.module('biloAtlas')
   .component('adminValues', {
     templateUrl: 'app/components/admin/admin-values/admin-values.component.html',
-    controller: function (ValuesData, GeoData, $routeParams) {
+    controller: function ($routeParams, ValuesData, GeoData, AdminSecurity) {
       this.sortOrder = 'year'
       
       //Load Data
@@ -25,6 +25,8 @@
       this.getRegionName = function(id){
         return GeoData.getRegionData(id).properties.NAME_3
       }
+
+      this.security = AdminSecurity
     }
   })
 })()

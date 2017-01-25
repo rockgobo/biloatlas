@@ -1,4 +1,18 @@
-<div class="container">
+<div class="alert alert-danger" role="alert" ng-if="!$ctrl.security.isValid()">
+    Sie müssen angemeldet sein um diesen Bereich zu nutzen
+</div>
+
+
+<div class="container" ng-if="$ctrl.security.isValid()">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <a href="#/admin/topics" class="btn btn-default" role="button">Themen ändern</a>
+            <a href="#/admin/layers" class="btn btn-default" role="button">Themenbereiche ändern</a>
+        </div>  
+    </div>
+</div>
+
+<div class="container" ng-if="$ctrl.security.isValid()">
     <h1>Bearbeite Values</h1>
     <form>
         <table class="table table-striped">

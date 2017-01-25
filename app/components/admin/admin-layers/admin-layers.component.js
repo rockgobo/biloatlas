@@ -8,10 +8,12 @@
 
   angular.module('biloAtlas').component('adminLayers', {
     templateUrl: 'app/components/admin/admin-layers/admin-layers.component.html',
-    controller: function (LayerData, $routeParams) {
+    controller: function (LayerData, AdminSecurity, $routeParams) {
       LayerData.getLayers().then(function (layers) {
         this.layers = layers
       }.bind(this))
+
+      this.security = AdminSecurity
     }
   })
 })()

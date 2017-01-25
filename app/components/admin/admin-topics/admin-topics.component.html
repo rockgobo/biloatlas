@@ -12,29 +12,21 @@
 </div>
 
 <div class="container"  ng-if="$ctrl.security.isValid()">
-    <h1>Admin- Layers</h1>
+    <h1>Admin- Themen</h1>
     <table class="table table-hover table-striped">
     <thead>
         <tr>
-            <th>#</th>
             <th>Name</th>
-            <th>Bearbeite Layer</th>
-            <th>Bearbeite Daten</th>
+            <th>Bearbeite Thema</th>
         </tr>
     </thead>
     <tbody>
-    <tr ng-repeat="layer in $ctrl.layers | orderBy: 'sortOrder'">
+    <tr ng-repeat="topic in $ctrl.topics | orderBy: 'name'">
         <td>
-            {{layer.sortOrder}}
-        </td>
-        <td ng-class="{'text-deleted': layer.isDeleted}">
-            {{layer.name}}
+            {{topic.name}}
         </td>
         <td>
-            <a href="#/admin/layer/{{layer.id}}" ng-hide="layer.isDeleted"><span class="glyphicon glyphicon-pencil"></span></a>
-        </td>
-        <td>
-            <a href="#/admin/values/{{layer.id}}" ng-hide="layer.isDeleted"><span class="glyphicon glyphicon-pencil"></span></a>
+            <a href="#/admin/topic/{{topic.id}}"><span class="glyphicon glyphicon-pencil"></span></a>
         </td>
     </tr>
     </tbody>

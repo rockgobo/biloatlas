@@ -1,0 +1,17 @@
+<div class="container">
+    <h1>Adminbereich</h1>
+    <div  ng-if="!$ctrl.isValid()">
+        <div class="alert alert-info">Bitte geben Sie ein Password ein</div>
+        <input type="text" ng-model="password"></input>
+        <button class="btn btn-default" ng-click="$ctrl.login(password)">anmelden</button>
+    </div>
+
+    <div ng-if="$ctrl.isValid()">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <a href="#/admin/topics" class="btn btn-default" role="button">Themen ändern</a>
+                <a href="#/admin/layers" class="btn btn-default" role="button">Themenbereiche ändern</a>
+            </div>  
+        </div>
+    </div>
+</div>
