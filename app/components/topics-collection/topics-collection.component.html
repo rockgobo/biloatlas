@@ -61,12 +61,19 @@
             <div ng-if="topicsCollection.visibleMap">
                 <div regions-map stats="topicsCollection.data1" unit="topicsCollection.layer.unit " stats2="topicsCollection.data2" schemecolors="topicsCollection.colors" schemecolors2="topicsCollection.colors2" options="topicsCollection.mapOptions">Lade...</div>
             </div>
+            
+            <!--Pie -->
             <div regions-pie stats="topicsCollection.data1" schemecolors="topicsCollection.colors" ng-if="topicsCollection.visiblePie">Lade...</div>
+            
+            
+            <!-- Table -->
             <topic-table data="{stats :[topicsCollection.data1, (topicsCollection.additionLayer && topicsCollection.layer.id !== topicsCollection.layer2.id ? topicsCollection.data2:[])], units: [topicsCollection.layer.unit, topicsCollection.layer2.unit], headlines:[topicsCollection.layer.name,topicsCollection.layer2.name]}" ng-if="topicsCollection.visibleTable">Loading...</topic-table>
 
+            <!-- Ring -->
             <div topic-ring data="{stats :[topicsCollection.data1, (topicsCollection.additionLayer?topicsCollection.data2:[])], units: [topicsCollection.layer.unit, topicsCollection.layer2.unit], headlines:[topicsCollection.layer.name,topicsCollection.layer2.name]}" schemecolors="[topicsCollection.colors, topicsCollection.colors2]" ng-if="topicsCollection.visibleRing" >Lade...</div>
             
-            <div id="legend" class="panel">
+            <!-- Legende -->
+            <div id="legend" class="panel" ng-if="!topicsCollection.visibleTable">
                 <colorbrewer-picker schema="topicsCollection.colors" min="topicsCollection.minValue()" max="topicsCollection.maxValue()" unit="topicsCollection.layer.unit"></colorbrewer-picker>
                 <colorbrewer-picker schema="topicsCollection.colors2" min="topicsCollection.minValue2()" max="topicsCollection.maxValue2()" unit="topicsCollection.layer.unit" ng-show="topicsCollection.additionLayer"></colorbrewer-picker>
             </div>
