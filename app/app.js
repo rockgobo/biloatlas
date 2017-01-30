@@ -5,5 +5,5 @@
   /**
   * @namespace biloAtlas
   */
-  angular.module('biloAtlas', ['ngRoute', 'nvd3','ngLocale'])
+  angular.module('biloAtlas', ['ngRoute', 'nvd3','ngLocale', 'ui.grid', 'ui.grid.edit'])
 })()

@@ -18,6 +18,18 @@
         LayerData.saveLayer(this.layer)
       }
 
+      this.delete = function () {
+        if(confirm("Wollen sie diesen Layer wirklich löschen?")){
+          this.layer.isDeleted = true
+          LayerData.saveLayer(this.layer)
+        }
+      }
+
+      this.undelete = function () {
+        this.layer.isDeleted = false
+        LayerData.saveLayer(this.layer)
+      }
+
       this.security = AdminSecurity
     }
   })

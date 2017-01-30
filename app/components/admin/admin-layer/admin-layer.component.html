@@ -38,8 +38,14 @@
             <label for="layerCalculation">Quelle</label>
             <input type="text" ng-model="$ctrl.layer.source" id="layerSource" class="form-control"/>
         </div>
-        <button class="btn btn-default" ng-click="$ctrl.save()">Speichern</button>
         
+        <div class="form-group">
+            <label for="layerSortOrder">SortOrder</label>
+            <input type="text" ng-model="$ctrl.layer.sortOrder" id="layerSortOrder" class="form-control"/>
+        </div>
+        <button class="btn btn-default" ng-click="$ctrl.save()" ng-if="!$ctrl.layer.isDeleted">Speichern</button>
+        <button class="btn btn-default" ng-click="$ctrl.delete()" ng-if="!$ctrl.layer.isDeleted">Löschen</button>
+        <button class="btn btn-default" ng-click="$ctrl.undelete()" ng-if="$ctrl.layer.isDeleted">Wiederherstellen</button>
         <a class="btn" href="#/admin/layers">Abbrechen</a>
     </form>
 </div>
