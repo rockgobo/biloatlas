@@ -14,20 +14,33 @@
         this.layer = layer
       }.bind(this))
 
+      this.message = false
       this.save = function () {
-        LayerData.saveLayer(this.layer)
+        LayerData.saveLayer(this.layer).then(function()
+          {
+            this.message = 'Layer gespeichert'
+          }.bind(this)
+        )
       }
 
       this.delete = function () {
         if(confirm("Wollen sie diesen Layer wirklich löschen?")){
           this.layer.isDeleted = true
-          LayerData.saveLayer(this.layer)
+          LayerData.saveLayer(this.layer).then(function()
+          {
+            this.message = 'Layer gelöscht'
+          }.bind(this)
+        )
         }
       }
 
       this.undelete = function () {
         this.layer.isDeleted = false
-        LayerData.saveLayer(this.layer)
+        LayerData.saveLayer(this.layer).then(function()
+          {
+            this.message = 'Layer wiederhergestellt'
+          }.bind(this)
+        )
       }
 
       this.security = AdminSecurity

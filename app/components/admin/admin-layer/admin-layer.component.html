@@ -43,6 +43,8 @@
             <label for="layerSortOrder">SortOrder</label>
             <input type="text" ng-model="$ctrl.layer.sortOrder" id="layerSortOrder" class="form-control"/>
         </div>
+
+        <div class="alert alert-info" ng-if="$ctrl.message">{{$ctrl.message}}</div>
         <button class="btn btn-default" ng-click="$ctrl.save()" ng-if="!$ctrl.layer.isDeleted">Speichern</button>
         <button class="btn btn-default" ng-click="$ctrl.delete()" ng-if="!$ctrl.layer.isDeleted">Löschen</button>
         <button class="btn btn-default" ng-click="$ctrl.undelete()" ng-if="$ctrl.layer.isDeleted">Wiederherstellen</button>

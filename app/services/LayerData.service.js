@@ -59,7 +59,6 @@
 
         return $http.post(webRoot + layer.id, layer).then(
           function (response) {
-            alert('Daten wurde gespeichert')
             return response.data
           },
           function (error) {
