@@ -14,6 +14,15 @@
       }.bind(this))
 
       this.security = AdminSecurity
+
+      this.delete = function(layer){
+        
+
+        if(confirm("Wollen sie diesen Layer wirklich löschen?")){
+          layer.isDeleted = true
+          LayerData.saveLayer(layer)
+        }
+      }
     }
   })
 })()

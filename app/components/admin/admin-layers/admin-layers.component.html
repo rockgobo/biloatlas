@@ -22,6 +22,7 @@
                 <th>Name</th>
                 <th style="width: 10%">Bearbeite Layer</th>
                 <th style="width: 10%">Bearbeite Daten</th>
+                <th style="width: 10%">Löschen</th>
             </tr>
         </thead>
         <tbody>
@@ -36,7 +37,10 @@
                 <a href="#/admin/layer/{{layer.id}}"><span class="glyphicon glyphicon-pencil"></span></a>
             </td>
             <td>
-                <a href="#/admin/values/{{layer.id}}" ng-hide="layer.isDeleted"><span class="glyphicon glyphicon-pencil"></span></a>
+                <a href="#/admin/values/{{layer.id}}" ng-hide="layer.isDeleted"><span class="glyphicon glyphicon-th-list"></span></a>
+            </td>
+            <td>
+                <a><span ng-click="$ctrl.delete(layer)" class="glyphicon glyphicon-remove"></span></a>
             </td>
         </tr>
         </tbody>
