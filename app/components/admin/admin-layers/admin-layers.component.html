@@ -14,7 +14,7 @@
 <div class="container"  ng-if="$ctrl.security.isValid()">
     <h1>Admin- Layers</h1>
     <div ng-repeat="group in $ctrl.layerGroups">
-        <h3>{{group.name}}</h3>
+        <h3><a href="#/admin/layer/{{group.id}}">{{group.name}} <span class="glyphicon glyphicon-pencil"></span></a></h3>
         <table class="table table-hover table-striped">
         <thead>
             <tr>
