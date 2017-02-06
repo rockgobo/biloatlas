@@ -50,6 +50,9 @@
         this.visibleRing = false
       }
       this.showRing = function () {
+        // Don´t show ring if data contains negative values
+        if(this.minValue() <= 0) return
+
         this.visibleMap = false
         this.visiblePie = false
         this.visibleTable = false

@@ -13,6 +13,24 @@
         },
         templateUrl: 'app/components/topic-ring/topic-ring.component.html',
         link: function (scope, element, attrs) {
+
+          /**
+           * return true if the data is valid for a pie diagram
+           * else false
+           */
+          function checkData(data){
+            if(data === undefined) return false
+            if(data.isArray && data.length === 0 ) return true
+
+            // Check if all values are possitve 
+            var nonvaliddata = data.find(function(d){ return d.value < 0})
+            if(nonvaliddata && nonvaliddata.value < 0 ){ 
+              console.log('Pie component: data contains a non valid information ('+nonvaliddata.name+' '+nonvaliddata.value+')')
+              return false
+             }
+
+            return true
+          }
           /*   SETTINGS
           ---------------------------------------------------------------*/
 
@@ -145,6 +163,10 @@
             if (Array.isArray(data2_) && data2_.length > 0) {
               data2 = prepareData(data2_)
             }
+
+            //checkdata
+            if(!checkData(data)){ data = [] }
+            if(!checkData(data2)){ data2 = [] }
 
             regionScale1 = d3.scale.linear()
               .domain([d3.min(data, function (d) { return d.value }), d3.max(data, function (d) { return d.value })])
