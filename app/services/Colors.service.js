@@ -45,7 +45,7 @@
       return {
         getColors: function (id, count) {
           count = typeof count !== 'undefined' ? count : c
-          var cut = Math.round(c / 2)
+          var cut = Math.round(count / 2)
           var scale = []
 
           var grey = tinycolor(minorColors[id])
@@ -69,6 +69,18 @@
         },
         getSecondary: function () {
           return this.getColors(m, c)
+        },
+        getPrimary5: function () {
+          return this.getColors(p, 5)
+        },
+        getSecondary5: function () {
+          return this.getColors(m, 5)
+        },
+        getPrimary3: function () {
+          return this.getColors(p, 3)
+        },
+        getSecondary3: function () {
+          return this.getColors(m, 3)
         },
         getPrimaryColor: function () {
           return primaryColor
