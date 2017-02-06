@@ -5,8 +5,8 @@
                 <!-- Nach DIN 5008 kommt immer ein Leerzeichen zwischen Wert und Einheit -->
                 <small>{{$ctrl.min | numberUnit : $ctrl.unit}} {{$ctrl.unit}}</small><span class="glyphicon glyphicon-triangle-right" style="font-size: 0.7em"></span>  
             </div>
-        <div class="col-md-8"style="text-align: center; height:12px; padding: 4px;"> 
-            <span ng-repeat="c in $ctrl.schema" class="colorpicker_colorbag" ng-style="{'background-color': c, 'width': (100/$ctrl.schema.length)+'%'}" >
+        <div class="col-md-8"style="text-align: center; padding-top: 5px; padding-right:0px; padding-left: 0px"> 
+            <span ng-repeat="c in $ctrl.currentSchema" class="colorpicker_colorbag" ng-style="{'background-color': c, 'width': (100/$ctrl.currentSchema.length)+'%'}" style="border-bottom: 1px solid #DDD;border-top: 1px solid #DDD;border-left: 1px solid #DDD;">
                 &nbsp;
             </span>
         </div>
@@ -17,7 +17,7 @@
     </div>
     <div class="row">
         <div class="col-md-2"></div>
-        <div class="col-md-10"><span style="display: inline-block; width: 15px; height: 15px; border: 1px solid #ccc; background-color: white">
+        <div class="col-md-10" style="padding-left: 0px;"><span style="display: inline-block; width: 15px; height: 15px; border: 1px solid #aaa; background-color: #ccc">
         </span> <span style="font-size: 10px;">Keine Angabe<span></div>
         
     </div>
@@ -26,8 +26,8 @@
  
 <div class="colorpickerColors" ng-show="$ctrl.opencolors"  >    
     <div ng-repeat="(name,schemas) in $ctrl.colors">
-        <div ng-repeat="(count, cs) in schemas" ng-click="$ctrl.opencolors=false; $ctrl.schema=cs; " class="colorpanel">
-            <span ng-repeat="c in cs" style="display: inline-block; width: 15px; height: 15px;" ng-style="{'background-color': c}">
+        <div ng-repeat="(count, cs) in schemas" ng-click="$ctrl.opencolors=false; $ctrl.pickSchema(cs); " class="colorpanel">
+            <span ng-repeat="c in cs" style="display: inline-block; width: 15px; height: 15px" ng-style="{'background-color': c}">
                 &nbsp;
             </span>
         </div>
