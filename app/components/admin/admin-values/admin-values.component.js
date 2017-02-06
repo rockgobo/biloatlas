@@ -77,7 +77,7 @@
 
       this.save = function () {
         console.log('saving values')
-        LayerData.saveLayer({
+        ValuesData.saveValues({
           id: this.layerId,
           values: this.gridOptions.data
         })
