@@ -104,24 +104,27 @@
             var regionScale = d3.scale.linear()
               .domain([scope.minValue, scope.maxValue])
               .range([0, colors.length - 1])
-            var regionColors = function (value) {
-              if (value === 0) return '#FFF'
-              return colors[Math.floor(regionScale(value))]
+            var regionColors = function (d) {
+              if(d.isMissing) { return '#CCC' } // Grey if value is a missing
+              if (d.value === 0) { return '#FFF' }
+              return colors[Math.floor(regionScale(d.value))]
             }
 
             var regionScale2 = d3.scale.linear()
               .domain([scope.minValue2, scope.maxValue2])
               .range([0, colors2.length - 1])
-            var regionColors2 = function (value) {
-              if (value === 0) return '#FFF'
-              return colors2[Math.floor(regionScale2(value))]
+            var regionColors2 = function (d) {
+              if (d.value === 0) return '#FFF'
+              return colors2[Math.floor(regionScale2(d.value))]
             }
 
             regions.selectAll('path')
               .data(data, key)
               .transition()
               .duration(1000)
-              .attr('fill', function (d) { return regionColors(d.value) })
+              .attr('fill', function (d) { 
+                return regionColors(d) 
+              })
 
             var max_height = data2.reduce(function (p, c) {
               if (p < Math.abs(c.value)) {
@@ -145,7 +148,7 @@
                 if (max_height === 0) return 0 // otherwise division by 0
                 return (Math.abs(d.value) / max_height) * options.stats2.height
               })
-              .style('fill', function (d) { return regionColors2(d.value) })
+              .style('fill', function (d) { return regionColors2(d) })
               .style('visibility', options.stats2.visible ? 'visible' : 'hidden')
             regions.selectAll('rect')
               .data(data2).on('mouseover', function (d) {
@@ -182,9 +185,6 @@
 
             angular.merge(options, scope.options)
 
-            /* *****************************
-             *             D3 TEST
-             *******************************/
             var width = element[0].clientWidth
             var height = 450
 
@@ -195,9 +195,9 @@
               .domain([scope.minValue, scope.maxValue])
               .range([0, colors.length - 1])
             // .range(ColorBrewer.colors.PuBu[9])
-            regionColors = function (value) {
-              if (value === 0) return '#FFF'
-              return colors[Math.floor(regionScale(value))]
+            regionColors = function (d) {
+              if (d.value === 0) return '#FFF'
+              return colors[Math.floor(regionScale(d.value))]
             }
             scope.regionColors = ['#FFF'].concat(colors)
 
@@ -205,9 +205,9 @@
             var regionScale2 = d3.scale.linear()
               .domain([scope.minValue2, scope.maxValue2])
               .range([0, colors2.length - 1])
-            var regionColors2 = function (value) {
-              if (value === 0) return '#FFF'
-              return colors2[Math.floor(regionScale2(value))]
+            var regionColors2 = function (d) {
+              if (d.value === 0) return '#FFF'
+              return colors2[Math.floor(regionScale2(d.value))]
             }
 
             // Remove entire map, data will be updated later on
@@ -254,7 +254,7 @@
               .append('a')
               .attr('xlink:href', function (d) { return '#/region/' + d.id })
               .append('path')
-              .attr('fill', function (d) { return regionColors(d.value) })
+              .attr('fill', function (d) { return regionColors(d) })
               .attr('title', function (d) { return GeoData.getRegionData(d.id).properties.NAME_3 })
               .attr('class', function (d) { return 'subunit ' + GeoData.getRegionData(d.id).properties.NAME_3.replace(' ', '_') })
               .attr('d', function (d) { return pathTopo(GeoData.getRegionData(d.id)) })
@@ -286,7 +286,10 @@
               .data(data2, key)
               .enter()
               .append('rect')
-              .style('fill', function (d) { return regionColors2(d.value) })
+              .style('fill', function (d) { 
+                if(d.isMissing) { return '#CCC' }
+                return regionColors2(d) 
+              })
               .attr('x', function (d) { return projection_oberfranken(GeoData.getCentroid(d.id))[0] - (options.stats2.width / 2) })
               .attr('y', function (d) {
                 if (max_height === 0) return '' // otherwise division by 0
