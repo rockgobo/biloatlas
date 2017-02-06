@@ -13,6 +13,18 @@
         },
         templateUrl: 'app/components/regions-pie/regions-pie.component.html',
         link: function (scope, element, attrs) {
+          var checkData = function(data){
+            console.log(data)
+            // Check if all values are possitve 
+            var nonvaliddata = data.find(function(d){ return data.value < 0})
+            if( nonvaliddata < 0 ){ 
+              console.log('Pie component: data contains a non valid information ('+nonvaliddata+')')
+              return false
+             }
+
+            return true
+          }
+          
           scope.render = function (data) {
             var colors = scope.schemecolors
             var regionScale = d3.scale.linear()
@@ -26,14 +38,17 @@
 
             data = data.map(function (i) { return {label: i.name, value: i.value, color: regionColors(i.value)} })
 
-            console.log('starting rendering pie function')
-
             /** ****************************
              *             D3
              *******************************/
 
             // Remove Pie if it already exists ... redraw is currently not possible (https://github.com/benkeen/d3pie/issues/48)
             if (scope.pie) scope.pie.destroy()
+
+            //check if data is valid
+            if (!checkData(data)) {
+              return            
+            }
 
             scope.pie = new d3pie('regions-pie', {
               header: {
