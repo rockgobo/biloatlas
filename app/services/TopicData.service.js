@@ -54,7 +54,6 @@
        */
       function getTopics () {
         if(cache.get('topics')){
-          console.log('get topics from cache')
           return getCachedAsPromise('topics')
         }
         
