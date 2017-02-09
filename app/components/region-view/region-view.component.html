@@ -30,13 +30,10 @@
         <div ng-repeat="(index,topic) in regionView.topics" class="topic-container" ng-init="visibleLayer = false">
             <div ng-if="topic.layers.length > 0" >
                 <h3  ng-click="visibleLayer = !visibleLayer" id="topic_{{topic.id}}">
-                    
-                    <small>
-                        <a>
-                            <span ng-show="visibleLayer" class="fa fa-angle-left" aria-hidden="true"></span>
-                            <span ng-hide="visibleLayer" class="fa fa-angle-right" aria-hidden="true"></span>
-                        </a>
-                    </small>
+                    <a>
+                        <span ng-show="visibleLayer" class="fa fa-angle-left" aria-hidden="true"></span>
+                        <span ng-hide="visibleLayer" class="fa fa-angle-right" aria-hidden="true"></span>
+                    </a>
                     <a>{{topic.name}}</a>
                 </h3>
                 <div ng-repeat="layer in topic.layers" ng-if="visibleLayer">
