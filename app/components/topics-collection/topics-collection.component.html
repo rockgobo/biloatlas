@@ -23,9 +23,15 @@
         <div class="col-md-7">
             <!-- Tabs with visuals -->
             <ul class="nav nav-tabs">
-                <li role="presentation" ng-click="topicsCollection.showMap()" ng-class="{active: topicsCollection.visibleMap}"><a>Karte</a></li>
-                <li role="presentation" ng-click="topicsCollection.showRing()" ng-class="{active: topicsCollection.visibleRing, disabled: topicsCollection.minValue() <= 0}"><a>Diagramm</a></li>
-                <li role="presentation" ng-click="topicsCollection.showTable()" ng-class="{active: topicsCollection.visibleTable}"><a>Tabelle</a></li>
+                <li role="presentation" ng-click="topicsCollection.showMap()" ng-class="{active: topicsCollection.visibleMap}">
+                    <a><span class="fa fa-map-o" aria-hidden="true"></span> Karte</a>
+                </li>
+                <li role="presentation" ng-click="topicsCollection.showRing()" ng-class="{active: topicsCollection.visibleRing, disabled: topicsCollection.minValue() <= 0}">
+                    <a><span class="fa fa-pie-chart" aria-hidden="true"></span> Diagramm</a>
+                </li>
+                <li role="presentation" ng-click="topicsCollection.showTable()" ng-class="{active: topicsCollection.visibleTable}">
+                    <a><span class="fa fa-table" aria-hidden="true"></span> Tabelle</a>
+                </li>
             </ul>
             
             <!-- Comments -->
