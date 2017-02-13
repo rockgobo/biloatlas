@@ -19,6 +19,8 @@
            * else false
            */
           function checkData(data){
+            scope.message = ""
+
             if(data === undefined) return false
             if(data.isArray && data.length === 0 ) return true
 
@@ -28,8 +30,7 @@
               console.log('Pie component: data contains a non valid information ('+nonvaliddata.name+' '+nonvaliddata.value+')')
               return false
              }
-
-            return true
+             return true
           }
           /*   SETTINGS
           ---------------------------------------------------------------*/
@@ -51,6 +52,7 @@
                 d1.value = d2.value
                 d1.name = d2.name
                 d1.shortName = d2.shortName
+                d1.isMissing = d2.isMissing
               }
               return d1
             })
@@ -167,6 +169,15 @@
             //checkdata
             if(!checkData(data)){ data = [] }
             if(!checkData(data2)){ data2 = [] }
+            
+            // diagram is not valid if the outer circle has less valid data than the inner circle
+            if(data2.length > 0){
+                if(data.filter(function(v){return v.value > 0}).length < data2.filter(function(v){return v.value > 0}).length){
+                  scope.message = "Der Vergleich dieser Kennzahlen ist leider in einem Ringdiagramm nicht möglich. Bitte wählen sie eine andere Visualisierung."
+                  data2 = []
+                }
+             }
+
 
             regionScale1 = d3.scale.linear()
               .domain([d3.min(data, function (d) { return d.value }), d3.max(data, function (d) { return d.value })])
@@ -191,7 +202,7 @@
               .attr('class', function (d) { return 'slice region_' + d.data.id })
               .attr('title', function (d) { return $filter('numberUnit')(d.data.value, scope.unit) })
               .on('mouseover', function (d) {
-                lifbi.tooltip.showTooltip(d.data.value.toFixed(1))
+                lifbi.tooltip.showTooltip(d.data.shortName + ": " + d.data.value.toFixed(1))
                 $('.region_' + d.data.id).css('stroke', 'gray').css('stroke-width', '2px')
               })
               .on('mouseout', function (d) {
@@ -250,11 +261,10 @@
               .remove()
 
             /* ------- TEXT LABELS -------*/
-
             var text = svg.select('.labels').selectAll('g')
               .data(pie(data), key)
               .attr('class', function(d){
-                if(d.data.value == 0){
+                if(d.data.value == 0 || d.data.isMissing){ // remove region if value == 0
                   return 'nodata'
                 }
               })
@@ -322,7 +332,7 @@
             var polyline = svg.select('.lines').selectAll('polyline')
               .data(pie(data), key)
               .attr('class', function(d){
-                if(d.data.value == 0){
+                if(d.data.value == 0 || d.data.isMissing){
                   return 'nodata'
                 }
               })
