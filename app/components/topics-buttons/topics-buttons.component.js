@@ -13,6 +13,7 @@
       this.loading = true
       TopicData.getTopics().then(function (topics) {
         this.topics = topics
+        this.loading = false
       }.bind(this))
 
       this.mapData = GeoData.getDataByValue(0,1)
