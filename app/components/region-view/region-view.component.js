@@ -99,7 +99,7 @@
                 if (d.year > maxYear) maxYear = d.year 
                 if (d.year < minYear) minYear = d.year
               })
-              if (isLongitudinalData(layer.data)) {
+              if (isLongitudinalData(layer.data, layer.dataUF)) {
                 var options = getOptions(layer.name, layer.unit, min, max, minYear, maxYear)
                 if(isContinous(layer.data)){
                   options.chart.type = 'lineChart'
@@ -130,6 +130,9 @@
           var diagram_height = name.length * 7
           if (diagram_height < 250) diagram_height = 250
           
+          var yDomainMax =  Math.floor(max) + (0.1 * max)
+          if(yDomainMax < 0 ) yDomainMax = 0
+
           return {
             chart: {
               type: 'scatterChart',
@@ -150,7 +153,7 @@
               },
               xAxis: {
                 axisLabel: 'Jahr',
-                showMaxMin: false
+                showMaxMin: true
               },
               yAxis: {
                 axisLabel: name,
@@ -159,8 +162,7 @@
                 //,tickFormat: function(d) {return $filter('numberUnit')(d, unit)+((unit.length < 3)?unit:'')}
               },
               // THIS is the important one you can specify an array the min and max value the x axis will have
-              yDomain: [Math.floor(min)-1,Math.floor(max)+1],
-              xDomain: [Math.floor(minYear)-0.1,Math.floor(maxYear)],
+              yDomain: [Math.floor(min)-1, yDomainMax],
               callback: function (chart) {},
               color: function (d, i) {
                 if (i === 1) return Colors.getPrimaryColor()
@@ -168,9 +170,8 @@
                 return Colors.getSecondaryColor()
               },
               tooltip: {
-                contentGenerator: function (values) { 
-                  var region1 = values.series[0]
-                  return '<b>'+values.value+'</b><p><div style="width: 14px; height:14px; margin-right:5px; display: inline-block; background-color:'+region1.color+'">&nbsp;</div>'+region1.key +' <b>' + $filter('numberUnit')(region1.value, unit)+' '+unit+'</b></p>'
+                valueFormatter: function(d){
+                  return $filter('numberUnit')(d, unit)
                 }
               }
             },
@@ -201,7 +202,7 @@
               yAxis: {
                 axisLabel: name,
                 tickFormat: function(d) {
-                  return $filter('numberUnit')(d, unit)+((unit && unit.length < 3)?unit:'')
+                  return $filter('numberUnit')(d, unit)+((unit && unit.length < 3) ? unit : '')
                 }
               },
               x: function (d) { return d.year },
@@ -210,14 +211,19 @@
                 if (i === 1) return Colors.getPrimaryColor()
                 if (i === 0) return Colors.getSecondaryColor()
                 return Colors.getSecondaryColor()
+              },
+              tooltip: {
+                valueFormatter: function(d){
+                  return $filter('numberUnit')(d, unit)
+                }
               }
             }
           }
         }
 
         //checks the data if the data has values from each year
-        function isLongitudinalData(data){
-          return data.length > 2
+        function isLongitudinalData(data, dataUF){
+          return data.length > 2 || dataUF.length > 2
         }
 
         function isContinous(data){
