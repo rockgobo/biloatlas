@@ -129,8 +129,8 @@
             .innerRadius(radius * 0.45)
 
           var outerArc = d3.svg.arc()
-            .innerRadius(radius * 0.8)
-            .outerRadius(radius * 0.8)
+            .innerRadius(radius * 0.9)
+            .outerRadius(radius * 0.9)
 
           var arc2 = d3.svg.arc()
             .outerRadius(radius2 * 0.65)
@@ -253,6 +253,11 @@
 
             var text = svg.select('.labels').selectAll('g')
               .data(pie(data), key)
+              .attr('class', function(d){
+                if(d.data.value == 0){
+                  return 'nodata'
+                }
+              })
 
             /* Text enter */
             text.enter()
@@ -270,6 +275,11 @@
             /* Update label */
             text.select('.value-label')
               .text(function (d) {
+                //remove labels for small angles
+                if(d.endAngle - d.startAngle < 0.2){
+                  return ""
+                }
+
                 var d2 = data2.find(function (d2) {
                   return d2.id === d.data.id
                 })
@@ -311,6 +321,11 @@
             /* ------- SLICE TO TEXT POLYLINES -------*/
             var polyline = svg.select('.lines').selectAll('polyline')
               .data(pie(data), key)
+              .attr('class', function(d){
+                if(d.data.value == 0){
+                  return 'nodata'
+                }
+              })
 
             polyline.enter()
               .append('polyline')
