@@ -29,7 +29,7 @@
                         <span class="sr-only">Karte</span>
                     </a>
                 </li>
-                <li role="presentation" ng-click="topicsCollection.showRing()" ng-class="{active: topicsCollection.visibleRing, disabled: topicsCollection.minValue() <= 0}">
+                <li role="presentation" ng-click="topicsCollection.showRing()" ng-class="{active: topicsCollection.visibleRing, disabled: topicsCollection.minValue() < 0}">
                     <a>
                         <span class="fa fa-pie-chart" aria-hidden="true"></span>
                         <span class="sr-only">Diagramm</span>
