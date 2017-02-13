@@ -79,9 +79,6 @@
               var layerData = []
               var min = 0 // set minumum to default zero
               var max = -99999999999999999
-
-              var minYear = 99999999999999999
-              var maxYear = 0
           
               layer.unit = layer.unit?layer.unit:''
               layerData.push({values: layer.data.map(function (d) { return { value: Calculations.trim(d.value, layer.unit), year: d.year } }), key: regionTopics.region.name})
@@ -90,17 +87,13 @@
               layer.data.map(function(d){
                 if (d.value > max) max = d.value 
                 if (d.value < min) min = d.value
-                if (d.year > maxYear) maxYear = d.year 
-                if (d.year < minYear) minYear = d.year
               })
               layer.dataUF.map(function(d){
                 if (d.value > max) max = d.value 
                 if (d.value < min) min = d.value
-                if (d.year > maxYear) maxYear = d.year 
-                if (d.year < minYear) minYear = d.year
               })
               if (isLongitudinalData(layer.data, layer.dataUF)) {
-                var options = getOptions(layer.name, layer.unit, min, max, minYear, maxYear)
+                var options = getOptions(layer.name, layer.unit, min, max)
                 if(isContinous(layer.data)){
                   options.chart.type = 'lineChart'
                 }
@@ -125,7 +118,7 @@
          * Private functions
          * 
          */
-        function getOptions (name, unit, min, max, minYear, maxYear) {
+        function getOptions (name, unit, min, max) {
           
           var diagram_height = name.length * 7
           if (diagram_height < 250) diagram_height = 250
