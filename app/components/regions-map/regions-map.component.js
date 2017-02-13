@@ -155,7 +155,7 @@
                 lifbi.tooltip.showTooltip(
                 (options.tooltips.name ? GeoData.getRegionData(d.id).properties.NAME_3 + ' ' : '') +
                 (options.tooltips.value ? $filter('numberUnit')(d.value, options.tooltips.unit)  : '') +
-                options.tooltips.unit)
+                $filter('singularUnit')(options.tooltips.unit, d.value))
               })
               .on('mouseout', function (d) {
                 lifbi.tooltip.hideTooltip()

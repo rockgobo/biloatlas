@@ -294,9 +294,9 @@
                   return d2.id === d.data.id
                 })
                 if (d2 === undefined) {
-                  return $filter('numberUnit')(d.data.value, scope.unit) + scope.unit
+                  return $filter('numberUnit')(d.data.value, scope.unit) + $filter('singularUnit')(scope.unit, d.value)
                 }
-                return $filter('numberUnit')(d.data.value, scope.unit) + ' (' + $filter('numberUnit')(d2.value, scope.unit2) + scope.unit2 + ')'
+                return $filter('numberUnit')(d.data.value, scope.unit) + ' (' + $filter('numberUnit')(d2.value, scope.unit2) + $filter('singularUnit')(scope.unit2, d2.value) + ')'
               })
 
             function midAngle (d) {
