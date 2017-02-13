@@ -79,6 +79,10 @@
               var layerData = []
               var min = 0 // set minumum to default zero
               var max = -99999999999999999
+
+              var minYear = 99999999999999999
+              var maxYear = 0
+          
               layer.unit = layer.unit?layer.unit:''
               layerData.push({values: layer.data.map(function (d) { return { value: Calculations.trim(d.value, layer.unit), year: d.year } }), key: regionTopics.region.name})
               //Add values for upper frankconia, if available
@@ -86,13 +90,17 @@
               layer.data.map(function(d){
                 if (d.value > max) max = d.value 
                 if (d.value < min) min = d.value
+                if (d.year > maxYear) maxYear = d.year 
+                if (d.year < minYear) minYear = d.year
               })
               layer.dataUF.map(function(d){
                 if (d.value > max) max = d.value 
                 if (d.value < min) min = d.value
+                if (d.year > maxYear) maxYear = d.year 
+                if (d.year < minYear) minYear = d.year
               })
               if (isLongitudinalData(layer.data)) {
-                var options = getOptions(layer.name, layer.unit, min, max)
+                var options = getOptions(layer.name, layer.unit, min, max, minYear, maxYear)
                 if(isContinous(layer.data)){
                   options.chart.type = 'lineChart'
                 }
@@ -117,9 +125,11 @@
          * Private functions
          * 
          */
-        function getOptions (name, unit, min, max) {
+        function getOptions (name, unit, min, max, minYear, maxYear) {
+          
           var diagram_height = name.length * 7
           if (diagram_height < 250) diagram_height = 250
+          
           return {
             chart: {
               type: 'scatterChart',
@@ -128,7 +138,7 @@
                 top: 20,
                 right: 20,
                 bottom: 40,
-                left: 55
+                left: 65
               },
               x: function (d) { return d.year },
               y: function (d) { return d.value },
@@ -144,12 +154,13 @@
               },
               yAxis: {
                 axisLabel: name,
-                axisLabelDistance: -10,
+                axisLabelDistance: 0,
                 showMaxMin: false
                 //,tickFormat: function(d) {return $filter('numberUnit')(d, unit)+((unit.length < 3)?unit:'')}
               },
               // THIS is the important one you can specify an array the min and max value the x axis will have
               yDomain: [Math.floor(min)-1,Math.floor(max)+1],
+              xDomain: [Math.floor(minYear)-0.1,Math.floor(maxYear)],
               callback: function (chart) {},
               color: function (d, i) {
                 if (i === 1) return Colors.getPrimaryColor()
