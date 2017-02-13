@@ -5,7 +5,7 @@ var cleanCSS = require('gulp-clean-css')
 var sourcemaps = require('gulp-sourcemaps')
 
 gulp.task('less', function () {
-  gulp.src('css/*.less')
+  gulp.src('css/index.less')
     .pipe(less())
     .pipe(gulp.dest(function (f) {
       return f.base
@@ -13,7 +13,7 @@ gulp.task('less', function () {
 })
 
 gulp.task('minify', function () {
-  gulp.src('css/*.css')
+  gulp.src('css/index.css')
     .pipe(sourcemaps.init())
     .pipe(cleanCSS({compatibility: 'ie8'}))
     .pipe(sourcemaps.write())
@@ -23,6 +23,6 @@ gulp.task('minify', function () {
 })
 
 gulp.task('default', ['less', 'minify'], function () {
-  gulp.watch('css/*.less', ['less'])
-  gulp.watch('css/*.css', ['minify'])
+  gulp.watch('css/index.less', ['less'])
+  gulp.watch('css/index.css', ['minify'])
 })
