@@ -17,7 +17,7 @@
         //don´t change missing values
         if(input === '.') return input
 
-        if(unit && unit.trim() === '%' || unit.trim() === 'Jahre'){
+        if(unit && (unit.trim() === '%' || unit.trim() === 'Jahre')){
             return $filter('number')(input, 1)+' ';
         }
         return $filter('number')(input, 0)+' ';
