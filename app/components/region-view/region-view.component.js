@@ -126,6 +126,16 @@
           var yDomainMax =  Math.floor(max) + (0.1 * max)
           if(yDomainMax < 0 ) yDomainMax = 0
 
+          // set y-domain for % 
+          if(unit.trim() === '%'){
+            if(max < 10){
+              yDomainMax = 50
+            }
+            else{
+              yDomainMax = 100
+            }
+          }
+
           return {
             chart: {
               type: 'scatterChart',
@@ -152,7 +162,7 @@
                 axisLabel: name,
                 axisLabelDistance: 0,
                 showMaxMin: false
-                //,tickFormat: function(d) {return $filter('numberUnit')(d, unit)+((unit.length < 3)?unit:'')}
+                //,tickFormat: function(d) {return d + ' ' + ((unit.length < 3)?unit:'')}
               },
               // THIS is the important one you can specify an array the min and max value the x axis will have
               yDomain: [Math.floor(min)-1, yDomainMax],
