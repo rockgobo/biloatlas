@@ -126,9 +126,12 @@
           var yDomainMax =  Math.floor(max) + (0.1 * max)
           if(yDomainMax < 0 ) yDomainMax = 0
 
-          // set y-domain for % 
+          // set y-domain for % (charm #106)
           if(unit.trim() === '%'){
             if(max < 10){
+              yDomainMax = 20
+            }
+            else if(max < 40){
               yDomainMax = 50
             }
             else{
