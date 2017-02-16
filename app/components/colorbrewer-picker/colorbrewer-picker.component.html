@@ -1,5 +1,4 @@
-<div>
-<div class="colorpicker colorpanel" ng-click="$ctrl.opencolors ? $ctrl.opencolors=false : $ctrl.opencolors=$ctrl.clickable">
+<div class="colorpicker colorpanel" >
     <div class="row">
         <div class="col-md-2" style="text-align: right; padding-right:2px"> 
                 <!-- Nach DIN 5008 kommt immer ein Leerzeichen zwischen Wert und Einheit -->
@@ -17,9 +16,11 @@
     </div>
     <div class="row">
         <div class="col-md-2"></div>
-        <div class="col-md-10" style="padding-left: 0px;"><span style="display: inline-block; width: 15px; height: 15px; border: 1px solid #aaa; background-color: #ccc">
+        <div class="col-md-8" style="padding-left: 0px;"><span style="display: inline-block; width: 15px; height: 15px; border: 1px solid #aaa; background-color: #ccc">
         </span> <span style="font-size: 10px;">Keine Angabe<span></div>
-        
+        <div class="col-md-2">
+            <i ng-click="$ctrl.opencolors ? $ctrl.opencolors=false : $ctrl.opencolors=$ctrl.clickable" class="fa fa-cog pull-right" aria-label="Auswahl der Kategorien und Farben"></i>
+        </div>
     </div>
 </div>
  
