@@ -99,7 +99,7 @@
                 }
                 layersData[layer.id] = {options: options, data: layerData}
               } else {
-                layersData[layer.id] = {options: getBarOptions(layer.name, layer.unit, layer.data.length), data: layerData}
+                layersData[layer.id] = {options: getBarOptions(layer.name, layer.unit, layer.data.length, min, max), data: layerData}
               }
             })
           })
@@ -194,7 +194,7 @@
           } 
         } 
 
-        function getBarOptions (name, unit, count) {
+        function getBarOptions (name, unit, count, min, max) {
           return {
             chart: {
               type: 'multiBarHorizontalChart',
@@ -213,6 +213,7 @@
               },
               x: function (d) { return d.year },
               y: function (d) { return d.value },
+              yDomain: [min,max],
               color: function (d, i) {
                 if (i === 1) return Colors.getPrimaryColor()
                 if (i === 0) return Colors.getSecondaryColor()
