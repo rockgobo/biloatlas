@@ -1,7 +1,17 @@
 <div class="container" id="buttonsView">
+    <div class="row" id="info-panel">
+        <div class="col-md-6">
+            <center><i class="fa fa-sticky-note-o fa-5x"  aria-hidden="true"></i></center>
+            <p>Wie verhalten sich die Daten zu einem Thema und einem Zeitpunkt über ganz Oberfranken.</p>
+        </div>
+        <div class="col-md-6">
+            <center><i class="fa fa-flag-o fa-5x"  aria-hidden="true"></i></center>
+            <p>Erhalten Sie ausgehend von einer Region oder einem Stadtgebiet innerhalb von Oberfranken einen zeitlichen Überblick über alle Themengebiete.</p>
+        </div>
+    </div>
+
     <div class="row">
         <div class="col-md-6">
-            <h4>Themenauswahl</h4>
             <div ng-show="$ctrl.loading" class="atlas-loading">
                 <i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i>
                 <span class="sr-only">Loading...</span>
@@ -13,7 +23,6 @@
            
         </div>
         <div class="col-md-6"> 
-           <h4>Regionenauswahl</h4>
            <div regions-map stats="$ctrl.mapData" year="0" selection=""  schemecolors="['#5ABA22','#009ee2']" options="{tooltips: {value: false}}" class="col-md-12"></div>
         </div> 
     </div>
