@@ -23,6 +23,8 @@
         this.data_ = []
         this.dataUF = []
 
+        this.showInfo = false;
+        
         this.filterData = function () {
           // #71: Merge the filtered data to a basic data table with 0 for each region
           // Maybe use a method with faster computation

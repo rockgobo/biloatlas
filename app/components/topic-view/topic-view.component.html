@@ -6,23 +6,23 @@
             <span class="caret"></span>
         </button>
         <ul class="dropdown-menu dropdown-menu-left scrollable-menu" aria-labelledby="LayersDropdownMenu">
-            <li ng-repeat="layer in topicView.topic_.layers track by layer.id" ng-click="topicView.layer = layer"><a>{{layer.name}}</a></li>
+            <li ng-repeat="layer in topicView.topic_.layers track by layer.id" ng-click="topicView.layer = layer; topicView.showInfo = false"><a>{{layer.name}}</a></li>
             <li ng-repeat-start="layerGroup in topicView.topic_.layerGroups"  class="dropdown-header">{{layerGroup.name}}</li>
-            <li ng-repeat="layer_sub in layerGroup.layers track by layer_sub.id" ng-click="topicView.layer = layer_sub"><a>{{layer_sub.name}}</a></li>
+            <li ng-repeat="layer_sub in layerGroup.layers track by layer_sub.id" ng-click="topicView.layer = layer_sub; topicView.showInfo = false"><a>{{layer_sub.name}}</a></li>
             <li ng-repeat-end  role="separator" class="divider"></li>
         </ul>
     </div>
 </p>
 
 <!-- Content -->
-<p ng-init="showInfo = false">
+<p>
         <small>{{topicView.layer.description}}</small>
-        <span ng-show="topicView.layer.infos" ng-click="showInfo = !showInfo">
+        <span ng-show="topicView.layer.infos" ng-click="topicView.showInfo = !topicView.showInfo">
             <span class="glyphicon glyphicon-info-sign"></span>
         </span>
     </div>
 
-    <div ng-show="showInfo" class="well" ng-click="showInfo = false">
+    <div ng-show="topicView.showInfo" class="well" ng-click="topicView.showInfo = false">
         <small>{{topicView.layer.infos}}</small>
     </div>
 </p>
