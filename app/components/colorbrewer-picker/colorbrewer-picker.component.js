@@ -51,6 +51,23 @@
         }
       }
 
+      this.colorCount = this.schema.length
+      this.colorStart = this.schema[0]
+      this.colorEnd = this.schema[this.schema.length - 1]
+      this.colorError = ""
+
+      this.createSchema = function(){
+        this.colorError = ""
+        try{
+          var schema = Colors.createColors(this.colorStart, this.colorEnd, this.colorCount)
+          this.pickSchema(schema)
+        }
+        catch(error){
+          this.colorError = error
+        }
+
+      }
+
       this.$onChanges = function(changesObj){
         if(changesObj.min){
           this.currentMin = changesObj.min.currentValue

@@ -61,6 +61,30 @@
           }
           return scale
         },
+
+        createColors: function (colorStart, colorEnd, count) {
+          if(colorStart === colorEnd) throw "Anfangs und End-Farbwerte dürfen nicht übereinstimmen"
+
+          count = typeof count !== 'undefined' ? count : c
+          var cut = Math.round(count / 2)
+          var scale = []
+
+          var grey = tinycolor(colorStart)
+          var color = tinycolor(colorEnd)
+
+          var i = 0
+          for (i = 0; i <  count; ++i) {
+            console.log(tinycolor.mix(colorStart, colorEnd, i * 100 / count).toHexString())
+            scale.push(tinycolor.mix(colorStart, colorEnd, i * 100 / count).toHexString())
+          }
+
+          //check Data for duplicates
+          var duplicates = scale.filter(function(elem, pos) { return scale.indexOf(elem) != pos; })
+          if(duplicates.length > 0) throw "Farbskala weißt Duplikate auf, bitte wählen sie eine andere Anzahl an Farbwerten oder unterschiedlichere Farbwerte"
+
+          return scale
+        },
+
         getColor: function (id) {
           return colors[(id + 0) % 6]
         },

@@ -50,6 +50,16 @@
 @red6: #d6015f;
 @red7: #f7016d;
 
+
+#buttonsView #info-panel{
+    margin-top: 40px;
+    margin-bottom: 40px;
+
+    p{
+        margin-top: 40px;
+    }
+}
+
 /* Link colors
 --------------------------------*/
 a.disabled,a.disabled:hover,a.disabled:visited{
@@ -221,12 +231,14 @@ select.clean{
 .colorpickerColors{
     position: absolute;
     z-index: 1000;
-    height:250px;
     overflow: auto;
     padding: 5px;
     box-shadow: 5px 5px 5px #99979c;
     background-color: #FFF;
     border: 1px solid #CCC;
+    width: 100%; 
+    overflow-x: hidden;
+    margin-bottom: 20px;
 }
 .colorpanel:hover{
     border: 1px solid #CCC;

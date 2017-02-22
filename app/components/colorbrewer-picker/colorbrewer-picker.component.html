@@ -28,14 +28,35 @@
 </div>
  
  
-<div class="colorpickerColors" ng-show="$ctrl.opencolors"  >    
-    <div ng-repeat="(name,schemas) in $ctrl.colors">
-        <div ng-repeat="(count, cs) in schemas" ng-click="$ctrl.opencolors=false; $ctrl.pickSchema(cs); " class="colorpanel">
-            <span ng-repeat="c in cs" style="display: inline-block; width: 15px; height: 15px" ng-style="{'background-color': c}">
-                &nbsp;
-            </span>
+<div class="colorpickerColors" ng-show="$ctrl.opencolors">    
+    <form class="form-horizontal">
+        <div class="form-group">
+            <label for="inputColorCount" class="col-sm-4">Kategorienanzahl</label>
+            <div class="col-sm-8" id="inputColorCount">
+                <input type="number" ng-model="$ctrl.colorCount" placeholder="Anzahl" class="form-control">
+            </div>
         </div>
-    </div>
+        <div class="form-group">
+            <label for="inputColorStart" class="col-sm-4">Farbe 1</label>
+            <div class="col-sm-8" id="inputColorStart">
+                <input type="color" ng-model="$ctrl.colorStart" class="form-control">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputColorEnd" class="col-sm-4">Farbe 2</label>
+            <div class="col-sm-8" id="inputColorEnd">
+                <input type="color" ng-model="$ctrl.colorEnd" class="form-control">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-4 col-sm-8">
+                <button class="btn btn-primary" type="button" ng-click="$ctrl.createSchema()">Farbschema erzeugen</button>
+                <button class="btn btn-default" type="button" ng-click="$ctrl.opencolors = false">Abbrechen</button>
+            </div>
+        </div>
+    </form>
+    
+    <div class="alert alert-info" ng-if="$ctrl.colorError">{{$ctrl.colorError}}</div>
 </div>   
 
 
