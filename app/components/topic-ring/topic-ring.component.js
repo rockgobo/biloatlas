@@ -59,7 +59,7 @@
           }
 
           var width = element[0].clientWidth
-          var height = 400
+          var height = 600
           var svg = d3.select(element[0]).select('#topic-ring').append('svg')
             .attr('width', width)
             .attr('height', height)
@@ -112,8 +112,8 @@
             .attr('in2', 'SourceGraphic')
 
 
-          var radius = Math.min(width, height) / 2
-          var radius2 = (Math.min(width, height) / 4)
+          var radius = Math.min(width-100, height-100) / 2
+          var radius2 = (Math.min(width-100, height-100) / 4)
 
           var pie = d3.layout.pie()
             .sort(null)
@@ -302,6 +302,10 @@
             function midAngle (d) {
               return d.startAngle + (d.endAngle - d.startAngle) / 2
             }
+            function elipsoidCoordination(d){
+              var angle = midAngle(d)
+              return [0.9 * radius * Math.sin( angle ), -1 * radius * Math.cos( angle )]
+            }
 
             text.transition().duration(1000)
               .attrTween('transform', function (d) {
@@ -310,8 +314,11 @@
                 this._current = interpolate(0)
                 return function (t) {
                   var d2 = interpolate(t)
-                  var pos = outerArc.centroid(d2)
-                  pos[0] = radius * (midAngle(d2) < Math.PI ? 1 : -1)
+                  //var pos = outerArc.centroid(d2)
+                  var pos = elipsoidCoordination(d2)
+                  pos[0] = 0.95 * radius * (midAngle(d2) < Math.PI ? 1 : -1)
+                  
+                console.log(pos)
                   return 'translate(' + pos + ')'
                 }
               })
@@ -347,9 +354,10 @@
                 this._current = interpolate(0)
                 return function (t) {
                   var d2 = interpolate(t)
-                  var pos = outerArc.centroid(d2)
-                  pos[0] = radius * 0.95 * (midAngle(d2) < Math.PI ? 1 : -1)
-                  return [arc.centroid(d2), outerArc.centroid(d2), pos]
+                  //var pos = outerArc.centroid(d2)
+                  var pos = elipsoidCoordination(d2)
+                  pos[0] = radius * 0.9 * (midAngle(d2) < Math.PI ? 1 : -1)
+                  return [arc.centroid(d2), elipsoidCoordination(d2), pos]
                 }
               })
 
