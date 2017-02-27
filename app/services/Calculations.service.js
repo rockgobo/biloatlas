@@ -13,7 +13,9 @@
     .factory('Calculations', calculations)
 
   function calculations () {
-    function average (data, unit = '') {
+    function average (data, unit) {
+      if(typeof(unit) === undefined) unit = '' // IE compatible default value
+
       if (data && data.length > 0) {
         var sum = data.reduce(function (p, c) { return p + c })
         var a = (sum / data.length) + ''
