@@ -30,7 +30,9 @@
           var icons = {
             101: school_path,
             102: domain_path,
-            103: child_path
+            103: child_path,
+            104: school_path,
+            105: school_path
           }
           /*   SETTINGS
           ---------------------------------------------------------------*/
