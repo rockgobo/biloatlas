@@ -24,7 +24,9 @@
       return unit.trim() === '%' ? 0.0 : 0
     }
 
-    function trim (value, unit = '') {
+    function trim (value, unit) {
+      if(typeof(unit) === undefined) unit = '' // IE compatible default value
+
       if (unit && unit.trim() === '%') {
         return parseFloat(value).toFixed(1).toLocaleString()
       }
