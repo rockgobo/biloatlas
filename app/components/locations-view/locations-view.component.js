@@ -55,6 +55,8 @@
             }
           })
 
+          //sort by parent_type.id
+          parent_types = parent_types.sort(function(t1,t2) {return t1.id > t2.id})
           // include all type in the parent_types
           parent_types.map(function (parent) {
             parent.children = types.filter(function (t) {
