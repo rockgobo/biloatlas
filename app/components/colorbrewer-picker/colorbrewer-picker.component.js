@@ -51,7 +51,8 @@
         }
       }
 
-      this.colorCount = this.schema.length
+      //this.colorCount = this.schema.length
+      this.colorCount = 3
       this.colorStart = this.schema[0]
       this.colorEnd = this.schema[this.schema.length - 1]
       this.colorError = ""
