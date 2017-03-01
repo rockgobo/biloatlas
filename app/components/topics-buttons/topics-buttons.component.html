@@ -25,7 +25,11 @@
                 <span class="sr-only">Loading...</span>
             </div>
             <div ng-repeat="topic in $ctrl.topics" ng-class="{disabled: (topic.layers.length === 0 && topic.layerGroups.length === 0)}">
-                <h3><a ng-href="#/topic/{{topic.id}}" ng-class="{disabled: (topic.layers.length === 0 && topic.layerGroups.length === 0)}">{{topic.name}}</a></h3>
+                <h3>
+                    <a ng-href="#/topic/{{topic.id}}" ng-class="{disabled: (topic.layers.length === 0 && topic.layerGroups.length === 0)}">
+                        <i class="fa fa-angle-right"></i> {{topic.name}}
+                    </a>
+                </h3>
                 <p>{{topic.description}}</p>                              
             </div>
            
