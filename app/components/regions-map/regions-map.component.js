@@ -9,7 +9,6 @@
         restrict: 'EA',
         scope: {
           stats: '=',
-          unit: '=',
           stats2: '=',
           schemecolors: '=',
           schemecolors2: '=',
@@ -154,8 +153,7 @@
               .data(data2).on('mouseover', function (d) {
                 lifbi.tooltip.showTooltip(
                 (options.tooltips.name ? GeoData.getRegionData(d.id).properties.NAME_3 + ' ' : '') +
-                (options.tooltips.value ? $filter('numberUnit')(d.value, options.tooltips.unit)  : '') +
-                $filter('singularUnit')(options.tooltips.unit, d.value))
+                (options.tooltips.value ? $filter('numberUnit')(d.value, options.tooltips.unit2)  : ''))
               })
               .on('mouseout', function (d) {
                 lifbi.tooltip.hideTooltip()
@@ -169,7 +167,7 @@
               .style('visibility', options.stats2.visible ? 'visible' : 'hidden')
             regions.selectAll('g text')
               .data(data2)
-              .text(function (d) { return options.stats2.label ? $filter('numberUnit')(d.value, scope.unit) : '' })
+              .text(function (d) { return options.stats2.label ? $filter('numberUnit')(d.value, '') : '' })
           }
 
 
@@ -264,7 +262,7 @@
               .on('mouseover', function (d) {
                 lifbi.tooltip.showTooltip(
                   (options.tooltips.name ? GeoData.getRegionData(d.id).properties.NAME_3 + ' ' : '') +
-                  (options.tooltips.value ? $filter('numberUnit')(d.value, scope.unit) : ''))
+                  (options.tooltips.value ? $filter('numberUnit')(d.value, '') : ''))
                 scope.selection = d.id
                 scope.$apply() // need to refresh scope manually as data is set in backend code
               })
@@ -308,7 +306,7 @@
               .on('mouseover', function (d) {
                 lifbi.tooltip.showTooltip(
                   (options.tooltips.name ? GeoData.getRegionData(d.id).properties.NAME_3 + ' ' : '') +
-                  (options.tooltips.value ? $filter('numberUnit')(d.value, scope.unit) : ''))
+                  (options.tooltips.value ? $filter('numberUnit')(d.value, '') : ''))
               })
               .on('mouseout', function (d) {
                 lifbi.tooltip.hideTooltip()
@@ -337,7 +335,7 @@
               .append('text')
               .style('text-anchor', 'middle')
               .style('font-size', '10px')
-              .text(function (d) { return options.stats2.label ? $filter('numberUnit')(d.value, scope.unit) : '' })
+              .text(function (d) { return options.stats2.label ? $filter('numberUnit')(d.value, '') : '' })
 
 
             regionsRendered = true
@@ -395,7 +393,7 @@
             }
             scope.render(scope.stats, scope.stats2)
           }, true)
-
+          
           scope.$watch('schemecolors', function () {
             if (scope.stats === undefined) {
               return
