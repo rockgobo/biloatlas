@@ -36,7 +36,7 @@
             }
 
             if (!test_includes) {
-              type.color = Colors.getPrimarySlices()[type.id]
+              type.color = Colors.getDetailMapColors()[type.id]
               type.parent_id = parent_type.id
               types.push(type)
             }

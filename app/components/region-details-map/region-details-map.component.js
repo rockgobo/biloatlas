@@ -18,7 +18,7 @@
 
           var pathTopo, projection_oberfranken
           var regions
-          var colors = Colors.getPrimarySlices()
+          var colors = Colors.getDetailMapColors()
 
           /*   Icons
           ---------------------------------------------------------------*/
@@ -26,13 +26,14 @@
           var school_path = '<circle cx="12" cy="12" r="8"/>'
           var domain_path = '<path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>'
           var child_path = '<path d="M6 6h12v12H6z"/>'
-
+          var university_path ='<path d="M0 0h24v24H0z" fill="none"/><path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z"/>'
+          var adults_path = '<path d="M0 0h24v24H0z" fill="none"/><path d="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2z"/>'
           var icons = {
             101: school_path,
             102: domain_path,
             103: child_path,
-            104: school_path,
-            105: school_path
+            104: university_path,
+            105: adults_path
           }
           /*   SETTINGS
           ---------------------------------------------------------------*/

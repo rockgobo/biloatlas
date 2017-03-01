@@ -38,6 +38,32 @@
       })
 
 
+      var mapColors = {}
+      mapColors[2] = 'rgb(221,170,222)' // Krippe
+      mapColors[3] = 'rgb(109,42,110)' // Kindergarten
+      mapColors[4] = 'rgb(155,137,149)' // Kinderhaus/Kindertagesstätte
+      mapColors[5] = 'rgb(207,199,205)' // Großtagespflegestelle
+      mapColors[6] = 'rgb(119,136,153)' // Sonstiges
+      
+      mapColors[8] = 'rgb(90,186,34)' // Grundschule
+      mapColors[9] = 'rgb(184,237,155)' // Grundschule, Nebenstelle
+      mapColors[10] = 'rgb(152,0,67)' // Mittelschule
+      mapColors[11] = 'rgb(255,171,209)' // Mittelschule, Nebenstelle
+      mapColors[12] = 'rgb(33,78,94)' // Realschule
+      mapColors[13] = 'rgb(32,178,170)' // Gymnasium
+      mapColors[14] = 'rgb(144,61,219)' // Gesamtschule
+      mapColors[15] = 'rgb(42,217,209)' // Walddorfschule
+      mapColors[16] = 'rgb(101,175,201)' // Wirtschaftsschule
+      mapColors[17] = 'rgb(179,188,197)' // Fachoberschule
+      mapColors[19] = 'rgb(255,153,102)' // Berufsfachschule
+      mapColors[20] = 'rgb(155,194,163)' // Berufsfachschule des Gesundheitswesens
+      mapColors[22] = 'rgb(85,26,139)' // Fachhochschule
+      mapColors[23] = 'rgb(235,245,255)' // Hochschule
+      mapColors[24] = 'rgb(4,0,114)' // Universität
+      mapColors[26] = 'rgb(17,19,68)' // VHS Hauptstellen
+      mapColors[27] = 'rgb(148,152,228)' // VHS Nebenstellen
+
+
       slices = ['#111344', '#214E5E', '#5ABA22', '#6D2A6E', '#980043', '#9B8995']
       var slices_transparent = ['#B8ED9B', '#DDAADE', '#65AFC9', '#FFABD1', '#CFC7CD', '#9498E4']
       slices = slices.concat(slices_transparent).concat(slices).concat(slices_transparent)
@@ -114,6 +140,9 @@
         },
         getPrimarySlices: function () {
           return slices
+        },
+        getDetailMapColors: function(){
+          return mapColors
         }
       }
     })
