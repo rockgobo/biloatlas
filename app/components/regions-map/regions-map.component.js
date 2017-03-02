@@ -41,7 +41,8 @@
               width: 10,
               height: 60,
               label: true
-            }
+            },
+            height: 450
           }
           // Override defaults
           angular.merge(options, scope.options)
@@ -184,7 +185,7 @@
             angular.merge(options, scope.options)
 
             var width = element[0].clientWidth
-            var height = 450
+            var height = options.height
 
             // currently selected region
             var active = d3.select(null)

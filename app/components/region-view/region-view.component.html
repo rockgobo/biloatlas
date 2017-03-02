@@ -2,27 +2,30 @@
 <region-badge regionid="regionView.regionid"></region-badge>
 
 <div class="container">
+    
+    <p>In der Detailansicht finden Sie die Adressinformationen zu den Einrichtungen des Kreisgebiets nach verschiedenen Bildungsbereichen. Das Kreisprofil stammt aus dem Atlas BildungsLandschaft Oberfranken (PDF-Version) und beinhaltet einzelne aufbereitete Kennzahlen je Themenbereich.</p>
+
     <div class="row hidden-xs">
-        <div class="col-md-6">
-            <h4>Oberfranken</h4>
-            <div id="ofr-map" regions-map stats="regionView.mapData" year="0" selection="regionView.selection"  schemecolors="regionView.colorSchema" options="{tooltips: {value: false}}"></div>
-            
-        </div>
-        
-        <div class="col-md-6">
+        <div class="col-md-8">
             <h4>{{regionView.region.name}}</h4>
             <div region-details-map region="regionView.regionid" pois="regionView.pois"></div>
+        </div>
+
+        <div class="col-md-4">
+            <h4>Oberfranken</h4>
+            <div id="ofr-map" regions-map stats="regionView.mapData" year="0" selection="regionView.selection"  schemecolors="regionView.colorSchema" options="{tooltips: {value: false}, height: 360}"></div>
+
             <div class="well">
-                <p>In der Detailansicht finden Sie die Adressinformationen zu den Einrichtungen des Kreisgebiets nach verschiedenen Bildungsbereichen.</p>
-                <p>Das Kreisprofil stammt aus dem Atlas BildungsLandschaft Oberfranken (PDF-Version) und beinhaltet einzelne aufbereitete Kennzahlen je Themenbereich.</p>
                 <a type="button" class="btn btn-default" href="#/location/{{regionView.regionid}}">
                     <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Detailansicht
                 </a>
                 <a type="button" class="btn btn-default" href="{{regionView.region.url}}">
-                    <span class="glyphicon glyphicon-save-file" aria-hidden="true"></span> Kreisprofil herunterladen (PDF)
+                    <span class="glyphicon glyphicon-save-file" aria-hidden="true"></span> Kreisprofil (PDF)
                 </a>
             </div>
         </div>
+        
+        
     </div>
     
 
