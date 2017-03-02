@@ -1,8 +1,10 @@
 <!-- Top Navigation: Selector Layer -->
-<p class="topic-view-navigation">
-    <div class="dropdown">
-        <button class="btn btn-default dropdown-toggle" type="button" id="LayersDropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+<div class="topic-view-navigation">
+    <div class="btn-group">
+        <button class="btn btn-default" type="button">
             {{topicView.layer.name}}
+        </button>
+        <button class="btn btn-default dropdown-toggle" type="button" id="LayersDropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <span class="caret"></span>
         </button>
         <ul class="dropdown-menu dropdown-menu-left scrollable-menu" aria-labelledby="LayersDropdownMenu">
@@ -12,7 +14,7 @@
             <li ng-repeat-end  role="separator" class="divider"></li>
         </ul>
     </div>
-</p>
+</div>
 
 <!-- Content -->
 <p>
