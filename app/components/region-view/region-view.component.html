@@ -2,34 +2,45 @@
 <region-badge regionid="regionView.regionid"></region-badge>
 
 <div class="container">
+    <div>
+        <p>In der <strong>Regionenansicht</strong> können Sie sich für das ausgewählte Kreisgebiet aller im webAtlas BildungsLandschaft Oberfranken verfügbaren Kennzahlen im Zeitverlauf im Vergleich zu Oberfranken anzeigen lassen. Wählen Sie dazu einen <strong>Themenbereich</strong> aus. </p>
+        <p>Zudem können Sie unter <strong>Detailansicht</strong> einen differenzierten Blick auf die räumliche Verteilung der verschiedenen Bildungseinrichtungen vor Ort gewinnen. Ergänzend finden Sie die entsprechenden Adressinformationen zu den Einrichtungen.</p>
+        <p>Das zur Verfügung gestellte <strong>Kreisprofil</strong> stammt aus dem Atlas BildungsLandschaft Oberfranken (PDF-Version) und beinhaltet einzelne aufbereitete Kennzahlen je Themenbereich für das gewählte Kreisgebiet.</p>
+    </div>
     
-    <p>In der Detailansicht finden Sie die Adressinformationen zu den Einrichtungen des Kreisgebiets nach verschiedenen Bildungsbereichen. Das Kreisprofil stammt aus dem Atlas BildungsLandschaft Oberfranken (PDF-Version) und beinhaltet einzelne aufbereitete Kennzahlen je Themenbereich.</p>
-
     <div class="row hidden-xs">
         <div class="col-md-8">
-            <h4>{{regionView.region.name}}</h4>
-            <div region-details-map region="regionView.regionid" pois="regionView.pois"></div>
+            <section>
+                <header>
+                    <h4>{{regionView.region.name}}</h4>
+                </header>
+                <div region-details-map region="regionView.regionid" pois="regionView.pois"></div>
+            <section>
         </div>
 
         <div class="col-md-4">
-            <h4>Oberfranken</h4>
-            <div id="ofr-map" regions-map stats="regionView.mapData" year="0" selection="regionView.selection"  schemecolors="regionView.colorSchema" options="{tooltips: {value: false}, height: 360}"></div>
+            <section>
+                <header>
+                    <h4>Oberfranken</h4>
+                </header>
+                <div id="ofr-map" regions-map stats="regionView.mapData" year="0" selection="regionView.selection"  schemecolors="regionView.colorSchema" options="{tooltips: {value: false}, height: 360}"></div>
 
-            <div class="well">
-                <a type="button" class="btn btn-default" href="#/location/{{regionView.regionid}}">
-                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Detailansicht
-                </a>
-                <a type="button" class="btn btn-default" href="{{regionView.region.url}}">
-                    <span class="glyphicon glyphicon-save-file" aria-hidden="true"></span> Kreisprofil (PDF)
-                </a>
-            </div>
+                <div class="well">
+                    <a type="button" class="btn btn-default" href="#/location/{{regionView.regionid}}">
+                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Detailansicht
+                    </a>
+                    <a type="button" class="btn btn-default" href="{{regionView.region.url}}">
+                        <span class="glyphicon glyphicon-save-file" aria-hidden="true"></span> Kreisprofil (PDF)
+                    </a>
+                </div>
+            </section>
         </div>
-        
-        
     </div>
-    
 
-    <div>    
+    <section>
+        <header>
+            <h4>Themenbereiche</h4>
+        </header> 
         <div ng-repeat="(index,topic) in regionView.topics" class="topic-container" ng-init="visibleLayer = false">
             <div ng-if="topic.layers.length > 0" >
                 <h3  ng-click="visibleLayer = !visibleLayer" id="topic_{{topic.id}}">
@@ -75,5 +86,5 @@
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 </div>
