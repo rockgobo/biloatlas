@@ -59,7 +59,7 @@
           }
 
           var width = element[0].clientWidth
-          var height = 600
+          var height = 550
           var svg = d3.select(element[0]).select('#topic-ring').append('svg')
             .attr('width', width)
             .attr('height', height)
@@ -277,27 +277,6 @@
               .text(function (d) {
                 return d.data.shortName
               })
-              .select(function () { return this.parentNode })
-              .append('text')
-              .attr('dy', 12)
-              .attr('class', 'value-label')
-
-            /* Update label */
-            text.select('.value-label')
-              .text(function (d) {
-                //remove labels for small angles
-                if(d.endAngle - d.startAngle < 0.2){
-                  return ""
-                }
-
-                var d2 = data2.find(function (d2) {
-                  return d2.id === d.data.id
-                })
-                if (d2 === undefined) {
-                  return $filter('numberUnit')(d.data.value, scope.unit) + $filter('singularUnit')(scope.unit, d.value)
-                }
-                return $filter('numberUnit')(d.data.value, scope.unit) + ' (' + $filter('numberUnit')(d2.value, scope.unit2) + $filter('singularUnit')(scope.unit2, d2.value) + ')'
-              })
 
             function midAngle (d) {
               return d.startAngle + (d.endAngle - d.startAngle) / 2
@@ -314,11 +293,10 @@
                 this._current = interpolate(0)
                 return function (t) {
                   var d2 = interpolate(t)
-                  //var pos = outerArc.centroid(d2)
-                  var pos = elipsoidCoordination(d2)
+                  var pos = outerArc.centroid(d2)
+                  //var pos = elipsoidCoordination(d2)
                   pos[0] = 0.95 * radius * (midAngle(d2) < Math.PI ? 1 : -1)
                   
-                console.log(pos)
                   return 'translate(' + pos + ')'
                 }
               })
@@ -354,10 +332,10 @@
                 this._current = interpolate(0)
                 return function (t) {
                   var d2 = interpolate(t)
-                  //var pos = outerArc.centroid(d2)
-                  var pos = elipsoidCoordination(d2)
+                  var pos = outerArc.centroid(d2)
+                  // var pos = elipsoidCoordination(d2)
                   pos[0] = radius * 0.9 * (midAngle(d2) < Math.PI ? 1 : -1)
-                  return [arc.centroid(d2), elipsoidCoordination(d2), pos]
+                  return [arc.centroid(d2), outerArc.centroid(d2), pos]
                 }
               })
 
