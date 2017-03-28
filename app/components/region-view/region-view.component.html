@@ -87,6 +87,8 @@
                         </div>
                         <div class="col-md-6 well  col-md-margin" ng-hide="regionView.getLayerData(layer.id).length === 0">
                             <nvd3 options="regionView.getLayerOptions(layer.id)" data="regionView.getLayerData(layer.id)"></nvd3>
+
+                            <div class="alert alert-info" role="alert" ng-if="regionView.hasRegionData(layer.id)">Für das Kreisgebiet liegen keine Angaben vor.</div>
                         </div>
                     </div>
                 </div>

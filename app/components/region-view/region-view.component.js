@@ -59,6 +59,12 @@
         this.getLayerOptions = function (id) {
           return this.layersData[id].options
         }
+        this.hasRegionData = function(id){
+          var regionData =  this.getLayerData(id).find(function(d){
+            return d.key !== 'Oberfranken'
+          })
+          return regionData.values.length === 0 
+        }
 
         this.regions = []
         RegionData.getRegions().then(
@@ -85,10 +91,13 @@
                 { values: layer.data.map(function (d) { return { value: Calculations.trim(d.value, layer.unit), year: d.year } }), 
                   key: regionTopics.region.name})
               //Add values for upper frankconia, if available
-              if(layer.dataUF && layer.dataUF.length > 0) { layerData.push(
-                {values: layer.dataUF.map(function (d) { return { value: Calculations.trim(d.value, layer.unit), year: d.year } }), 
-                key: 'Oberfranken', 
-                color: Colors.getPrimaryColor()})
+              if(layer.dataUF && layer.dataUF.length > 0) { 
+                layerData.push(
+                  {
+                    values: layer.dataUF.map(function (d) { return { value: Calculations.trim(d.value, layer.unit), year: d.year } }), 
+                    key: 'Oberfranken', 
+                    color: Colors.getPrimaryColor()
+                  })
               }
               layer.data.map(function(d){
                 if (d.value > max) max = d.value 
