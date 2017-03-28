@@ -124,26 +124,27 @@ a.disabled,a.disabled:hover,a.disabled:visited{
 
 #tooltip span{
     color: white;
-    opacity: 1.0 !important;
+    opacity: 1.0 !important; 
 }
 
 #legend{
     margin-top:20px;
-}
-#legend .colors{
-    border: 1px solid #CCC;
-    height: 20px;
-}
+    font-size: 12px;
 
-#legend .legenditem{
-    display: inline-block;
-    height: 12px;
+    .colors{
+        border: 1px solid #CCC;
+        height: 20px;
+    }
+    .legenditem{
+        display: inline-block;
+        height: 12px;
+    }
 }
 
 .atlas-footer img.img-responsive{
     background: white; 
     padding: 5px; 
-    border-radius: 2px;
+    border-radius: 2px; 
 }
 
 .coatsofarms{
@@ -598,9 +599,15 @@ body {
     }
 }
 
-
-/* Admin
--------------------------------------------------- */
+/*---------------------------------
+     CSS for Admin section
+-----------------------------------*/
 .text-deleted{
     text-decoration: line-through;
 } 
+
+/*  Value table */
+#grid_values{
+    width: 100%;
+    height: 600px;
+}
