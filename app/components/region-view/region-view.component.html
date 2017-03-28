@@ -3,16 +3,22 @@
 
 <div class="container">
     <div class="description">
-        <p>In der <strong>Regionenansicht</strong> können Sie sich für das ausgewählte Kreisgebiet alle im webAtlas BildungsLandschaft Oberfranken verfügbaren Kennzahlen im Zeitverlauf im Vergleich zu Oberfranken anzeigen lassen. Wählen Sie dazu einen <strong>Themenbereich</strong> aus. </p>
-        <p>Zudem können Sie unter <a href="#/location/{{regionView.regionid}}">Detailansicht</a> einen differenzierten Blick auf die räumliche Verteilung der verschiedenen Bildungseinrichtungen vor Ort gewinnen. Ergänzend finden Sie die entsprechenden Adressinformationen zu den Einrichtungen.</p>
-        <p>Das zur Verfügung gestellte <a href="{{regionView.region.url}}">Kreisprofil</a> stammt aus dem Atlas BildungsLandschaft Oberfranken (PDF-Version) und beinhaltet einzelne aufbereitete Kennzahlen je Themenbereich für das gewählte Kreisgebiet.</p>
+        <p>
+        Die Karte des gewählten Kreisgebiets zeigt die räumliche Verteilung der Bildungseinrichtungen vor Ort. Sie können in der grünen Karte eine andere Region wählen, indem Sie das gewünschte Kreisgebiet anklicken.
+        </p>
+        <p>
+        In der <a href="#/location/{{regionView.regionid}}">Detailansicht</a> finden Sie neben den Einrichtungstypen auch die zugehörigen Adressen. Das <a href="{{regionView.region.url}}">Kreisprofil</a> stammt aus dem Atlas BildungsLandschaft Oberfranken (PDF-Version) und beinhaltet aufbereitete Kennzahlen je Themenbereich für das jeweilige Kreisgebiet.
+        </p>
+        <p>
+        Unter den Karten sind die verschiedenen Themenbereiche des webAtlas BildungsLandschaft Oberfranken aufgelistet. Wenn Sie diese anklicken, erscheinen alle Kennzahlen des Bereichs im Zeitverlauf für das gewählte Kreisgebiet im Vergleich zu Oberfranken.
+        </p>
     </div>
 
     <div class="row hidden-xs">
         <div class="col-md-8">
             <section>
                 <header>
-                    <h4>{{regionView.region.name}}</h4>
+                    <h4>{{regionView.region.name}} - Räumliche Verteilung der Bildungseinrichtungen</h4>
                 </header>
                 <div region-details-map region="regionView.regionid" pois="regionView.pois"></div>
             <section>
@@ -21,7 +27,7 @@
         <div class="col-md-4">
             <section>
                 <header>
-                    <h4>Oberfranken</h4>
+                    <h4>Oberfranken - Auswahl des Kreisgebiets</h4>
                 </header>
                 <div id="ofr-map" regions-map stats="regionView.mapData" year="0" selection="regionView.selection"  schemecolors="regionView.colorSchema" options="{tooltips: {value: false}, height: 360}"></div>
 
