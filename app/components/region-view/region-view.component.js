@@ -154,7 +154,7 @@
                 top: 20,
                 right: 20,
                 bottom: 40,
-                left: 65
+                left: 90
               },
               x: function (d) { return d.year },
               y: function (d) { return d.value },
@@ -170,7 +170,7 @@
               },
               yAxis: {
                 axisLabel: name,
-                axisLabelDistance: 0,
+                axisLabelDistance: 10,
                 showMaxMin: false
                 //,tickFormat: function(d) {return d + ' ' + ((unit.length < 3)?unit:'')}
               },
