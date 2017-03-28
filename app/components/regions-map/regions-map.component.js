@@ -25,7 +25,11 @@
           var colors2 = scope.schemecolors2
           var pathTopo, projection_oberfranken
           var key = function (d) { return d.id }
-
+          var getTooltip = function (d) {
+              lifbi.tooltip.showTooltip(
+              (options.tooltips.name ? GeoData.getRegionData(d.id).properties.NAME_3 + ': ' : '') +
+              (d.isMissing ? 'Keine Angabe' : (options.tooltips.value ? $filter('numberUnit')(d.value, '') : '')))
+          }
           /*   SETTINGS
           ---------------------------------------------------------------*/
           // Options defaults
@@ -151,11 +155,7 @@
               .style('fill', function (d) { return regionColors2(d) })
               .style('visibility', options.stats2.visible ? 'visible' : 'hidden')
             regions.selectAll('rect')
-              .data(data2).on('mouseover', function (d) {
-                lifbi.tooltip.showTooltip(
-                (options.tooltips.name ? GeoData.getRegionData(d.id).properties.NAME_3 + ' ' : '') +
-                (options.tooltips.value ? $filter('numberUnit')(d.value, options.tooltips.unit2)  : ''))
-              })
+              .data(data2).on('mouseover', getTooltip)
               .on('mouseout', function (d) {
                 lifbi.tooltip.hideTooltip()
               })
@@ -261,9 +261,7 @@
               .attr('stroke', '#BBB')
               .on('click', clicked)
               .on('mouseover', function (d) {
-                lifbi.tooltip.showTooltip(
-                  (options.tooltips.name ? GeoData.getRegionData(d.id).properties.NAME_3 + ' ' : '') +
-                  (options.tooltips.value ? $filter('numberUnit')(d.value, '') : ''))
+                getTooltip(d)
                 scope.selection = d.id
                 scope.$apply() // need to refresh scope manually as data is set in backend code
               })
