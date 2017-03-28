@@ -81,9 +81,15 @@
               var max = -99999999999999999
           
               layer.unit = layer.unit?layer.unit:''
-              layerData.push({values: layer.data.map(function (d) { return { value: Calculations.trim(d.value, layer.unit), year: d.year } }), key: regionTopics.region.name})
+              layerData.push(
+                { values: layer.data.map(function (d) { return { value: Calculations.trim(d.value, layer.unit), year: d.year } }), 
+                  key: regionTopics.region.name})
               //Add values for upper frankconia, if available
-              if(layer.dataUF && layer.dataUF.length > 0) layerData.push({values: layer.dataUF.map(function (d) { return { value: Calculations.trim(d.value, layer.unit), year: d.year } }), key: 'Oberfranken', color: Colors.getPrimaryColor()})
+              if(layer.dataUF && layer.dataUF.length > 0) { layerData.push(
+                {values: layer.dataUF.map(function (d) { return { value: Calculations.trim(d.value, layer.unit), year: d.year } }), 
+                key: 'Oberfranken', 
+                color: Colors.getPrimaryColor()})
+              }
               layer.data.map(function(d){
                 if (d.value > max) max = d.value 
                 if (d.value < min) min = d.value
@@ -141,6 +147,7 @@
 
           return {
             chart: {
+              noData: "Leider keine Daten verfügbar",
               type: 'scatterChart',
               height: diagram_height,
               margin: {
@@ -168,7 +175,7 @@
                 //,tickFormat: function(d) {return d + ' ' + ((unit.length < 3)?unit:'')}
               },
               // THIS is the important one you can specify an array the min and max value the x axis will have
-              yDomain: [Math.floor(min)-1, yDomainMax],
+              yDomain: [Math.floor(min)-5, yDomainMax],
               callback: function (chart) {},
               color: function (d, i) {
                 if (i === 1) return Colors.getPrimaryColor()
@@ -197,19 +204,23 @@
         function getBarOptions (name, unit, count, min, max) {
           return {
             chart: {
+              noData: "Leider keine Daten verfügbar",
               type: 'multiBarHorizontalChart',
               height: (count * 60) + 100,
               showControls: false,
               showValues: false,
               duration: 500,
               xAxis: {
-                showMaxMin: false,
+                showMaxMin: false
               },
               yAxis: {
                 axisLabel: name,
+                showMaxMin: true,
                 tickFormat: function(d) {
                   return $filter('numberUnit')(d, unit)+((unit && unit.length < 3) ? unit : '')
-                }
+                },
+                tickSubdivide: 0,
+                ticks: 0
               },
               x: function (d) { return d.year },
               y: function (d) { return d.value },
