@@ -2,7 +2,6 @@
     Sie müssen angemeldet sein um diesen Bereich zu nutzen
 </div>
 
-
 <div class="container" ng-if="$ctrl.security.isValid()">
     <div class="panel panel-default">
         <div class="panel-body">
@@ -13,29 +12,70 @@
 </div>
 
 <div class="container" ng-if="$ctrl.security.isValid()">
-    <h1>Bearbeite Values</h1>
-    <!--<form>
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th ng-click="$ctrl.sortOrder = 'id'"><strong>Region</strong></th>
-                    <th ng-click="$ctrl.sortOrder = 'id'"><strong>Region Id</strong></th>
-                    <th ng-click="$ctrl.sortOrder = 'year'"><strong>Jahr</strong></th>
-                    <th><strong>Wert</strong></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="value in $ctrl.layerValues.values | orderBy: $ctrl.sortOrder">
-                    <td>{{$ctrl.getRegionName(value.id)}}</td>
-                    <td>{{value.id}}</td>
-                    <td>{{value.year}}</td>
-                    <td><input ng-value="value.value"></td>
-                </tr>
-            </tbody>
-        <table>
-    </form>-->
+    <h2>Bearbeite Werte</h2>
+    
+    
+    <nav class="navbar navbar-default">
+        <form class="navbar-form navbar-left" role="search">
+            <button ng-click="$ctrl.reset()" role="button" class="btn btn-default navbar-btn">alte Werte zurücksetzen</button>
+            <button ng-click="$ctrl.removeAll()" role="button" class="btn btn-default navbar-btn">alle Werte entfernen</button>  
+            <button ng-click="$ctrl.removeSelection()" role="button" class="btn btn-default navbar-btn" ng-disabled="$ctrl.selectedRows.length === 0">Auswahl entfernen</button>    
+        
+            <div class="form-group" role="group" aria-label="Options for years">
+                <input type="text" class="form-control" placeholder="Jahr" ng-model="newYear">
+            </div>
+            <div class="btn-group">
+                <button class="btn btn-default navbar-btn" type="button" ng-click="$ctrl.addYear(newYear)">Jahr hinzufügen</button>
+                <button class="btn btn-default navbar-btn" type="button" ng-click="$ctrl.removeYear(newYear)">Jahr entfernen</button>
+            </div>
+        </form>
+        <form class="navbar-form navbar-right" role="search"  style="margin-right: 0px">
+            <button ng-click="$ctrl.save()" role="button" class="btn btn-primary navbar-btn" ng-disabled="!$ctrl.dataIsValid">speichern</button>
+        </form>
+    </nav>
+    
+    <!-- Messages -->
+    <div ng-show="!$ctrl.dataIsValid" class="alert alert-danger" role="alert">
+        Sie haben einen Fehler im Datensatz. Bitte korrigieren sie diesen an der entsprechenden Stelle bevor Sie die Daten speichern.
+    </div>
+    <div class="alert alert-info" role="alert" ng-if="$ctrl.msg">
+        {{$ctrl.msg}}
+    </div>
 
-    <div id="grid_values" ui-grid="$ctrl.gridOptions" ui-grid-edit class="grid"></div>
+    <!-- Import options -->
+    <details>
+        <summary>
+            Einstellungen CSV-Import
+        </summary>
+        
+        <nav class="navbar navbar-default">
+            <form class="navbar-form navbar-left">
+                <div class="form-group">
+                    <label for="regionInputName">Regionen (Id):</label>
+                    <input type="text" ng-model="$ctrl.regionColName" id="regionInputName" class="form-control" aria-required="true" required>
+                </div>
+                <div class="form-group">
+                    <label for="yearInputName">Jahre:</label>
+                    <input type="text" ng-model="$ctrl.yearColName" id="yearInputName" class="form-control" aria-required="true" required>
+                </div>
+                <div class="form-group">
+                    <label for="valueInputName">Werte:</label>
+                    <input type="text" ng-model="$ctrl.valueColName" id="valueInputName" class="form-control" aria-required="true" required>
+                </div>
+            </form>
+            <form class="navbar-form navbar-left">
+                <div class="form-group">
+                    <label for="layerInputName">Layer (Id):</label>
+                    <input type="text" ng-model="$ctrl.layerColName" id="seperatorInputName" class="form-control" aria-required="true" required>
+                </div>
+                <div class="form-group">
+                    <label for="seperatorInputName">Seperator:</label>
+                    <input type="text" ng-model="$ctrl.csvSeperator" id="seperatorInputName" class="form-control" style="width:40px" aria-required="true" required>
+                </div>
+            </form>
+        </nav>
+    </details>
 
-    <button ng-click="$ctrl.save()" role="button" disabled="disabled">speichern</button>
+    <div id="grid_values" ui-grid="$ctrl.gridOptions" ui-grid-edit ui-grid-cellNav ui-grid-validate ui-grid-selection ui-grid-importer class="grid"></div>
+
 </div>
