@@ -13,6 +13,7 @@
 
 <div class="container"  ng-if="$ctrl.security.isValid()">
     <h1>Admin- Layers</h1>
+    <input ng-model="searchterm" type="text" class="form-control"/>
     <div ng-repeat="group in $ctrl.layerGroups">
         <h3><a href="#/admin/layer/{{group.id}}">{{group.name}} <span class="glyphicon glyphicon-pencil"></span></a></h3>
         <table class="table table-hover table-striped">
@@ -26,7 +27,7 @@
             </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="layer in group.layers | orderBy: 'sortOrder'">
+        <tr ng-repeat="layer in group.layers | orderBy: 'sortOrder' | filter: searchterm : layer.name">
             <td>
                 {{layer.sortOrder}}
             </td>
