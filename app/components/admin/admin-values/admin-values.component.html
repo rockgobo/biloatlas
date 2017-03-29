@@ -17,17 +17,19 @@
     
     <nav class="navbar navbar-default">
         <form class="navbar-form navbar-left" role="search">
-            <button ng-click="$ctrl.reset()" role="button" class="btn btn-default navbar-btn">alte Werte zurücksetzen</button>
-            <button ng-click="$ctrl.removeAll()" role="button" class="btn btn-default navbar-btn">alle Werte entfernen</button>  
-            <button ng-click="$ctrl.removeSelection()" role="button" class="btn btn-default navbar-btn" ng-disabled="$ctrl.selectedRows.length === 0">Auswahl entfernen</button>    
+            <button ng-click="$ctrl.reset()" role="button" class="btn btn-default navbar-btn"><i class="fa fa-recycle" aria-hidden="true" title="Ausgangswerte wiederherstellen"></i></button>
+            <button ng-click="$ctrl.addRow()" role="button" class="btn btn-success navbar-btn"><i class="fa fa-plus" aria-hidden="true" title="Neue Zeile hinzufügen"></i></button>  
+            <button ng-click="$ctrl.removeAll()" role="button" class="btn btn-danger navbar-btn">Alle Werte entfernen</button>  
+            <button ng-click="$ctrl.removeSelection()" role="button" class="btn btn-danger navbar-btn" ng-disabled="$ctrl.selectedRows.length === 0"><i class="fa fa-trash" aria-hidden="true" title="Ausgewählte Daten entfernen"></i></button>    
         
             <div class="form-group" role="group" aria-label="Options for years">
                 <input type="text" class="form-control" placeholder="Jahr" ng-model="newYear">
+                <div class="btn-group">
+                    <button class="btn btn-default navbar-btn" type="button" ng-click="$ctrl.addYear(newYear)" title="Fügt ein komplettes Jahr mit allen Regionen in die Tabelle ein">Jahr hinzufügen</button>
+                    <button class="btn btn-default navbar-btn" type="button" ng-click="$ctrl.removeYear(newYear)" title="Entfernt alle Daten diese Jahres aus der Tabelle">Jahr entfernen</button>
+                </div>
             </div>
-            <div class="btn-group">
-                <button class="btn btn-default navbar-btn" type="button" ng-click="$ctrl.addYear(newYear)">Jahr hinzufügen</button>
-                <button class="btn btn-default navbar-btn" type="button" ng-click="$ctrl.removeYear(newYear)">Jahr entfernen</button>
-            </div>
+            
         </form>
         <form class="navbar-form navbar-right" role="search"  style="margin-right: 0px">
             <button ng-click="$ctrl.save()" role="button" class="btn btn-primary navbar-btn" ng-disabled="!$ctrl.dataIsValid">speichern</button>

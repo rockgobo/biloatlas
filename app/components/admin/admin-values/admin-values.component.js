@@ -280,6 +280,10 @@
         })
         $scope.data = $scope.data.concat(newData)
       }
+      this.addRow = function(year) {
+        var newData = { year: 0, value: 0, region: ''}
+        $scope.data.splice(0, 0, newData)
+      }
       // Add new year to data
       this.removeYear = function(year) {
         var newData = $scope.data.filter(
