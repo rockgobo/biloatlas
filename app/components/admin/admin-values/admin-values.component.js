@@ -240,16 +240,17 @@
           var thisCol;
           console.log(this.regionColName)
           headerArray.forEach( function( value, index ) {
-            if(value === this.regionColName){
+            var value = value.toLowerCase()
+            if(value === this.regionColName.toLowerCase()){
               myHeaderColumns.push( "region" );
             }
-            else if(value === this.yearColName){
+            else if(value === this.yearColName.toLowerCase()){
               myHeaderColumns.push( "year" );
             }
-            else if(value === this.valueColName){
+            else if(value === this.valueColName.toLowerCase()){
               myHeaderColumns.push( "value" );
             }
-            else if(value === this.layerColName){
+            else if(value === this.layerColName.toLowerCase()){
               myHeaderColumns.push( "layerId" );
             }
             else{
