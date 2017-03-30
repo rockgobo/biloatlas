@@ -13,38 +13,40 @@
 
 <div class="container"  ng-if="$ctrl.security.isValid()">
     <h1>Admin- Layers</h1>
-    <input ng-model="searchterm" type="text" class="form-control"/>
+    <input ng-model="$ctrl.searchterm" type="text" class="form-control" placeholder="Name der Kennzahl"/>
     <div ng-repeat="group in $ctrl.layerGroups">
-        <h3><a href="#/admin/layer/{{group.id}}">{{group.name}} <span class="glyphicon glyphicon-pencil"></span></a></h3>
-        <table class="table table-hover table-striped">
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>Name</th>
-                <th style="width: 10%">Bearbeite Layer</th>
-                <th style="width: 10%">Bearbeite Daten</th>
-                <th style="width: 10%">Löschen</th>
+        <div ng-if="$ctrl.isVisible(group)">
+            <h3><a href="#/admin/layer/{{group.id}}">{{group.name}} <span class="glyphicon glyphicon-pencil"></span></a></h3>
+            <table class="table table-hover table-striped">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th style="width: 10%">Bearbeite Layer</th>
+                    <th style="width: 10%">Bearbeite Daten</th>
+                    <th style="width: 10%">Löschen</th>
+                </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="layer in group.layers | orderBy: 'sortOrder' | filter: $ctrl.searchterm : layer.name">
+                <td>
+                    {{layer.sortOrder}}
+                </td>
+                <td ng-class="{'text-deleted': layer.isDeleted}">
+                    {{layer.name}}
+                </td>
+                <td>
+                    <a href="#/admin/layer/{{layer.id}}"><span class="glyphicon glyphicon-pencil"></span></a>
+                </td>
+                <td>
+                    <a href="#/admin/values/{{layer.id}}" ng-hide="layer.isDeleted"><span class="glyphicon glyphicon-th-list"></span></a>
+                </td>
+                <td>
+                    <a><span ng-click="$ctrl.delete(layer)" class="glyphicon glyphicon-remove"></span></a>
+                </td>
             </tr>
-        </thead>
-        <tbody>
-        <tr ng-repeat="layer in group.layers | orderBy: 'sortOrder' | filter: searchterm : layer.name">
-            <td>
-                {{layer.sortOrder}}
-            </td>
-            <td ng-class="{'text-deleted': layer.isDeleted}">
-                {{layer.name}}
-            </td>
-            <td>
-                <a href="#/admin/layer/{{layer.id}}"><span class="glyphicon glyphicon-pencil"></span></a>
-            </td>
-            <td>
-                <a href="#/admin/values/{{layer.id}}" ng-hide="layer.isDeleted"><span class="glyphicon glyphicon-th-list"></span></a>
-            </td>
-            <td>
-                <a><span ng-click="$ctrl.delete(layer)" class="glyphicon glyphicon-remove"></span></a>
-            </td>
-        </tr>
-        </tbody>
-        <table>
+            </tbody>
+            </table>
+        </div>
     </div>
 </div>
