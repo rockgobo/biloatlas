@@ -89,7 +89,7 @@
               layer.unit = layer.unit?layer.unit:''
               layerData.push(
                 { values: layer.data.map(function (d) { return { value: Calculations.trim(d.value, layer.unit), year: d.year } }), 
-                  key: regionTopics.region.name})
+                  key: regionTopics.region.name })
               //Add values for upper frankconia, if available
               if(layer.dataUF && layer.dataUF.length > 0) { 
                 layerData.push(
@@ -133,6 +133,17 @@
          * Private functions
          * 
          */
+
+        /**
+         * #171 add Euro to layer name
+         */
+        var getUnit = function(unit){
+          if(unit.trim() === '€'){
+            return ' [€]'
+          }
+          return ''
+        }
+
         function getOptions (name, unit, min, max) {
           
           var diagram_height = name.length * 7
@@ -178,7 +189,7 @@
                 showMaxMin: true
               },
               yAxis: {
-                axisLabel: name,
+                axisLabel: name +getUnit(unit),
                 axisLabelDistance: 10,
                 showMaxMin: false
                 //,tickFormat: function(d) {return d + ' ' + ((unit.length < 3)?unit:'')}
