@@ -110,7 +110,7 @@
               .range([0, colors.length - 1])
             var regionColors = function (d) {
               if(d.isMissing) { return '#CCC' } // Grey if value is a missing
-              if (d.value === 0) { return '#FFF' }
+              if (d.value === 0 && scope.minValue === 0) { return '#FFF' }
               return colors[Math.floor(regionScale(d.value))]
             }
 
@@ -118,7 +118,7 @@
               .domain([scope.minValue2, scope.maxValue2])
               .range([0, colors2.length - 1])
             var regionColors2 = function (d) {
-              if (d.value === 0) return '#FFF'
+              if (d.value === 0 && scope.minValue === 0) return '#FFF'
               return colors2[Math.floor(regionScale2(d.value))]
             }
 
