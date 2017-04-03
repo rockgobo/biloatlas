@@ -202,7 +202,7 @@
               .attr('class', function (d) { return 'slice region_' + d.data.id })
               .attr('title', function (d) { return $filter('numberUnit')(d.data.value, scope.unit) })
               .on('mouseover', function (d) {
-                lifbi.tooltip.showTooltip(d.data.shortName + ": " + d.data.value.toFixed(1))
+                lifbi.tooltip.showTooltip(d.data.name + ": " + d.data.value.toFixed(1))
                 $('.region_' + d.data.id).css('stroke', 'gray').css('stroke-width', '2px')
               })
               .on('mouseout', function (d) {
@@ -275,7 +275,7 @@
               .attr('dy', '.35em')
               .append('text')
               .text(function (d) {
-                return d.data.shortName
+                return d.data.name
               })
 
             function midAngle (d) {

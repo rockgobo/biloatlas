@@ -27,7 +27,7 @@
           var key = function (d) { return d.id }
           var getTooltip = function (d) {
               lifbi.tooltip.showTooltip(
-              (options.tooltips.name ? GeoData.getRegionData(d.id).properties.NAME_3 + ': ' : '') +
+              (options.tooltips.name ? GeoData.getRegionData(d.id).properties.VARNAME_3 + ': ' : '') +
               (d.isMissing ? 'Keine Angabe' : (options.tooltips.value ? $filter('numberUnit')(d.value, '') : '')))
           }
           /*   SETTINGS
@@ -255,7 +255,7 @@
               .append('path')
               .attr('fill', function (d) { return regionColors(d) })
               .attr('title', function (d) { return GeoData.getRegionData(d.id).properties.NAME_3 })
-              .attr('class', function (d) { return 'subunit ' + GeoData.getRegionData(d.id).properties.NAME_3.replace(' ', '_') })
+              .attr('class', function (d) { return 'subunit ' + GeoData.getRegionData(d.id).properties.VARNAME_3.replace(' ', '_') })
               .attr('d', function (d) { return pathTopo(GeoData.getRegionData(d.id)) })
               .attr('stroke-width', 1)
               .attr('stroke', '#BBB')
