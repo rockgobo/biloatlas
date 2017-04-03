@@ -79,7 +79,12 @@
           })
 
           var center = d3.geo.centroid(oberfranken)
-          var scale = 150
+          /**
+           * Map scale
+           * Will be recalucuted based on data
+           * @type {integer}
+           */
+          var scale = 120
           var offset = [width / 2, height / 2]
 
           // projection
@@ -93,11 +98,11 @@
             .projection(projection_oberfranken)
 
           var bounds = pathTopo.bounds(oberfranken)
-          var hscale = 0.6 * scale * width / (bounds[1][0] - bounds[0][0])
-          var vscale = 0.6 * scale * height / (bounds[1][1] - bounds[0][1])
+          var hscale = 0.56 * scale * width / (bounds[1][0] - bounds[0][0])
+          var vscale = 0.56 * scale * height / (bounds[1][1] - bounds[0][1])
           scale = (hscale < vscale) ? hscale : vscale
-          offset = [width - (bounds[0][0] + bounds[1][0]) / 2,
-            height - (bounds[0][1] + bounds[1][1]) / 2]
+          offset = [width - ((bounds[0][0] + bounds[1][0]) / 2),
+            height - ((bounds[0][1] + bounds[1][1]) / 2)]
 
           // new projection
           projection_oberfranken = d3.geo.mercator().center(center)
