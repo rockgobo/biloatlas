@@ -22,6 +22,8 @@
                 <tr>
                     <th>#</th>
                     <th>Name</th>
+                    <th>Einheit</th>
+                    <th>Nachkommastellen</th>
                     <th style="width: 10%">Bearbeite Layer</th>
                     <th style="width: 10%">Bearbeite Daten</th>
                     <th style="width: 10%">Löschen</th>
@@ -34,6 +36,12 @@
                 </td>
                 <td ng-class="{'text-deleted': layer.isDeleted}">
                     {{layer.name}}
+                </td>
+                <td ng-class="{'text-deleted': layer.isDeleted}">
+                    {{layer.unit}}
+                </td>
+                <td ng-class="{'text-deleted': layer.isDeleted}">
+                    {{layer.decimals}}
                 </td>
                 <td>
                     <a href="#/admin/layer/{{layer.id}}"><span class="glyphicon glyphicon-pencil"></span></a>
