@@ -28,7 +28,7 @@
 
       var p = 2 // primary color index
       var m = 4 // minor color index
-      var c = 9 // count of colors for the color schemes
+      var c = 3 // count of colors for the color schemes
 
       var slices = []
       var type_colors = [{colors: greens, count: 9}, {colors: purples, count: 2}, {colors: blues, count: 5}]
@@ -71,12 +71,12 @@
       return {
         getColors: function (id, count) {
           count = typeof count !== 'undefined' ? count : c
-          var cut = Math.round(count / 2)
+          var cut = Math.floor(count / 2)
           var scale = []
 
           var grey = tinycolor(minorColors[id])
           var cutcolor = tinycolor(cutcolors[id])
-          var color = tinycolor(colors[id])
+          var color = tinycolor(colors[9]) 
           var i = 0
           for (i = 0; i < cut; ++i) {
             scale.push(tinycolor.mix(grey, cutcolor, i * 100 / cut).toHexString())

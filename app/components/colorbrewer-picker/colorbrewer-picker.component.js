@@ -18,14 +18,14 @@
       //this.colors = ColorBrewer.colors
       this.colors = {
         color1: {
-          9: Colors.getPrimary(),
+          3: Colors.getPrimary3(),
           5: Colors.getPrimary5(),
-          3: Colors.getPrimary3()
+          9: Colors.getPrimary()
         },
         color2: {
-          9: Colors.getSecondary(),
+          3: Colors.getSecondary3(),
           5: Colors.getSecondary5(),
-          3: Colors.getSecondary3()
+          9: Colors.getSecondary()
         }
       }
       this.opencolors = false
