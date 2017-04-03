@@ -77,11 +77,12 @@
 
             <!-- Map -->
             <div ng-if="topicsCollection.visibleMap">
-                <div regions-map stats="topicsCollection.data1" 
+                <div regions-map 
+                    stats="topicsCollection.data1" 
                     stats2="topicsCollection.data2" 
                     schemecolors="topicsCollection.colors" 
                     schemecolors2="topicsCollection.colors2" 
-                    options="topicsCollection.mapOptions">Lade...</div>
+                    options="{ stats2: { visible: topicsCollection.additionLayer }, unit: [topicsCollection.layer.unit, topicsCollection.layer2.unit], decimals: [topicsCollection.layer.decimals,topicsCollection.layer2.decimals]  }">Lade...</div>
             </div>
             
             <!--Pie -->
@@ -89,10 +90,10 @@
             
             
             <!-- Table -->
-            <topic-table data="{stats :[topicsCollection.data1, (topicsCollection.additionLayer && topicsCollection.layer.id !== topicsCollection.layer2.id ? topicsCollection.data2:[])], units: [topicsCollection.layer.unit, topicsCollection.layer2.unit], headlines:[topicsCollection.layer.name,topicsCollection.layer2.name]}" ng-if="topicsCollection.visibleTable">Loading...</topic-table>
+            <topic-table data="{stats :[topicsCollection.data1, (topicsCollection.additionLayer && topicsCollection.layer.id !== topicsCollection.layer2.id ? topicsCollection.data2:[])], units: [topicsCollection.layer.unit, topicsCollection.layer2.unit], decimals: [topicsCollection.layer.decimals, topicsCollection.layer2.decimals], headlines:[topicsCollection.layer.name,topicsCollection.layer2.name]}" ng-if="topicsCollection.visibleTable">Loading...</topic-table>
 
             <!-- Ring (only for non-negative values) -->
-            <div topic-ring data="{stats :[topicsCollection.data1, (topicsCollection.additionLayer?topicsCollection.data2:[])], units: [topicsCollection.layer.unit, topicsCollection.layer2.unit], headlines:[topicsCollection.layer.name,topicsCollection.layer2.name]}" schemecolors="[topicsCollection.colors, topicsCollection.colors2]" ng-if="topicsCollection.visibleRing && topicsCollection.minValue() >= 0" >Lade...</div>
+            <div topic-ring data="{stats :[topicsCollection.data1, (topicsCollection.additionLayer?topicsCollection.data2:[])], units: [topicsCollection.layer.unit, topicsCollection.layer2.unit], decimals: [topicsCollection.layer.decimals, topicsCollection.layer2.decimals], headlines:[topicsCollection.layer.name,topicsCollection.layer2.name]}" schemecolors="[topicsCollection.colors, topicsCollection.colors2]" ng-if="topicsCollection.visibleRing && topicsCollection.minValue() >= 0" >Lade...</div>
             <div ng-if="topicsCollection.visibleRing && topicsCollection.minValue() < 0" class="alert alert-info">
                 Die Ansicht ist für die ausgewählte Kennzahl nicht verfügbar. Bitte wählen sie eine andere Visualisierung aus: 
                 <ul>
@@ -103,8 +104,8 @@
             
             <!-- Legende -->
             <div id="legend" ng-if="!topicsCollection.visibleTable">
-                <colorbrewer-picker schema="topicsCollection.colors" min="topicsCollection.minValue()" max="topicsCollection.maxValue()" unit="topicsCollection.layer.unit"></colorbrewer-picker>
-                <colorbrewer-picker schema="topicsCollection.colors2" min="topicsCollection.minValue2()" max="topicsCollection.maxValue2()" unit="topicsCollection.layer2.unit" ng-show="topicsCollection.additionLayer"></colorbrewer-picker>
+                <colorbrewer-picker schema="topicsCollection.colors" min="topicsCollection.minValue()" max="topicsCollection.maxValue()" unit="topicsCollection.layer.unit" decimals="topicsCollection.layer.decimals"></colorbrewer-picker>
+                <colorbrewer-picker schema="topicsCollection.colors2" min="topicsCollection.minValue2()" max="topicsCollection.maxValue2()" unit="topicsCollection.layer2.unit"  decimals="topicsCollection.layer2.decimals" ng-show="topicsCollection.additionLayer"></colorbrewer-picker>
             </div>
         </div>
     </div>

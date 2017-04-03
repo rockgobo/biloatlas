@@ -51,6 +51,6 @@
     <div class="col-md-4 stats_label" ng-if="topicView.average()">
         <small><b>Oberfranken:</b></small>
     </div> 
-    <div class="col-md-8" ng-if="topicView.average()"><small>{{topicView.average() | numberUnit : topicView.unit()}}{{topicView.unit() | singularUnit : topicView.average()}}</small>&nbsp;</div>
+    <div class="col-md-8" ng-if="topicView.average()"><small>{{topicView.average() | numberValue : topicView.decimals}}{{topicView.unit() | singularUnit : topicView.average()}}</small>&nbsp;</div>
 </div>
 

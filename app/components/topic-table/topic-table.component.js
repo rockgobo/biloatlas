@@ -21,7 +21,8 @@
         var options = {
           stats: [],
           headlines: [],
-          units: []
+          units: [],
+          decimals: []
         }
         // Override defaults
         angular.merge(options, this.data)
@@ -30,6 +31,7 @@
         $scope.$watch('topicTable.data', function (data) {
           angular.merge(options, data)
           this.units = options.units
+          this.decimals = options.decimals
 
           var stats = {}
           var columns = 0

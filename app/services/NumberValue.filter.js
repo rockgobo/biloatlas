@@ -12,14 +12,15 @@
      */
     /*globals angular:true*/
     angular.module('biloAtlas')
-        .filter('numberUnit', function($filter) { return function(input, unit) {
+        .filter('numberValue', function($filter) { return function(value, d) {
             //don´t change missing values
-            if(input === '.') return input+' '
+            if(value === '.') return value+' '
 
-            if(unit && (unit.trim() === '%' || unit.trim() === 'Jahre')){
-                return $filter('number')(input, 1)+' ';
+            var decimals = 0
+            if(d){
+                decimals = d
             }
-            return $filter('number')(input, 0)+' ';
+            return $filter('number')(value, decimals)+' '
         };
     })
 })()

@@ -88,13 +88,13 @@
           
               layer.unit = layer.unit?layer.unit:''
               layerData.push(
-                { values: layer.data.map(function (d) { return { value: Calculations.trim(d.value, layer.unit), year: d.year } }), 
+                { values: layer.data.map(function (d) { return { value: d.value, year: d.year } }), 
                   key: regionTopics.region.name })
               //Add values for upper frankconia, if available
               if(layer.dataUF && layer.dataUF.length > 0) { 
                 layerData.push(
                   {
-                    values: layer.dataUF.map(function (d) { return { value: Calculations.trim(d.value, layer.unit), year: d.year } }), 
+                    values: layer.dataUF.map(function (d) { return { value: d.value, year: d.year } }), 
                     key: 'Oberfranken', 
                     color: Colors.getPrimaryColor()
                   })
@@ -108,13 +108,13 @@
                 if (d.value < min) min = d.value
               })
               if (isLongitudinalData(layer.data, layer.dataUF)) {
-                var options = getOptions(layer.name, layer.unit, min, max)
+                var options = getOptions(layer.name, layer.unit, min, max, layer.decimals)
                 if(isContinous(layer.data)){
                   options.chart.type = 'lineChart'
                 }
                 layersData[layer.id] = {options: options, data: layerData}
               } else {
-                layersData[layer.id] = {options: getBarOptions(layer.name, layer.unit, layer.data.length, min, max), data: layerData}
+                layersData[layer.id] = {options: getBarOptions(layer.name, layer.unit, layer.data.length, min, max, layer.decimals), data: layerData}
               }
             })
           })
@@ -144,7 +144,7 @@
           return ''
         }
 
-        function getOptions (name, unit, min, max) {
+        function getOptions (name, unit, min, max, decimals) {
           
           var diagram_height = name.length * 7
           if (diagram_height < 250) diagram_height = 250
@@ -204,7 +204,7 @@
               },
               tooltip: {
                 valueFormatter: function(d){
-                  return $filter('numberUnit')(d, unit)
+                  return $filter('numberValue')(d, decimals)
                 }
               }
             },
@@ -221,7 +221,7 @@
           } 
         } 
 
-        function getBarOptions (name, unit, count, min, max) {
+        function getBarOptions (name, unit, count, min, max, decimals) {
           return {
             chart: {
               noData: "Leider keine Daten verfügbar",
@@ -237,7 +237,7 @@
                 axisLabel: name,
                 showMaxMin: true,
                 tickFormat: function(d) {
-                  return $filter('numberUnit')(d, unit)+((unit && unit.length < 3) ? unit : '')
+                  return $filter('numberValue')(d, decimals)+((unit && unit.length < 3) ? unit : '')
                 },
                 tickSubdivide: 0,
                 ticks: 0
@@ -252,7 +252,7 @@
               },
               tooltip: {
                 valueFormatter: function(d){
-                  return $filter('numberUnit')(d, unit)
+                  return $filter('numberValue')(d, decimals)
                 }
               }
             }

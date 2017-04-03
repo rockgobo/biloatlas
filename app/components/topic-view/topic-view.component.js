@@ -19,11 +19,12 @@
         this.years = []
         this.year = 0
         this.topic_ = {}
+        this.decimals = 0
 
         this.data_ = []
         this.dataUF = []
 
-        this.showInfo = false;
+        this.showInfo = false
         
         this.filterData = function () {
           // #71: Merge the filtered data to a basic data table with 0 for each region
@@ -87,7 +88,7 @@
                 this.years.push(d.year)
               }
             }.bind(this))
-
+            this.decimals = layer.decimals
             this.years.sort()
             this.year = this.years[this.years.length - 1]
 

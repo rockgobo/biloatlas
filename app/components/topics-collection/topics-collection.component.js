@@ -59,7 +59,7 @@
         this.visibleRing = true
       }
 
-      this.mapOptions = { stats2: { visible: false }, unit: '' }
+      this.mapOptions = { stats2: { visible: false }, unit: '', decimals: 0 }
 
       this.showAdditionalLayer = function () {
         this.mapOptions.stats2.visible = true

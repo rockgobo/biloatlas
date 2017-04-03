@@ -25,10 +25,13 @@
           var colors2 = scope.schemecolors2
           var pathTopo, projection_oberfranken
           var key = function (d) { return d.id }
-          var getTooltip = function (d) {
-              lifbi.tooltip.showTooltip(
+          var getTooltip = function (d, index) {
+            if(!index) { index = 0 }
+
+            lifbi.tooltip.showTooltip(
               (options.tooltips.name ? GeoData.getRegionData(d.id).properties.VARNAME_3 + ': ' : '') +
-              (d.isMissing ? 'Keine Angabe' : (options.tooltips.value ? $filter('numberUnit')(d.value, '') : '')))
+              (d.isMissing ? 'Keine Angabe' : (options.tooltips.value ? $filter('numberValue')(d.value, scope.options.decimals[index]) + scope.options.unit[index] : ''))
+            )
           }
           /*   SETTINGS
           ---------------------------------------------------------------*/
@@ -155,7 +158,7 @@
               .style('fill', function (d) { return regionColors2(d) })
               .style('visibility', options.stats2.visible ? 'visible' : 'hidden')
             regions.selectAll('rect')
-              .data(data2).on('mouseover', getTooltip)
+              .data(data2).on('mouseover', function(d) { getTooltip(d,1) } )
               .on('mouseout', function (d) {
                 lifbi.tooltip.hideTooltip()
               })
@@ -261,7 +264,7 @@
               .attr('stroke', '#BBB')
               .on('click', clicked)
               .on('mouseover', function (d) {
-                getTooltip(d)
+                getTooltip(d,0)
                 scope.selection = d.id
                 scope.$apply() // need to refresh scope manually as data is set in backend code
               })
@@ -305,7 +308,7 @@
               .on('mouseover', function (d) {
                 lifbi.tooltip.showTooltip(
                   (options.tooltips.name ? GeoData.getRegionData(d.id).properties.NAME_3 + ' ' : '') +
-                  (options.tooltips.value ? $filter('numberUnit')(d.value, '') : ''))
+                  (options.tooltips.value ? $filter('numberValue')(d.value, scope.options.decimals[1]) : ''))
               })
               .on('mouseout', function (d) {
                 lifbi.tooltip.hideTooltip()

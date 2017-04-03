@@ -200,9 +200,9 @@
               .style('stroke', 'white')
               .style('fill', function (d) { return regionColors1(d.data.value) })
               .attr('class', function (d) { return 'slice region_' + d.data.id })
-              .attr('title', function (d) { return $filter('numberUnit')(d.data.value, scope.unit) })
+              .attr('title', function (d) { return $filter('numberValue')(d.data.value, scope.decimals) })
               .on('mouseover', function (d) {
-                lifbi.tooltip.showTooltip(d.data.name + ": " + d.data.value.toFixed(1))
+                lifbi.tooltip.showTooltip(d.data.name + ": " + $filter('numberValue')(d.data.value, scope.data.decimals[0]))
                 $('.region_' + d.data.id).css('stroke', 'gray').css('stroke-width', '2px')
               })
               .on('mouseout', function (d) {
@@ -236,11 +236,11 @@
               .style('fill', function (d) { return regionColors2(d.data.value) })
               .attr('class', function (d) { return 'slice region_' + d.data.id })
               .on('mouseover', function (d) {
+                lifbi.tooltip.showTooltip(d.data.name + ": " + $filter('numberValue')(d.data.value, scope.data.decimals[1]))
                 $('.region_' + d.data.id).css('stroke', 'gray').css('stroke-width', '2px')
                 $('.connection_' + d.data.id).css('stroke', 'yellow')
               })
               .on('mouseout', function (d) {
-                lifbi.tooltip.showTooltip(d.data.value.toFixed(1))
                 $('.region_' + d.data.id).css('stroke', 'white').css('stroke-width', '1px')
                 $('.connection_' + d.data.id).css('stroke', '')
               })

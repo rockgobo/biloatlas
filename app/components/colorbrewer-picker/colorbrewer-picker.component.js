@@ -11,7 +11,8 @@
       schema: '=',
       min: '<',
       max: '<',
-      unit: '<'
+      unit: '<',
+      decimals: '<'
     },
     controller: function (ColorBrewer, Colors) {
       this.clickable = true
