@@ -47,6 +47,25 @@
         )
       }
 
+       /**
+       * @name getTopicById
+       * @function
+       * @param {guid} id - The ID of the topic.
+       * @return List of layers as promise
+       */
+      function getParentLayerById (id) {
+
+        return $http.get(webRoot + id + '/parents').then(
+          function (response) {
+            return response.data
+          },
+          function (error) {
+            console.log(error)
+            return null
+          }
+        )
+      }
+
       /**
        * @name getTopics
        * @function
@@ -64,6 +83,7 @@
           },
           function (error) { console.log(error) })
       }
+      
 
       /**
        * @name getTopics
@@ -94,6 +114,7 @@
       return {
         getTopics: getTopics,
         getTopicById: getTopicById,
+        getParentLayerById: getParentLayerById,
         saveTopic: saveTopic
       }
     })

@@ -9,13 +9,30 @@
   angular.module('biloAtlas')
   .component('adminLayer', {
     templateUrl: 'app/components/admin/admin-layer/admin-layer.component.html',
-    controller: function (LayerData, AdminSecurity, $routeParams) {
+    controller: function (TopicData, LayerData, AdminSecurity, $routeParams) {
+      
+      /* FIELDS*/
+      this.message = false
+      this.parents = []
+      this.selectedParent = { }
+
+      /* LOAD DATA */
       LayerData.getLayerById($routeParams.id).then(function (layer) {
         this.layer = layer
+        this.selectedParent = { id: layer.parentId }
+
+        TopicData.getParentLayerById(layer.topicId).then(function (layers) {
+          this.parents = layers
+        }.bind(this))
       }.bind(this))
 
-      this.message = false
+      
+
+
+      /* FUNCTIONS */
       this.save = function () {
+        //Set new parentId 
+        this.layer.parentId = this.selectedParent.id
         LayerData.saveLayer(this.layer).then(function()
           {
             this.message = 'Layer gespeichert'
