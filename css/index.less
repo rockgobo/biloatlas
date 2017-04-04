@@ -231,7 +231,21 @@ select.clean{
 
 .colorpicker{
     width: 100%; 
-    background-color: white  
+    background-color: white;  
+
+    .colorbar{
+        width: 100%;
+        display: table;
+
+        .colorbar-item{
+            display: table-cell;
+        }
+        .colorbar-colors {
+            display: table-cell;
+            width: 60%;
+        }
+
+    }
 }
 
 .colorpanel{
