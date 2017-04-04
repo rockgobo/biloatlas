@@ -151,6 +151,8 @@
           
           var yDomainMax =  Math.floor(max) + (0.1 * max)
           if(yDomainMax < 0 ) yDomainMax = 0
+          
+          var yDomainMin =  Math.floor(min) - (0.1 * Math.abs(min)) - 0.5
 
           // set y-domain for % (charm #106)
           if(unit.trim() === '%'){
@@ -195,7 +197,7 @@
                 //,tickFormat: function(d) {return d + ' ' + ((unit.length < 3)?unit:'')}
               },
               // THIS is the important one you can specify an array the min and max value the x axis will have
-              yDomain: [Math.floor(min)-5, yDomainMax],
+              yDomain: [yDomainMin, yDomainMax],
               callback: function (chart) {},
               color: function (d, i) {
                 if (i === 1) return Colors.getPrimaryColor()
