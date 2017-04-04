@@ -85,11 +85,17 @@
               var layerData = []
               var min = 0 // set minumum to default zero
               var max = -99999999999999999
-          
+              var count = layer.data.length
+              if(count === 0){
+                count = layer.dataUF.length
+              }
+
               layer.unit = layer.unit?layer.unit:''
-              layerData.push(
-                { values: layer.data.map(function (d) { return { value: d.value, year: d.year } }), 
-                  key: regionTopics.region.name })
+              if(layer.data.length){
+                layerData.push(
+                  { values: layer.data.map(function (d) { return { value: d.value, year: d.year } }), 
+                    key: regionTopics.region.name })
+              }
               //Add values for upper frankconia, if available
               if(layer.dataUF && layer.dataUF.length > 0) { 
                 layerData.push(
@@ -107,6 +113,8 @@
                 if (d.value > max) max = d.value 
                 if (d.value < min) min = d.value
               })
+
+
               if (isLongitudinalData(layer.data, layer.dataUF)) {
                 var options = getOptions(layer.name, layer.unit, min, max, layer.decimals)
                 if(isContinous(layer.data)){
@@ -114,7 +122,7 @@
                 }
                 layersData[layer.id] = {options: options, data: layerData}
               } else {
-                layersData[layer.id] = {options: getBarOptions(layer.name, layer.unit, layer.data.length, min, max, layer.decimals), data: layerData}
+                layersData[layer.id] = {options: getBarOptions(layer.name, layer.unit, count, min, max, layer.decimals), data: layerData}
               }
             })
           })
