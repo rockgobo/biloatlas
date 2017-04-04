@@ -16,7 +16,7 @@
     <form>
         <div class="form-group">
             <div>{{$ctrl.selectedParent}}</div>
-            <label for="categoryName">Kategorie</label>
+            <label for="categoryName">Überbegriff / Oberkategorie</label>
             <select ng-options="parent.name for parent in $ctrl.parents track by parent.id"
                     ng-model="$ctrl.selectedParent" 
                     id="categoryName" 
