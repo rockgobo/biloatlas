@@ -52,20 +52,57 @@
         <h5>{{results.length}} Bildungseinrichtungen</h5>
         
         <table class="table table-condensed">
-        <tr class="active">
-            <td><input ng-model="searchTerm"  class="form-control"  placeholder="Name"/></td>
-            <td><input ng-model="searchStreet"  class="form-control"  placeholder="Straße"/></td>
-            <td><input ng-model="searchCity"  class="form-control"  placeholder="Ort"/></td>
-        </tr>
-        <tr ng-repeat="poi in locationsView.pois 
-                        | filter:{properties : {name : searchTerm}}
-                        | filter:{properties : {street : searchStreet}}
-                        | filter:{properties : {city : searchCity}}
-                        | filter:{properties : {type : {id : locationsView.selectedType }}}:true
-                        as results" class="poi" ng-mouseover="locationsView.highlightPoi(poi.properties.id)" ng-mouseleave="locationsView.dehighlightPoi(poi.properties.id)">
-            <td>{{poi.properties.name}}</td>
-            <td>{{poi.properties.street}} {{poi.properties.streetNr}}</td>
-            <td>{{poi.properties.city}}</td>
-        </div>
+            <tr class="active">
+                <td><input ng-model="searchTerm"  class="form-control"  placeholder="Name"/></td>
+                <td><input ng-model="searchStreet"  class="form-control"  placeholder="Straße"/></td>
+                <td><input ng-model="searchCity"  class="form-control"  placeholder="Ort"/></td>
+            </tr>
+            <tr ng-repeat="poi in locationsView.pois 
+                            | filter:{properties : {name : searchTerm}}
+                            | filter:{properties : {street : searchStreet}}
+                            | filter:{properties : {city : searchCity}}
+                            | filter:{properties : {type : {id : locationsView.selectedType }}}:true
+                            as results" class="poi" ng-mouseover="locationsView.highlightPoi(poi.properties.id)" ng-mouseleave="locationsView.dehighlightPoi(poi.properties.id)">
+                <td>{{poi.properties.name}}</td>
+                <td>{{poi.properties.street}} {{poi.properties.streetNr}}</td>
+                <td>{{poi.properties.city}}</td>
+            </tr>
+        </table>
     </div>
+
+    <aside class="alert alert-info">
+        <small>
+            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+            <strong>Datenquellen</strong>
+            <article>
+                <div>
+                    Frühki: Eigene Adressrecherche der Kindertageseinrichtungen (Stand: September 2015). Rückmeldung der Jugendämter aus Oberfranken zur Tagespflege (Stand: Juli/August 2015).
+                </div>
+            </article>
+            <article>
+                <div>
+                    Schule - Primarstufe: Bayerisches Landesamt für Statistik (Stand: Herbst 2015).
+                </div>
+            </article>
+            <article>
+                <div>
+                    Schule - Sekundarstufe:: Bayerisches Landesamt für Statistik (Stand: Herbst 2015).
+                </div>
+            <article>
+                <div>
+                    Ausbildung: Eigene Adressrecherche (Stand: Herbst 2015).
+                </div>
+            </article>
+            <article>
+                <div>
+                    Studium: Eigene Recherche (Stand: 25.07.2016).
+                </div>
+            </article>
+            <article>
+                <div>
+                    Erwachsenenbildung: bvv-Statistik (Stand: 31.12.2013).
+                </div>
+            </article>  
+        </small>
+    </aside>
 </div>
