@@ -47,6 +47,10 @@
         <header>
             <h4>Themenbereiche</h4>
         </header> 
+        
+        <div class="alert alert-info" role="alert">
+            Um die Kennzahl auf einen Blick in den verschiedenen Kreisgebieten Oberfrankens zu sehen, klicken Sie bitte auf <a href="#/topic/6193567f-aa49-42a8-9cc3-4bd76ef16707">Themen</a>.
+        </div>
         <div ng-repeat="(index,topic) in regionView.topics" class="topic-container" ng-init="visibleLayer = false">
             <div ng-if="topic.layers.length > 0" >
                 <h3  ng-click="visibleLayer = !visibleLayer" id="topic_{{topic.id}}">
